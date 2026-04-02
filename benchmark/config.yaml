@@ -11,11 +11,35 @@ models:
   #   knowledge_cutoff: "2025-05"
 
 suites:
+  # ── EVMBench (primary benchmark) ──────────────────────────────
+  evmbench:
+    description: "EVMBench (OpenAI+Paradigm): 117 vulns from 40 Code4rena audits"
+    type: external
+    repo: "https://github.com/openai/frontier-evals"
+    path: "project/evmbench"
+    published: "2026-02-18"
+    splits:
+      detect-tasks: "40 audits, 117 vulns — full detect evaluation"
+      patch-tasks: "22 audits, 44 vulns — produce fixing diffs"
+      exploit-tasks: "16 audits, 23 vulns — craft exploit transactions"
+      debug: "1 audit — quick setup validation"
+    # Run via: python3 benchmark/evmbench_skill_runner.py --split detect-tasks
+    # Or official: cd evmbench-upstream/project/evmbench && uv run python -m evmbench.nano.entrypoint ...
+
+    # Published baselines (2026-02-18)
+    baselines:
+      claude-opus-4-6:
+        detect_recall: 0.459
+        detect_award: 37824.52
+      gpt-5.2:
+        detect_award: 8106.69
+      gpt-5.3-codex:
+        exploit_rate: 0.710
+
+  # ── Custom suites ─────────────────────────────────────────────
   known-vulns:
     description: "Known vulnerabilities from past audits and bug bounties"
     source_dir: suites/known-vulns.yaml
-    # Each case has: protocol, vuln description, severity, affected code
-    # The benchmark checks if the tool finds and correctly classifies it
 
   audit-contests:
     description: "Past audit contest findings (Sherlock, Code4rena, Cantina)"

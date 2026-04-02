@@ -31,6 +31,9 @@ reports-*/
 # ─── Benchmark results (generated) ───────────────────────────────
 benchmark/results/
 
+# ─── EVMBench upstream (cloned separately) ────────────────────────
+evmbench-upstream/
+
 # ─── OS / Editor ──────────────────────────────────────────────────
 .DS_Store
 Thumbs.db

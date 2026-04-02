@@ -10,9 +10,10 @@ Finds **valid, PoC-confirmed vulnerabilities** in live protocols (Immunefi) and 
 | **Model** | Claude Opus 4.6 (1M context) |
 | **Knowledge cutoff** | May 2025 |
 | **Tooling** | Claude Code CLI with custom slash commands |
+| **Benchmark** | EVMBench (OpenAI + Paradigm, 2026-02-18) |
 | **Last verified** | 2026-04-02 |
 
-> The model's Solidity/EVM knowledge covers up to May 2025. Protocols deployed or significantly updated after this date may use patterns the model hasn't seen. Always supplement with current docs.
+> **Knowledge cutoff note:** The model's Solidity/EVM knowledge covers up to May 2025. EVMBench dataset spans 2023-07 to 2026-01 — some test cases (2025-10, 2026-01) may contain patterns post-cutoff. This is intentional for measuring generalization. Protocols deployed or significantly updated after May 2025 may use patterns the model hasn't seen.
 
 ---
 
@@ -156,19 +157,73 @@ tail -f audit-logs/*.log
 
 ## Benchmarking
 
-See [`benchmark/`](./benchmark/) for the evaluation framework.
+Two benchmark tracks: **EVMBench** (official, standardized) and **custom suites**.
 
-The benchmark system measures:
-- **Precision** — What % of reported findings are valid?
-- **Recall** — What % of known bugs does it find?
-- **Severity accuracy** — Does it correctly classify H/M/L?
-- **Cost efficiency** — $ spent per valid finding
+### EVMBench (OpenAI + Paradigm)
 
-Run benchmarks:
+Industry-standard benchmark for AI smart contract security. 117 vulnerabilities from 40 Code4rena audits.
+
+| Metric | Description |
+|---|---|
+| **Detect** | Find vulns in a codebase → structured audit report |
+| **Patch** | Produce a diff that fixes the bug without breaking tests |
+| **Exploit** | Craft transactions that exploit the bug on a local Anvil chain |
+
+**Published scores (2026-02-18):**
+
+| Model | Detect Recall | Detect Award | Exploit |
+|---|---|---|---|
+| Claude Opus 4.6 | **45.9%** (1st) | **$37,824** (1st) | — |
+| GPT-5.3-Codex | — | — | **71.0%** |
+| GPT-5.2 | ~lower | $8,106 | 33.3% |
+
+#### Run EVMBench (official harness)
+
+```bash
+# One-time setup (clones repo, builds Docker images)
+bash benchmark/evmbench_setup.sh
+
+# Run Claude on full detect split
+cd evmbench-upstream/project/evmbench
+ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
+uv run python -m evmbench.nano.entrypoint \
+    evmbench.audit_split=detect-tasks \
+    evmbench.mode=detect \
+    evmbench.hint_level=none \
+    evmbench.log_to_run_dir=True \
+    evmbench.solver=evmbench.nano.solver.EVMbenchSolver \
+    evmbench.solver.agent_id=claude-opus-4.6 \
+    runner.concurrency=3
+```
+
+#### Run EVMBench via our skills (custom wrapper)
+
+Feeds EVMBench cases through our `/audit-hunt` skill and scores against ground truth.
+
+```bash
+# All detect cases
+python3 benchmark/evmbench_skill_runner.py --split detect-tasks
+
+# Single audit
+python3 benchmark/evmbench_skill_runner.py --audit 2024-04-noya
+
+# Compare last two runs
+python3 benchmark/evmbench_skill_runner.py --compare
+
+# Dry run (validate, no API calls)
+python3 benchmark/evmbench_skill_runner.py --dry-run --split detect-tasks
+```
+
+### Custom Suites
+
+For additional test cases beyond EVMBench:
+
 ```bash
 python3 benchmark/run.py --suite known-vulns
-python3 benchmark/run.py --suite audit-contests --model claude-opus-4-6
+python3 benchmark/run.py --compare
 ```
+
+See `benchmark/config.yaml` for scoring weights and `benchmark/suites/` for test case definitions.
 
 ---
 
@@ -176,20 +231,27 @@ python3 benchmark/run.py --suite audit-contests --model claude-opus-4-6
 
 ```
 bounty/
-├── README.md                ← this file
-├── CLAUDE.md                ← Claude Code project instructions
+├── README.md                       ← this file
+├── CLAUDE.md                       ← Claude Code project instructions
 ├── .gitignore
-├── hunt_loop.py             ← headless Immunefi loop orchestrator
-├── audit_loop.py            ← headless audit competition loop orchestrator
-├── benchmark/               ← evaluation framework
-│   ├── run.py               ← benchmark runner
-│   ├── config.yaml          ← test suites & scoring config
-│   ├── suites/              ← test case definitions
-│   │   └── known-vulns.yaml ← known vulnerability test cases
-│   └── results/             ← benchmark outputs (gitignored)
-├── poc-forge/test/          ← Foundry PoC files
-├── poc/                     ← web3.py verification scripts
-└── [protocol]-report/       ← per-protocol report drafts
+├── hunt_loop.py                    ← headless Immunefi loop orchestrator
+├── audit_loop.py                   ← headless audit competition loop orchestrator
+├── .claude-commands/               ← slash command source files
+│   ├── immunefi-hunt.md
+│   ├── immunefi-loop.md
+│   ├── audit-hunt.md
+│   └── audit-loop.md
+├── benchmark/                      ← evaluation framework
+│   ├── evmbench_setup.sh           ← EVMBench official harness setup
+│   ├── evmbench_skill_runner.py    ← skill wrapper for EVMBench cases
+│   ├── run.py                      ← custom suite benchmark runner
+│   ├── config.yaml                 ← scoring config
+│   ├── suites/                     ← custom test case definitions
+│   └── results/                    ← benchmark outputs (gitignored)
+├── evmbench-upstream/              ← cloned openai/frontier-evals (gitignored)
+├── poc-forge/test/                 ← Foundry PoC files
+├── poc/                            ← web3.py verification scripts
+└── [protocol]-report/              ← per-protocol report drafts
 ```
 
 ---
@@ -200,17 +262,23 @@ bounty/
 
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code)
 - [Foundry](https://book.getfoundry.sh/) (`forge`, `cast`, `anvil`)
-- Python 3.10+
+- Python 3.10+ with [uv](https://docs.astral.sh/uv/) (for EVMBench)
+- Docker (for EVMBench official harness)
 - `gh` CLI (for Sherlock auto-submit)
+- PyYAML (`pip install pyyaml`)
 
 ### Install
 
 ```bash
-git clone https://github.com/<your-username>/bounty.git
+git clone https://github.com/sane100400/bounty.git
 cd bounty
 
-# Slash commands are in ~/.claude/commands/ — copy if needed
-cp -r .claude-commands/* ~/.claude/commands/ 2>/dev/null || true
+# Install slash commands
+mkdir -p ~/.claude/commands
+cp .claude-commands/*.md ~/.claude/commands/
+
+# (Optional) Set up EVMBench
+bash benchmark/evmbench_setup.sh
 ```
 
 ---
