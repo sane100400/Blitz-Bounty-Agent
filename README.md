@@ -29,17 +29,16 @@ Finds **valid, PoC-confirmed vulnerabilities** in live protocols (Immunefi) and 
 │  Slash Commands   │   │  Python Orchestrators│
 │  (Claude Code)    │   │  (subprocess loops)  │
 │                   │   │                      │
-│  /immunefi-hunt   │   │  hunt_loop.py        │
-│  /immunefi-loop   │   │  audit_loop.py       │
-│  /audit-hunt      │   │                      │
-│  /audit-loop      │   │                      │
+│  /web3-hunt       │   │  hunt_loop.py        │
+│  /web3-loop       │   │  audit_loop.py       │
 └──────┬───────────┘   └──────┬──────────────┘
        │                       │
        ▼                       ▼
 ┌─────────────────────────────────────────────────────┐
 │              Shared Phase Pipeline                    │
 │                                                      │
-│  Recon → Scope/Diff → Attack Surface → Triage →     │
+│  Recon → Systematic File Sweep (100% coverage) →    │
+│  Cross-Compare → Attack Surface → Triage →          │
 │  PoC (Foundry fork / mock) → Report                  │
 └─────────────────────────────────────────────────────┘
 ```
@@ -48,70 +47,52 @@ Finds **valid, PoC-confirmed vulnerabilities** in live protocols (Immunefi) and 
 
 | Mode | Entry Point | Use Case |
 |---|---|---|
-| **Interactive** | `/immunefi-hunt`, `/audit-hunt` | Single structured run inside Claude Code session |
-| **Headless loop** | `hunt_loop.py`, `audit_loop.py` | Autonomous iteration — feeds drop reasons back each cycle |
+| **Interactive** | `/web3-hunt` | Single structured run — auto-detects audit vs bounty |
+| **Iterative** | `/web3-loop` | Autonomous loop — coverage gap tracking per iteration |
+| **Headless** | `hunt_loop.py`, `audit_loop.py` | Background subprocess loops |
 
 ---
 
 ## Slash Commands (Skills)
 
-### `/immunefi-hunt [target] [rpc-url]`
+### `/web3-hunt [target] [platform?] [rpc-url?]`
 
-Single-run structured hunt on a **live Immunefi** target.
+Unified single-run hunt. Auto-detects mode from URL/platform.
 
 **Phases:**
-1. **Recon** — Fetch scope, rewards, audit history, WONTFIX
-2. **Unaudited Diff** — Find post-audit code changes (primary attack surface)
-3. **Attack Surface** — Scenario-first mapping (10 attack classes)
-4. **Triage** — 4-check gate: code trace → intent check → dup check → impact threshold
-5. **PoC** — Mainnet fork only (Foundry `.t.sol` + web3.py verification)
-6. **Report** — On-chain evidence, block numbers, real TVL, gas vs profit analysis
+1. **Recon** — Scope, rewards, economic model
+2. **Systematic File Sweep** — Enumerate ALL .sol files, 100% coverage target
+3. **Cross-Compare** — Pattern groups (connectors, adapters) compared side-by-side
+4. **Attack Surface** — Scenario-first, with dedicated accounting/TVL trace
+5. **Triage** — Exploitability, scope, known design, severity checks
+6. **PoC** — Foundry test (mock for audits, mainnet fork for Immunefi)
+7. **Report** — Platform-specific format
 
 ```bash
-/immunefi-hunt "https://immunefi.com/bug-bounty/balancer" "https://1rpc.io/eth"
+# Audit competitions
+/web3-hunt "https://cantina.xyz/competitions/..." cantina
+/web3-hunt "https://code4rena.com/audits/..." codearena
+
+# Immunefi bounties
+/web3-hunt "https://immunefi.com/bug-bounty/balancer" immunefi "https://1rpc.io/eth"
 ```
 
-### `/immunefi-loop [target] [rpc-url] [max-iterations]`
+### `/web3-loop [target] [platform?] [max-iterations?] [rpc-url?]`
 
-Autonomous loop wrapper. Runs `/immunefi-hunt` repeatedly, learning from each dropped candidate.
+Autonomous loop with **coverage gap tracking** — each iteration reads files missed previously.
 
+```bash
+/web3-loop "https://cantina.xyz/competitions/..." cantina 10
+/web3-loop "https://immunefi.com/bug-bounty/balancer" immunefi 10 "https://1rpc.io/eth"
+```
+
+- Audit mode: accumulates multiple H/M findings across iterations
+- Bounty mode: stops on first confirmed finding
 - State persisted to `hunt-state.md`
-- Recon runs once, reused across iterations
-- Drop reasons feed back to avoid repeating mistakes
 
-```bash
-/immunefi-loop "https://immunefi.com/bug-bounty/balancer" "https://1rpc.io/eth" 10
-```
+### Legacy commands
 
-### `/audit-hunt [contest-url] [platform] [rpc-url?]`
-
-Single-run hunt for **audit competitions**. All code is target (no audit-history filtering).
-
-**Platforms:** `cantina`, `sherlock`, `codearena`, `codehawks`
-
-**Key differences from Immunefi:**
-- Duplicates still pay → less aggressive dup triage
-- Mediums count → don't filter by severity
-- Foundry mock tests are acceptable (no mainnet fork required)
-- Platform-specific report format
-
-```bash
-/audit-hunt "https://cantina.xyz/competitions/..." cantina
-/audit-hunt "https://audits.sherlock.xyz/contests/123" sherlock
-```
-
-### `/audit-loop [contest-url] [platform] [max-iterations]`
-
-Autonomous loop for contests. Speed-optimized for contest windows.
-
-- Keeps hunting after first finding (accumulates multiple H/M)
-- Auto-runs `forge test` in PoC phase
-- Generates submission-ready reports in `audit-reports/`
-- Sherlock: auto-submits via `gh issue create`
-
-```bash
-/audit-loop "https://cantina.xyz/competitions/..." cantina 10
-```
+`/immunefi-hunt`, `/immunefi-loop`, `/audit-hunt`, `/audit-loop` still work but `/web3-*` is preferred.
 
 ---
 
@@ -198,7 +179,7 @@ uv run python -m evmbench.nano.entrypoint \
 
 #### Run EVMBench via our skills (custom wrapper)
 
-Feeds EVMBench cases through our `/audit-hunt` skill and scores against ground truth.
+Feeds EVMBench cases through our `/web3-hunt` skill and scores against ground truth.
 
 ```bash
 # All detect cases
@@ -237,10 +218,9 @@ bounty/
 ├── hunt_loop.py                    ← headless Immunefi loop orchestrator
 ├── audit_loop.py                   ← headless audit competition loop orchestrator
 ├── .claude-commands/               ← slash command source files
-│   ├── immunefi-hunt.md
-│   ├── immunefi-loop.md
-│   ├── audit-hunt.md
-│   └── audit-loop.md
+│   ├── web3-hunt.md                ← unified hunt (auto-detects audit vs bounty)
+│   ├── web3-loop.md                ← unified loop with coverage tracking
+│   └── (legacy: immunefi-*, audit-*)
 ├── benchmark/                      ← evaluation framework
 │   ├── evmbench_setup.sh           ← EVMBench official harness setup
 │   ├── evmbench_skill_runner.py    ← skill wrapper for EVMBench cases

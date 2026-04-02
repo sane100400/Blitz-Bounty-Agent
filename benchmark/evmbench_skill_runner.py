@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EVMBench Skill Wrapper — runs our /audit-hunt skill against EVMBench cases
+EVMBench Skill Wrapper — runs our /web3-hunt skill against EVMBench cases
 and scores results against ground truth findings.
 
 This measures how well our custom hunting skills perform compared to
@@ -202,7 +202,7 @@ def find_solidity_dirs(source_dir: Path) -> list[str]:
 
 
 def run_skill_on_audit(audit_id: str, audit_config: dict, mode: str = "hunt") -> dict:
-    """Run /audit-hunt or /audit-loop skill on a single audit.
+    """Run /web3-hunt or /web3-loop skill on a single audit.
 
     Args:
         mode: "hunt" for single-shot, "loop" for iterative (3 iterations)
@@ -234,13 +234,13 @@ def run_skill_on_audit(audit_id: str, audit_config: dict, mode: str = "hunt") ->
 
     # Build prompt — point at the ACTUAL cloned source
     if mode == "loop":
-        skill_cmd = f"/audit-loop {source_dir} codearena 3"
+        skill_cmd = f"/web3-loop {source_dir} codearena 3"
         extra = (
             "Run 3 iterations. Each iteration should cover files missed in previous iterations. "
             "After iteration 1, check which .sol files were NOT analyzed and prioritize them. "
         )
     else:
-        skill_cmd = f"/audit-hunt {source_dir} codearena"
+        skill_cmd = f"/web3-hunt {source_dir} codearena"
         extra = ""
 
     prompt = (
@@ -496,7 +496,7 @@ def run_benchmark(audit_ids: list[str], dry_run: bool = False, use_llm_judge: bo
             print(f"    Source: {src} ({sol_count} .sol files)")
 
         if dry_run:
-            print(f"  → [DRY RUN] Would run /audit-hunt on {audit_id}")
+            print(f"  → [DRY RUN] Would run /web3-hunt on {audit_id}")
             continue
 
         # Run skill
