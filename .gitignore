@@ -1,0 +1,51 @@
+# ─── State & Logs (ephemeral, per-run) ────────────────────────────
+hunt-state.json
+hunt-state.md
+audit-state.json
+audit-state.md
+hunt-logs/
+audit-logs/
+audit-reports/
+
+# ─── Protocol-specific work dirs ──────────────────────────────────
+# Add protocol dirs as needed; these are examples from past hunts
+balancer-report/
+beanstalk-report/
+pol-report/
+contest-chainlink/
+defisaver/
+dual-governance/
+veda/
+target/
+
+# ─── PoC outputs ──────────────────────────────────────────────────
+poc/
+poc-forge/out/
+poc-forge/cache/
+
+# ─── Reports (generated per-hunt) ─────────────────────────────────
+report-*.md
+reports-*/
+*-report/
+
+# ─── Benchmark results (generated) ───────────────────────────────
+benchmark/results/
+
+# ─── OS / Editor ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# ─── Python ───────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+.env
+venv/
+
+# ─── Foundry ──────────────────────────────────────────────────────
+out/
+cache/

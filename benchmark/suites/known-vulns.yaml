@@ -1,0 +1,38 @@
+# Known Vulnerability Test Suite
+# Each entry is a confirmed, real-world vulnerability.
+# The benchmark runner feeds the protocol code to the hunt skill
+# and checks if the finding appears in the output.
+
+# Format:
+#   - id: unique identifier
+#     protocol: protocol name
+#     source: link to disclosure / audit report
+#     severity: critical | high | medium | low
+#     category: attack class (reentrancy, price-manipulation, etc.)
+#     description: one-line summary
+#     affected_files: list of file paths within the protocol repo
+#     detection_keywords: phrases that must appear in a valid finding
+#     setup: how to prepare the test environment
+#       repo: git clone URL
+#       commit: vulnerable commit hash
+#       rpc_block: block number for fork testing (if applicable)
+
+cases: []
+  # Example (uncomment and fill in with real cases):
+  #
+  # - id: euler-2023-001
+  #   protocol: euler-finance
+  #   source: "https://..."
+  #   severity: critical
+  #   category: donation-attack
+  #   description: "ERC4626 share price manipulation via direct token transfer"
+  #   affected_files:
+  #     - src/EVault.sol
+  #   detection_keywords:
+  #     - "share price"
+  #     - "donation"
+  #     - "first depositor"
+  #   setup:
+  #     repo: "https://github.com/euler-xyz/euler-vault-kit"
+  #     commit: "abc123"
+  #     rpc_block: 18000000

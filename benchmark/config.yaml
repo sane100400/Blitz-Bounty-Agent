@@ -1,0 +1,47 @@
+# Benchmark Configuration
+# Defines test suites, scoring weights, and model settings.
+
+models:
+  - id: claude-opus-4-6
+    name: "Claude Opus 4.6"
+    knowledge_cutoff: "2025-05"
+  # Add future models here for comparison
+  # - id: claude-sonnet-4-6
+  #   name: "Claude Sonnet 4.6"
+  #   knowledge_cutoff: "2025-05"
+
+suites:
+  known-vulns:
+    description: "Known vulnerabilities from past audits and bug bounties"
+    source_dir: suites/known-vulns.yaml
+    # Each case has: protocol, vuln description, severity, affected code
+    # The benchmark checks if the tool finds and correctly classifies it
+
+  audit-contests:
+    description: "Past audit contest findings (Sherlock, Code4rena, Cantina)"
+    source_dir: suites/audit-contests.yaml
+
+  false-positives:
+    description: "Intentional design patterns that should NOT be flagged"
+    source_dir: suites/false-positives.yaml
+
+scoring:
+  # Weights for composite score (must sum to 1.0)
+  precision_weight: 0.35    # Valid findings / total findings
+  recall_weight: 0.30       # Found bugs / known bugs
+  severity_weight: 0.20     # Correct severity classification
+  cost_weight: 0.15         # Normalized by $ per valid finding
+
+  # Severity scoring
+  severity_match:
+    exact: 1.0              # Correct severity
+    off_by_one: 0.5         # H→M or M→L
+    wrong: 0.0              # H→L or L→H
+
+  # Cost normalization (lower is better)
+  cost_baseline_per_finding: 5.00  # $ — anything below this gets full marks
+
+output:
+  results_dir: results/
+  format: json              # json | csv | markdown
+  compare_runs: true        # Show delta vs previous run
