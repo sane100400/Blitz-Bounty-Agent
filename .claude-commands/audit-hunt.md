@@ -31,6 +31,12 @@ These are different from Immunefi. Audit competitions have different economics.
 
 6. **Report format is platform-specific.** Sherlock wants GitHub issues. Code4rena wants markdown submissions. Cantina has their own UI. Know the format before writing.
 
+7. **100% file coverage.** Read EVERY in-scope .sol file. The bugs that pay the most are often in peripheral files (connectors, adapters, helpers) that reviewers skip. If the codebase has 20 connectors, read all 20.
+
+8. **Cross-compare pattern groups.** If multiple files implement the same interface (e.g., `_getPositionTVL()`), compare ALL implementations. The bug is the one that does it differently from the rest.
+
+9. **Use sub-agents for large codebases.** If there are 100+ .sol files, use the Agent tool to parallelize: one agent reads core contracts, another reads connectors A-K, another reads connectors L-Z. Merge findings before Phase 3.
+
 ---
 
 # PHASE 1: CONTEST RECON
@@ -151,7 +157,55 @@ Mark files/functions that deserve deeper attention:
 
 ## 2f. Stopping rule
 
-Do not proceed to Phase 3 until you have a full contract inventory with trust model and asset flow map.
+Do not proceed to Phase 2g until you have a full contract inventory with trust model and asset flow map.
+
+## 2g. SYSTEMATIC FILE SWEEP (MANDATORY)
+
+**This step is critical. Do not skip it.**
+
+Many vulnerabilities hide in peripheral files (connectors, adapters, helpers) that look similar but have subtle bugs. You MUST read every in-scope file, not just the "interesting" ones.
+
+### Step 1: Enumerate ALL source files
+
+```bash
+find . -name "*.sol" -not -path "*/test/*" -not -path "*/lib/*" -not -path "*/node_modules/*" -not -path "*/mock/*" | sort
+```
+
+### Step 2: Group by pattern
+
+For protocols with repeated patterns (connectors, adapters, strategies, vaults, handlers):
+
+1. **Identify the pattern group**: e.g., all files matching `*Connector.sol`, `*Strategy.sol`, `*Adapter.sol`
+2. **Read the base/parent contract first** to understand the interface
+3. **Read EVERY implementation** — not just 2-3. Each one may have unique bugs in its override logic
+4. **Cross-compare**: if 10 connectors implement `_getPositionTVL()`, compare all 10. The bug is often in one that does it differently.
+
+### Step 3: Dedicated accounting/TVL pass
+
+For every function that returns a value or balance:
+- `_getPositionTVL`, `totalAssets`, `balanceOf`, `getValue`, `getPrice`, any `tvl` or `balance` function
+- Trace: what is added? what is subtracted? are there edge cases where it underflows?
+- Check: does it include ALL sources of value? (staked tokens, pending rewards, borrowed amounts)
+- Check: does it correctly handle debt (subtract, not add)?
+
+### Step 4: File coverage checklist
+
+Write a checklist of ALL in-scope .sol files. Mark each as READ or SKIPPED.
+**Target: 100% of files READ.** If you skip a file, write WHY.
+
+If time is short, prioritize in this order:
+1. Files with value calculations (TVL, pricing, share math)
+2. Files with external calls (to DeFi protocols, oracles)
+3. Files with access control logic
+4. Remaining files
+
+## 2h. Stopping rule
+
+Do not proceed to Phase 3 until:
+- [ ] Full contract inventory with trust model and asset flow map
+- [ ] ALL in-scope .sol files have been read (or explicitly justified as skipped)
+- [ ] All pattern groups cross-compared
+- [ ] All value/TVL functions traced
 
 ---
 

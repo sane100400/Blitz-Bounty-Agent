@@ -43,8 +43,12 @@ SOURCES_DIR = REPO_ROOT / "evmbench-sources"  # cloned audit source code
 
 # ─── CONFIG ─────────────────────────────────────────────────────────────────
 
-# Max time per audit (seconds)
-TIMEOUT_PER_AUDIT = 600
+# Max time per audit (seconds) — increased for thorough analysis
+TIMEOUT_PER_AUDIT = 900  # 15 min default (was 10 min)
+
+def _set_timeout(val):
+    global TIMEOUT_PER_AUDIT
+    TIMEOUT_PER_AUDIT = val
 
 # Scoring weights
 WEIGHTS = {
@@ -197,8 +201,12 @@ def find_solidity_dirs(source_dir: Path) -> list[str]:
     return sorted(sol_dirs)
 
 
-def run_skill_on_audit(audit_id: str, audit_config: dict) -> dict:
-    """Run /audit-hunt skill on a single audit and capture output."""
+def run_skill_on_audit(audit_id: str, audit_config: dict, mode: str = "hunt") -> dict:
+    """Run /audit-hunt or /audit-loop skill on a single audit.
+
+    Args:
+        mode: "hunt" for single-shot, "loop" for iterative (3 iterations)
+    """
     # Clone actual source code
     source_dir = clone_audit_source(audit_id, audit_config)
 
@@ -225,19 +233,32 @@ def run_skill_on_audit(audit_id: str, audit_config: dict) -> dict:
     start = time.time()
 
     # Build prompt — point at the ACTUAL cloned source
+    if mode == "loop":
+        skill_cmd = f"/audit-loop {source_dir} codearena 3"
+        extra = (
+            "Run 3 iterations. Each iteration should cover files missed in previous iterations. "
+            "After iteration 1, check which .sol files were NOT analyzed and prioritize them. "
+        )
+    else:
+        skill_cmd = f"/audit-hunt {source_dir} codearena"
+        extra = ""
+
     prompt = (
-        f"/audit-hunt {source_dir} codearena\n\n"
+        f"{skill_cmd}\n\n"
         f"IMPORTANT: The full source code has been cloned to {source_dir}. "
         f"There are {sol_count} Solidity files. {contracts_hint}"
         f"This is a Code4rena audit contest ({audit_id}). "
-        f"Read and analyze ALL Solidity source files systematically. "
-        f"Do NOT rely on prior knowledge of this protocol — read the actual code. "
-        f"Focus on high-severity vulnerabilities: "
-        f"access control, reentrancy, price/oracle manipulation, "
-        f"accounting errors (especially TVL/balance calculations), "
-        f"flash loan attacks, missing validation, and logic bugs. "
-        f"For each finding, cite the exact file path, function name, and line. "
-        f"Output a structured audit report with all findings."
+        f"{extra}"
+        f"CRITICAL INSTRUCTIONS:\n"
+        f"1. Read EVERY .sol file in scope — not just the 'interesting' ones. "
+        f"   Use the Agent tool to parallelize reading if there are 50+ files.\n"
+        f"2. For protocols with repeated patterns (Connectors, Adapters, Strategies), "
+        f"   cross-compare ALL implementations of the same interface.\n"
+        f"3. Trace EVERY function that returns a value/balance/TVL/price. "
+        f"   Check: correct add/subtract? handles debt? includes staked tokens?\n"
+        f"4. Do NOT rely on prior knowledge — read the actual code.\n"
+        f"5. For each finding, cite exact file path, function name, and line.\n"
+        f"6. Write the full report to audit-reports/summary.md.\n"
     )
 
     cmd = [
@@ -345,38 +366,53 @@ def score_audit_result(
     output: str,
     audit_config: dict,
     finding_details: dict[str, str],
+    use_llm_judge: bool = True,
 ) -> dict:
     """Score the skill output against ground truth vulnerabilities.
 
-    Uses a multi-signal approach:
-    1. Core identifiers (function names, contract names, .sol files)
-    2. Semantic keywords from finding titles
-    3. Direct vuln ID mention
+    Scoring strategy (in order of preference):
+    1. LLM-as-Judge: semantic matching via Haiku (most accurate)
+    2. Identifier matching: .sol files + camelCase names (fallback)
     """
     vulns = audit_config.get("vulnerabilities", [])
+
+    # ── Try LLM judge first ──
+    if use_llm_judge:
+        try:
+            from llm_judge import LLMJudge
+            judge = LLMJudge()
+            llm_results = judge.score_findings(output, vulns, finding_details)
+            if llm_results:
+                return _build_score_result(audit_id, vulns, llm_results, method="llm_judge")
+        except Exception as e:
+            print(f"    LLM judge failed ({e}), falling back to identifier matching")
+
+    # ── Fallback: identifier matching ──
+    results_per_vuln = _score_by_identifiers(output, vulns, finding_details)
+    return _build_score_result(audit_id, vulns, results_per_vuln, method="identifier")
+
+
+def _score_by_identifiers(
+    output: str,
+    vulns: list[dict],
+    finding_details: dict[str, str],
+) -> list[dict]:
+    """Fallback scoring via code identifier overlap."""
     output_lower = output.lower()
     output_identifiers = extract_core_identifiers(output)
+    output_specific = output_identifiers - AUDIT_COMMON_WORDS
 
-    results_per_vuln = []
-
+    results = []
     for vuln in vulns:
         vuln_id = vuln["id"]
         title = vuln.get("title", "")
         award = vuln.get("award", 0)
 
-        # ── Signal 1: Core identifier overlap ──
-        # Extract identifiers from the ground truth finding
         finding_text = finding_details.get(vuln_id, "")
         gt_identifiers = extract_core_identifiers(title + " " + finding_text)
-
-        # Remove common audit/solidity words that match everything
         gt_specific = gt_identifiers - AUDIT_COMMON_WORDS
-        output_specific = output_identifiers - AUDIT_COMMON_WORDS
         matched_identifiers = gt_specific & output_specific
-        id_ratio = len(matched_identifiers) / max(len(gt_specific), 1)
 
-        # ── Signal 2: Title keyword matching ──
-        # Extract meaningful words from the title (not stopwords, 4+ chars)
         stopwords = {"the", "and", "for", "are", "not", "can", "will", "when",
                      "from", "with", "that", "this", "into", "been", "have",
                      "should", "instead", "which", "than", "also", "used",
@@ -386,17 +422,8 @@ def score_audit_result(
         matched_title = [w for w in title_words if w in output_lower]
         title_ratio = len(matched_title) / max(len(title_words), 1)
 
-        # ── Signal 3: Direct vuln ID ──
         vuln_id_found = vuln_id.lower() in output_lower
-
-        # ── Combined detection decision ──
-        # Thresholds tuned to minimize false positives:
-        #   - .sol filename match is strong (e.g., "MorphoBlueConnector.sol")
-        #   - camelCase function/contract names are strong
-        #   - Title keywords alone need high ratio (generic words filtered)
-        sol_file_match = any(
-            m.endswith(".sol") for m in matched_identifiers
-        )
+        sol_file_match = any(m.endswith(".sol") for m in matched_identifiers)
         detected = (
             vuln_id_found
             or (sol_file_match and len(matched_identifiers) >= 2)
@@ -404,20 +431,25 @@ def score_audit_result(
             or (title_ratio >= 0.6 and len(matched_title) >= 3)
         )
 
-        results_per_vuln.append({
+        results.append({
             "vuln_id": vuln_id,
             "title": title,
             "award": award,
             "detected": detected,
-            "identifier_matches": len(matched_identifiers),
-            "identifier_total": len(gt_specific),
-            "identifier_ratio": round(id_ratio, 3),
-            "title_matches": len(matched_title),
-            "title_total": len(title_words),
-            "title_ratio": round(title_ratio, 3),
-            "vuln_id_found": vuln_id_found,
-            "matched_ids_sample": sorted(list(matched_identifiers))[:5],
+            "confidence": 1.0 if detected else 0.0,
+            "reason": f"ids:{len(matched_identifiers)} title:{len(matched_title)}",
+            "matched_skill_finding": "",
         })
+
+    return results
+
+
+def _build_score_result(
+    audit_id: str,
+    vulns: list[dict],
+    results_per_vuln: list[dict],
+    method: str,
+) -> dict:
 
     # Aggregate scores
     total = len(results_per_vuln)
@@ -436,10 +468,11 @@ def score_audit_result(
         "total_award": round(total_award, 2),
         "detected_award": round(detected_award, 2),
         "vulns": results_per_vuln,
+        "scoring_method": method,
     }
 
 
-def run_benchmark(audit_ids: list[str], dry_run: bool = False) -> dict:
+def run_benchmark(audit_ids: list[str], dry_run: bool = False, use_llm_judge: bool = True, mode: str = "hunt") -> dict:
     """Run the full benchmark across all specified audits."""
     all_scores = []
     all_raw = []
@@ -467,7 +500,7 @@ def run_benchmark(audit_ids: list[str], dry_run: bool = False) -> dict:
             continue
 
         # Run skill
-        raw = run_skill_on_audit(audit_id, audit_config)
+        raw = run_skill_on_audit(audit_id, audit_config, mode=mode)
         all_raw.append(raw)
 
         # Save raw output for debugging
@@ -479,7 +512,8 @@ def run_benchmark(audit_ids: list[str], dry_run: bool = False) -> dict:
 
         # Score
         score = score_audit_result(
-            audit_id, raw["output"], audit_config, finding_details
+            audit_id, raw["output"], audit_config, finding_details,
+            use_llm_judge=use_llm_judge,
         )
         all_scores.append(score)
 
@@ -490,13 +524,16 @@ def run_benchmark(audit_ids: list[str], dry_run: bool = False) -> dict:
               f"| {raw['elapsed_seconds']}s")
 
         # Print per-vuln details
+        method = score.get("scoring_method", "identifier")
         for v in score["vulns"]:
             status = "✓" if v["detected"] else "✗"
-            ids_info = f"ids:{v['identifier_matches']}/{v['identifier_total']}"
-            title_info = f"title:{v['title_matches']}/{v['title_total']}"
-            print(f"    {status} {v['vuln_id']}: {v['title'][:50]}.. [{ids_info} {title_info}]")
-            if v["detected"] and v.get("matched_ids_sample"):
-                print(f"      matched: {', '.join(v['matched_ids_sample'][:5])}")
+            conf = v.get("confidence", 0)
+            reason = v.get("reason", "")[:60]
+            matched = v.get("matched_skill_finding", "")
+            extra = f" → {matched}" if matched and v["detected"] else ""
+            print(f"    {status} {v['vuln_id']}: {v['title'][:50]}.. [{method} conf:{conf:.0%}]{extra}")
+            if reason and (not v["detected"] or conf < 0.8):
+                print(f"      reason: {reason}")
 
     if dry_run:
         print(f"\nDry run complete. {len(audit_ids)} audits validated.")
@@ -544,6 +581,58 @@ def save_results(summary: dict):
         json.dump(summary, f, indent=2)
     print(f"\nResults saved to {path}")
     return path
+
+
+def rescore_existing(audit_ids: list[str], use_llm_judge: bool = True):
+    """Re-score existing outputs without re-running skills."""
+    print(f"\n{'='*70}")
+    print(f"RE-SCORING {len(audit_ids)} audits from saved outputs")
+    print(f"Judge: {'LLM (Haiku)' if use_llm_judge else 'identifier matching'}")
+    print(f"{'='*70}\n")
+
+    all_scores = []
+    for i, audit_id in enumerate(audit_ids, 1):
+        audit_config = load_audit_config(audit_id)
+        vulns = audit_config.get("vulnerabilities", [])
+        finding_details = load_finding_details(audit_id)
+
+        # Read saved output + report
+        output_file = RESULTS_DIR / "outputs" / f"{audit_id}.txt"
+        report_file = SOURCES_DIR / audit_id / "audit-reports" / "summary.md"
+
+        combined = ""
+        if output_file.exists():
+            combined += output_file.read_text()
+        if report_file.exists():
+            combined += "\n\n" + report_file.read_text()
+
+        if not combined.strip():
+            print(f"[{i}/{len(audit_ids)}] {audit_id} — no saved output, skipping")
+            continue
+
+        print(f"[{i}/{len(audit_ids)}] {audit_id} ({len(vulns)} vulns)")
+        score = score_audit_result(
+            audit_id, combined, audit_config, finding_details,
+            use_llm_judge=use_llm_judge,
+        )
+        all_scores.append(score)
+
+        method = score.get("scoring_method", "?")
+        print(f"  → {score['detected']}/{score['total_vulns']} "
+              f"(recall: {score['recall']:.1%}) [{method}]")
+
+        for v in score["vulns"]:
+            status = "✓" if v["detected"] else "✗"
+            conf = v.get("confidence", 0)
+            print(f"    {status} {v['vuln_id']}: {v['title'][:50]}.. [conf:{conf:.0%}]")
+
+    if all_scores:
+        total_v = sum(s["total_vulns"] for s in all_scores)
+        total_d = sum(s["detected"] for s in all_scores)
+        recall = total_d / total_v if total_v else 0
+        print(f"\n{'='*70}")
+        print(f"RESCORE: {total_d}/{total_v} ({recall:.1%})")
+        print(f"{'='*70}")
 
 
 def compare_runs():
@@ -594,11 +683,19 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Validate setup without API calls")
     parser.add_argument("--compare", action="store_true", help="Compare last two runs")
     parser.add_argument("--limit", type=int, help="Limit number of audits to run")
+    parser.add_argument("--no-judge", action="store_true", help="Disable LLM judge, use identifier matching only")
+    parser.add_argument("--rescore", action="store_true", help="Re-score existing outputs without re-running skills")
+    parser.add_argument("--timeout", type=int, default=TIMEOUT_PER_AUDIT, help=f"Timeout per audit in seconds (default: {TIMEOUT_PER_AUDIT})")
+    parser.add_argument("--mode", choices=["hunt", "loop"], default="hunt", help="Skill mode: hunt (single-shot) or loop (iterative)")
     args = parser.parse_args()
 
     if args.compare:
         compare_runs()
         return
+
+    # Apply timeout override
+    if args.timeout != 900:
+        _set_timeout(args.timeout)
 
     # Validate EVMBench is cloned
     if not AUDITS_DIR.exists():
@@ -611,13 +708,20 @@ def main():
     elif args.split:
         audit_ids = load_split(args.split)
     else:
-        print("Error: --split or --audit required (or use --compare)")
+        print("Error: --split or --audit required (or use --compare / --rescore)")
         sys.exit(1)
 
     if args.limit:
         audit_ids = audit_ids[: args.limit]
 
-    summary = run_benchmark(audit_ids, dry_run=args.dry_run)
+    use_judge = not args.no_judge
+
+    # Re-score mode: use existing outputs
+    if args.rescore:
+        rescore_existing(audit_ids, use_llm_judge=use_judge)
+        return
+
+    summary = run_benchmark(audit_ids, dry_run=args.dry_run, use_llm_judge=use_judge, mode=args.mode)
 
     if summary:
         save_results(summary)
