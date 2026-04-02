@@ -31,8 +31,9 @@ reports-*/
 # ─── Benchmark results (generated) ───────────────────────────────
 benchmark/results/
 
-# ─── EVMBench upstream (cloned separately) ────────────────────────
+# ─── EVMBench (cloned separately) ─────────────────────────────────
 evmbench-upstream/
+evmbench-sources/
 
 # ─── OS / Editor ──────────────────────────────────────────────────
 .DS_Store

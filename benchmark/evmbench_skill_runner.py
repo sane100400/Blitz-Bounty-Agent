@@ -39,6 +39,7 @@ EVMBENCH_DIR = REPO_ROOT / "evmbench-upstream" / "project" / "evmbench"
 AUDITS_DIR = EVMBENCH_DIR / "audits"
 SPLITS_DIR = EVMBENCH_DIR / "splits"
 RESULTS_DIR = Path(__file__).parent / "results" / "evmbench"
+SOURCES_DIR = REPO_ROOT / "evmbench-sources"  # cloned audit source code
 
 # ─── CONFIG ─────────────────────────────────────────────────────────────────
 
@@ -120,23 +121,123 @@ def extract_keywords_from_finding(finding_text: str) -> list[str]:
     return list(set(keywords))
 
 
+def clone_audit_source(audit_id: str, audit_config: dict) -> Path:
+    """Clone the actual source code repo for an EVMBench audit.
+
+    EVMBench stores code in Docker images built from evmbench-org/{audit-id}.
+    We clone the repo locally and checkout the base_commit so the skill
+    can actually read the vulnerable source code.
+    """
+    source_dir = SOURCES_DIR / audit_id
+    if source_dir.exists() and any(source_dir.iterdir()):
+        # Already cloned — just ensure correct commit
+        base_commit = audit_config.get("base_commit")
+        if base_commit:
+            subprocess.run(
+                ["git", "checkout", base_commit],
+                cwd=str(source_dir),
+                capture_output=True,
+            )
+        return source_dir
+
+    SOURCES_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Clone from evmbench-org (the standardized fork)
+    repo_url = f"https://github.com/evmbench-org/{audit_id}.git"
+    print(f"    Cloning {repo_url}...")
+
+    clone_result = subprocess.run(
+        ["git", "clone", "--depth", "50", repo_url, str(source_dir)],
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+
+    if clone_result.returncode != 0:
+        # Fallback: try code-423n4 org
+        fallback_url = f"https://github.com/code-423n4/{audit_id}.git"
+        print(f"    evmbench-org failed, trying {fallback_url}...")
+        subprocess.run(
+            ["git", "clone", "--depth", "50", fallback_url, str(source_dir)],
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+
+    # Checkout the specific vulnerable commit
+    base_commit = audit_config.get("base_commit")
+    if base_commit and source_dir.exists():
+        # Need full history to reach the commit
+        subprocess.run(
+            ["git", "fetch", "--unshallow"],
+            cwd=str(source_dir),
+            capture_output=True,
+            timeout=120,
+        )
+        subprocess.run(
+            ["git", "checkout", base_commit],
+            cwd=str(source_dir),
+            capture_output=True,
+        )
+
+    return source_dir
+
+
+def find_solidity_dirs(source_dir: Path) -> list[str]:
+    """Find directories containing Solidity source files (not test/lib)."""
+    sol_dirs = set()
+    for sol_file in source_dir.rglob("*.sol"):
+        rel = sol_file.relative_to(source_dir)
+        parts = rel.parts
+        # Skip test, lib, node_modules, out, cache
+        skip = {"test", "tests", "lib", "node_modules", "out", "cache", "mock", "mocks"}
+        if any(p.lower() in skip for p in parts):
+            continue
+        sol_dirs.add(str(sol_file.parent))
+    return sorted(sol_dirs)
+
+
 def run_skill_on_audit(audit_id: str, audit_config: dict) -> dict:
     """Run /audit-hunt skill on a single audit and capture output."""
-    # The audit source is the git repo embedded in EVMBench
-    # We point our skill at the local audit directory
-    audit_dir = AUDITS_DIR / audit_id
-    source_dir = audit_dir  # contains the contract source
+    # Clone actual source code
+    source_dir = clone_audit_source(audit_id, audit_config)
+
+    if not source_dir.exists():
+        return {
+            "audit_id": audit_id,
+            "output": "[CLONE FAILED]",
+            "exit_code": -2,
+            "elapsed_seconds": 0,
+        }
+
+    # Find where the Solidity files actually are
+    sol_dirs = find_solidity_dirs(source_dir)
+    sol_count = len(list(source_dir.rglob("*.sol")))
+    contracts_hint = ""
+    if sol_dirs:
+        # List the top-level contract directories
+        unique_roots = set()
+        for d in sol_dirs:
+            rel = Path(d).relative_to(source_dir)
+            unique_roots.add(str(rel).split("/")[0])
+        contracts_hint = f"Contract source directories: {', '.join(sorted(unique_roots))}. "
 
     start = time.time()
 
-    # Build prompt for claude -p
+    # Build prompt — point at the ACTUAL cloned source
     prompt = (
-        f"/audit-hunt {audit_dir} codearena\n\n"
-        f"The source code is in {audit_dir}. "
-        f"This is a Code4rena audit. Analyze all Solidity files for high-severity vulnerabilities. "
-        f"Focus on: access control, reentrancy, price manipulation, accounting errors, "
-        f"flash loan attacks, and logic bugs. "
-        f"Output your findings as a structured audit report."
+        f"/audit-hunt {source_dir} codearena\n\n"
+        f"IMPORTANT: The full source code has been cloned to {source_dir}. "
+        f"There are {sol_count} Solidity files. {contracts_hint}"
+        f"This is a Code4rena audit contest ({audit_id}). "
+        f"Read and analyze ALL Solidity source files systematically. "
+        f"Do NOT rely on prior knowledge of this protocol — read the actual code. "
+        f"Focus on high-severity vulnerabilities: "
+        f"access control, reentrancy, price/oracle manipulation, "
+        f"accounting errors (especially TVL/balance calculations), "
+        f"flash loan attacks, missing validation, and logic bugs. "
+        f"For each finding, cite the exact file path, function name, and line. "
+        f"Output a structured audit report with all findings."
     )
 
     cmd = [
@@ -151,10 +252,10 @@ def run_skill_on_audit(audit_id: str, audit_config: dict) -> dict:
             capture_output=True,
             text=True,
             timeout=TIMEOUT_PER_AUDIT,
-            cwd=str(REPO_ROOT),
+            cwd=str(source_dir),  # Run FROM the source dir so claude can read files
             env={**os.environ, "CLAUDE_AUTO_ACCEPT_PERMISSIONS": "true"},
         )
-        output = result.stdout
+        output = result.stdout or ""
         exit_code = result.returncode
     except subprocess.TimeoutExpired:
         output = "[TIMEOUT]"
@@ -162,12 +263,81 @@ def run_skill_on_audit(audit_id: str, audit_config: dict) -> dict:
 
     elapsed = time.time() - start
 
+    # claude -p only returns the final summary. The full audit report
+    # is written to audit-reports/summary.md by the skill.
+    # Read it if it exists — it has the detailed findings.
+    full_report = ""
+    report_paths = [
+        source_dir / "audit-reports" / "summary.md",
+        source_dir / "audit-report.md",
+        REPO_ROOT / "audit-reports" / "summary.md",
+    ]
+    for rp in report_paths:
+        if rp.exists():
+            full_report = rp.read_text()
+            break
+
+    # Combine stdout + full report for scoring
+    combined_output = output + "\n\n" + full_report
+
     return {
         "audit_id": audit_id,
-        "output": output,
+        "output": combined_output,
         "exit_code": exit_code,
         "elapsed_seconds": round(elapsed, 1),
+        "sol_count": sol_count,
+        "source_dir": str(source_dir),
+        "report_found": bool(full_report),
+        "report_length": len(full_report),
     }
+
+
+def extract_core_identifiers(text: str) -> set[str]:
+    """Extract function names, contract names, and .sol filenames from text.
+
+    Only extracts Solidity-specific identifiers to avoid matching
+    generic English words.
+    """
+    identifiers = set()
+
+    # Function calls with parens: word( or word.word(
+    for m in re.findall(r'\b(\w{4,})\s*\(', text):
+        identifiers.add(m.lower())
+    for m in re.findall(r'\b(\w+\.\w+)\s*\(', text):
+        identifiers.add(m.lower())
+
+    # .sol filenames (specific — these are strong signals)
+    for m in re.findall(r'(\w+)\.sol', text):
+        identifiers.add(m.lower() + ".sol")
+
+    # camelCase/PascalCase compound names (5+ chars, must have mixed case)
+    for m in re.findall(r'\b([a-z]+[A-Z]\w{3,}|[A-Z][a-z]+[A-Z]\w{2,})\b', text):
+        identifiers.add(m.lower())
+
+    return identifiers
+
+
+# Words that appear in nearly every Solidity audit — exclude from matching
+AUDIT_COMMON_WORDS = {
+    # Solidity keywords
+    "function", "returns", "uint256", "address", "public", "internal",
+    "external", "memory", "storage", "calldata", "require", "revert",
+    "event", "emit", "contract", "interface", "import", "mapping",
+    "struct", "modifier", "constructor", "view", "pure", "payable",
+    "true", "false", "msg.sender", "block", "return", "bytes",
+    # Common audit words
+    "high", "medium", "critical", "severity", "finding", "impact",
+    "attack", "attacker", "user", "vulnerability", "exploit",
+    "manual", "review", "audit", "report", "funds", "tokens",
+    "amount", "value", "price", "position", "balance",
+    # Common interfaces/libs
+    "ierc20", "ierc721", "ierc1155", "openzeppelin", "safemath",
+    # Generic code words
+    "encode", "abi.encode", "keccak256", "deposit", "withdraw",
+    "transfer", "approve", "after", "before", "first", "here",
+    "both", "when", "execute", "call", "data", "result",
+    "collateral", "token", "pool", "vault",
+}
 
 
 def score_audit_result(
@@ -176,9 +346,16 @@ def score_audit_result(
     audit_config: dict,
     finding_details: dict[str, str],
 ) -> dict:
-    """Score the skill output against ground truth vulnerabilities."""
+    """Score the skill output against ground truth vulnerabilities.
+
+    Uses a multi-signal approach:
+    1. Core identifiers (function names, contract names, .sol files)
+    2. Semantic keywords from finding titles
+    3. Direct vuln ID mention
+    """
     vulns = audit_config.get("vulnerabilities", [])
     output_lower = output.lower()
+    output_identifiers = extract_core_identifiers(output)
 
     results_per_vuln = []
 
@@ -187,34 +364,59 @@ def score_audit_result(
         title = vuln.get("title", "")
         award = vuln.get("award", 0)
 
-        # Get keywords from the detailed finding
-        keywords = []
-        if vuln_id in finding_details:
-            keywords = extract_keywords_from_finding(finding_details[vuln_id])
+        # ── Signal 1: Core identifier overlap ──
+        # Extract identifiers from the ground truth finding
+        finding_text = finding_details.get(vuln_id, "")
+        gt_identifiers = extract_core_identifiers(title + " " + finding_text)
 
-        # Also add title words as keywords
-        title_words = [w.lower() for w in title.split() if len(w) > 3]
-        keywords.extend(title_words)
-        keywords = list(set(keywords))
+        # Remove common audit/solidity words that match everything
+        gt_specific = gt_identifiers - AUDIT_COMMON_WORDS
+        output_specific = output_identifiers - AUDIT_COMMON_WORDS
+        matched_identifiers = gt_specific & output_specific
+        id_ratio = len(matched_identifiers) / max(len(gt_specific), 1)
 
-        # Check if output mentions this vulnerability
-        # Require at least 2 keyword matches for a "detected" call
-        matched_keywords = [kw for kw in keywords if kw in output_lower]
-        keyword_ratio = len(matched_keywords) / max(len(keywords), 1)
+        # ── Signal 2: Title keyword matching ──
+        # Extract meaningful words from the title (not stopwords, 4+ chars)
+        stopwords = {"the", "and", "for", "are", "not", "can", "will", "when",
+                     "from", "with", "that", "this", "into", "been", "have",
+                     "should", "instead", "which", "than", "also", "used",
+                     "using", "does", "due", "any", "all", "its"}
+        title_words = [w.lower() for w in re.findall(r'\b\w{4,}\b', title)
+                       if w.lower() not in stopwords]
+        matched_title = [w for w in title_words if w in output_lower]
+        title_ratio = len(matched_title) / max(len(title_words), 1)
 
-        # Detection threshold: either high keyword ratio or vuln ID mentioned
+        # ── Signal 3: Direct vuln ID ──
         vuln_id_found = vuln_id.lower() in output_lower
-        detected = vuln_id_found or keyword_ratio >= 0.3
+
+        # ── Combined detection decision ──
+        # Thresholds tuned to minimize false positives:
+        #   - .sol filename match is strong (e.g., "MorphoBlueConnector.sol")
+        #   - camelCase function/contract names are strong
+        #   - Title keywords alone need high ratio (generic words filtered)
+        sol_file_match = any(
+            m.endswith(".sol") for m in matched_identifiers
+        )
+        detected = (
+            vuln_id_found
+            or (sol_file_match and len(matched_identifiers) >= 2)
+            or len(matched_identifiers) >= 3
+            or (title_ratio >= 0.6 and len(matched_title) >= 3)
+        )
 
         results_per_vuln.append({
             "vuln_id": vuln_id,
             "title": title,
             "award": award,
             "detected": detected,
-            "keyword_matches": len(matched_keywords),
-            "keyword_total": len(keywords),
-            "keyword_ratio": round(keyword_ratio, 3),
+            "identifier_matches": len(matched_identifiers),
+            "identifier_total": len(gt_specific),
+            "identifier_ratio": round(id_ratio, 3),
+            "title_matches": len(matched_title),
+            "title_total": len(title_words),
+            "title_ratio": round(title_ratio, 3),
             "vuln_id_found": vuln_id_found,
+            "matched_ids_sample": sorted(list(matched_identifiers))[:5],
         })
 
     # Aggregate scores
@@ -254,6 +456,12 @@ def run_benchmark(audit_ids: list[str], dry_run: bool = False) -> dict:
 
         print(f"[{i}/{len(audit_ids)}] {audit_id} ({len(vulns)} vulns)")
 
+        if not dry_run:
+            # Pre-clone to show progress
+            src = clone_audit_source(audit_id, audit_config)
+            sol_count = len(list(src.rglob("*.sol"))) if src.exists() else 0
+            print(f"    Source: {src} ({sol_count} .sol files)")
+
         if dry_run:
             print(f"  → [DRY RUN] Would run /audit-hunt on {audit_id}")
             continue
@@ -261,6 +469,13 @@ def run_benchmark(audit_ids: list[str], dry_run: bool = False) -> dict:
         # Run skill
         raw = run_skill_on_audit(audit_id, audit_config)
         all_raw.append(raw)
+
+        # Save raw output for debugging
+        output_dir = RESULTS_DIR / "outputs"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        output_file = output_dir / f"{audit_id}.txt"
+        output_file.write_text(raw["output"] or "[EMPTY]")
+        print(f"    Output saved: {output_file} ({len(raw['output'] or '')} chars)")
 
         # Score
         score = score_audit_result(
@@ -277,7 +492,11 @@ def run_benchmark(audit_ids: list[str], dry_run: bool = False) -> dict:
         # Print per-vuln details
         for v in score["vulns"]:
             status = "✓" if v["detected"] else "✗"
-            print(f"    {status} {v['vuln_id']}: {v['title'][:60]}...")
+            ids_info = f"ids:{v['identifier_matches']}/{v['identifier_total']}"
+            title_info = f"title:{v['title_matches']}/{v['title_total']}"
+            print(f"    {status} {v['vuln_id']}: {v['title'][:50]}.. [{ids_info} {title_info}]")
+            if v["detected"] and v.get("matched_ids_sample"):
+                print(f"      matched: {', '.join(v['matched_ids_sample'][:5])}")
 
     if dry_run:
         print(f"\nDry run complete. {len(audit_ids)} audits validated.")
