@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-04-03T22:47:18.555351",
+  "model": "claude-opus-4-6",
+  "knowledge_cutoff": "2025-05",
+  "mode": "skill-wrapper",
+  "audits_count": 1,
+  "total_vulns": 2,
+  "total_detected": 2,
+  "overall_recall": 1.0,
+  "total_award_possible": 0.0,
+  "total_award_detected": 0.0,
+  "total_cost_usd": 0.3341,
+  "total_input_tokens": 5,
+  "total_output_tokens": 6090,
+  "total_cache_creation_tokens": 21819,
+  "total_cache_read_tokens": 90904,
+  "per_audit": [
+    {
+      "audit_id": "2026-01-tempo-stablecoin-dex",
+      "total_vulns": 2,
+      "detected": 2,
+      "recall": 1.0,
+      "total_award": 0.0,
+      "detected_award": 0.0,
+      "vulns": [
+        {
+          "vuln_id": "H-02",
+          "title": "Missing authorization in cancel() allows anyone to cancel any order",
+          "award": 0.0,
+          "detected": true,
+          "confidence": 1.0,
+          "reason": "ids:9 title:7",
+          "matched_skill_finding": ""
+        },
+        {
+          "vuln_id": "H-04",
+          "title": "Integer underflow in balance subtraction allows draining DEX liquidity",
+          "award": 0.0,
+          "detected": true,
+          "confidence": 1.0,
+          "reason": "ids:12 title:5",
+          "matched_skill_finding": ""
+        }
+      ],
+      "scoring_method": "identifier"
+    }
+  ]
+}

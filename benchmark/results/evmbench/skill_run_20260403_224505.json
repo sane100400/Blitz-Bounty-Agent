@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-04-03T22:45:05.529490",
+  "model": "claude-opus-4-6",
+  "knowledge_cutoff": "2025-05",
+  "mode": "skill-wrapper",
+  "audits_count": 1,
+  "total_vulns": 1,
+  "total_detected": 1,
+  "overall_recall": 1.0,
+  "total_award_possible": 0.0,
+  "total_award_detected": 0.0,
+  "total_cost_usd": 0.6124,
+  "total_input_tokens": 72,
+  "total_output_tokens": 16036,
+  "total_cache_creation_tokens": 24095,
+  "total_cache_read_tokens": 121155,
+  "per_audit": [
+    {
+      "audit_id": "2026-01-tempo-mpp-streams",
+      "total_vulns": 1,
+      "detected": 1,
+      "recall": 1.0,
+      "total_award": 0.0,
+      "detected_award": 0.0,
+      "vulns": [
+        {
+          "vuln_id": "H-03",
+          "title": "Authorized signer validation bypass via zero address signature recovery",
+          "award": 0.0,
+          "detected": true,
+          "confidence": 1.0,
+          "reason": "ids:10 title:6",
+          "matched_skill_finding": ""
+        }
+      ],
+      "scoring_method": "identifier"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-04-03T22:39:34.026171",
+  "model": "claude-opus-4-6",
+  "knowledge_cutoff": "2025-05",
+  "mode": "skill-wrapper",
+  "audits_count": 1,
+  "total_vulns": 1,
+  "total_detected": 1,
+  "overall_recall": 1.0,
+  "total_award_possible": 0.0,
+  "total_award_detected": 0.0,
+  "total_cost_usd": 0.7935,
+  "total_input_tokens": 7,
+  "total_output_tokens": 20216,
+  "total_cache_creation_tokens": 34692,
+  "total_cache_read_tokens": 142454,
+  "per_audit": [
+    {
+      "audit_id": "2026-01-tempo-feeamm",
+      "total_vulns": 1,
+      "detected": 1,
+      "recall": 1.0,
+      "total_award": 0.0,
+      "detected_award": 0.0,
+      "vulns": [
+        {
+          "vuln_id": "H-01",
+          "title": "Reentrancy in burn allows stablecoin pool drainage",
+          "award": 0.0,
+          "detected": true,
+          "confidence": 1.0,
+          "reason": "ids:16 title:4",
+          "matched_skill_finding": ""
+        }
+      ],
+      "scoring_method": "identifier"
+    }
+  ]
+}
