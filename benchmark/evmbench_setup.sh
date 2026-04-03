@@ -5,7 +5,12 @@
 # Prerequisites:
 #   - Docker (running)
 #   - uv (https://docs.astral.sh/uv/)
-#   - ANTHROPIC_API_KEY set in env
+#   - API-style credentials if you plan to run upstream Claude solvers
+#
+# Note:
+#   This script is for the official upstream harness path.
+#   The repo-local Blitz runners use `claude -p` and can run from a logged-in
+#   Claude Code subscription session without ANTHROPIC_API_KEY.
 #
 # Usage:
 #   bash benchmark/evmbench_setup.sh          # full setup
@@ -27,7 +32,9 @@ for cmd in docker uv; do
 done
 
 if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
-    echo "WARNING: ANTHROPIC_API_KEY not set. Claude agents won't work."
+    echo "WARNING: ANTHROPIC_API_KEY not set."
+    echo "         That's fine for Blitz's local `claude -p` runners."
+    echo "         It may block upstream EVMBench runs that expect API credentials."
 fi
 
 # 2. Clone if not present
@@ -84,3 +91,8 @@ echo "      evmbench.log_to_run_dir=True \\"
 echo "      evmbench.solver=evmbench.nano.solver.EVMbenchSolver \\"
 echo "      evmbench.solver.agent_id=claude-opus-4.6 \\"
 echo "      runner.concurrency=3"
+echo ""
+echo "Repo-local subscription-backed benchmark path:"
+echo "  cd $REPO_ROOT"
+echo "  python3 benchmark/claude_subscription_check.py --probe"
+echo "  python3 benchmark/evmbench_skill_runner.py --audit 2026-01-tempo-feeamm"

@@ -71,7 +71,7 @@ Both feed into the same phase pipeline:
 **`audit_orchestrator.py`** is a multi-agent variant: runs parallel specialist agents (recon → parallel vulnerability analysis → merge/triage) via `ThreadPoolExecutor`.
 
 **Benchmark system** has two tracks:
-- `evmbench_skill_runner.py` — wraps EVMBench cases through our `/web3-hunt` skill, uses `llm_judge.py` (Haiku-based semantic matcher) for scoring against ground truth
+- `evmbench_skill_runner.py` — wraps EVMBench cases through our `/web3-hunt` skill, uses `llm_judge.py` (Haiku-based semantic matcher) for scoring against ground truth. This path uses `claude -p`, so a logged-in Claude Code subscription session is sufficient; no `ANTHROPIC_API_KEY` is required.
 - `run.py` — custom benchmark suites defined in `benchmark/suites/`, config in `benchmark/config.yaml`
 
 ## Key Rules for Vulnerability Hunting
@@ -94,3 +94,10 @@ Both feed into the same phase pipeline:
 
 - Claude Code CLI, Foundry (`forge`/`cast`/`anvil`), Python 3.10+, PyYAML
 - Optional: Docker + uv (EVMBench official harness), `gh` CLI (Sherlock auto-submit)
+
+## Auth Notes
+
+- Main repo flows use `claude -p` and are designed to run on a logged-in Claude Code subscription session.
+- `ANTHROPIC_API_KEY` is optional for those flows.
+- Upstream EVMBench official harness is a separate path and may require API-style credentials depending on the solver.
+- Quick check: `python3 benchmark/claude_subscription_check.py --probe`

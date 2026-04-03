@@ -17,10 +17,18 @@ import os
 import re
 import subprocess
 import hashlib
+import sys
 from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from claude_cli import ClaudeCliUnavailable, run_claude_prompt
 
 # Cache dir to avoid re-judging identical pairs
 CACHE_DIR = Path(__file__).parent / "results" / "judge_cache"
+JUDGE_MODEL = os.environ.get("BLITZ_JUDGE_MODEL", "claude-haiku-4-5")
 
 
 class LLMJudge:
@@ -86,13 +94,13 @@ Respond ONLY with this JSON, nothing else:
 {{"match": true/false, "confidence": 0.0-1.0, "reason": "one sentence"}}"""
 
         try:
-            result_proc = subprocess.run(
-                ["claude", "-p", prompt, "--output-format", "text"],
-                capture_output=True,
-                text=True,
+            result_proc = run_claude_prompt(
+                prompt,
                 timeout=30,
+                output_format="text",
+                model=JUDGE_MODEL,
             )
-            text = result_proc.stdout.strip()
+            text = result_proc["text"].strip()
 
             # Parse JSON from response
             json_match = re.search(r'\{[^}]+\}', text)
@@ -101,6 +109,8 @@ Respond ONLY with this JSON, nothing else:
             else:
                 result = {"match": False, "confidence": 0.0, "reason": "parse error"}
 
+        except ClaudeCliUnavailable as e:
+            result = {"match": False, "confidence": 0.0, "reason": f"claude unavailable: {e}"}
         except Exception as e:
             result = {"match": False, "confidence": 0.0, "reason": f"error: {e}"}
 
@@ -173,13 +183,13 @@ Respond with ONLY a JSON array, one entry per ground truth vuln:
 Include ALL {len(gt_vulns)} ground truth vulns. Output ONLY the JSON array."""
 
         try:
-            result_proc = subprocess.run(
-                ["claude", "-p", prompt, "--output-format", "text"],
-                capture_output=True,
-                text=True,
+            result_proc = run_claude_prompt(
+                prompt,
                 timeout=120,
+                output_format="text",
+                model=JUDGE_MODEL,
             )
-            text = result_proc.stdout.strip()
+            text = result_proc["text"].strip()
 
             # Parse JSON array
             array_match = re.search(r'\[[\s\S]*\]', text)
@@ -188,6 +198,9 @@ Include ALL {len(gt_vulns)} ground truth vulns. Output ONLY the JSON array."""
             else:
                 return None  # fallback to identifier matching
 
+        except ClaudeCliUnavailable as e:
+            print(f"    Judge batch call unavailable: {e}")
+            return None
         except Exception as e:
             print(f"    Judge batch call failed: {e}")
             return None

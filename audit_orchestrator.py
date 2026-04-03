@@ -30,31 +30,34 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 
+from claude_cli import ClaudeCliUnavailable, run_claude_prompt
+
 # Force unbuffered stdout for real-time progress
 sys.stdout.reconfigure(line_buffering=True)
 
 # ─── CONFIG ────────────────────────────────────────────────────────────────
 
 TIMEOUT_PER_AGENT = 600      # 10 min per specialist agent
-MERGE_TIMEOUT = 300           # 5 min for merge
+MERGE_TIMEOUT = 300          # 5 min for merge
 MAX_PARALLEL_AGENTS = 5
 REPORTS_DIR = Path("audit-reports")
 
 # Per-agent budget caps (USD) — prevents runaway output tokens
-BUDGET_SPECIALIST = 0.50     # $0.50 per specialist agent
-BUDGET_MERGER     = 0.80     # $0.80 for merger (needs room for full report)
+DEFAULT_SPECIALIST_BUDGET = 0.50
+DEFAULT_MERGER_BUDGET = 0.80
 
-# Model assignments — Opus for deep semantic analysis, Sonnet for pattern matching
-MODEL_OPUS   = "opus"
-MODEL_SONNET = "sonnet"
+# Model assignments — deep reasoning for semantic analysis, fast model for grep/pattern work
+DEFAULT_MODEL_DEEP = "claude-opus-4-6"
+DEFAULT_MODEL_FAST = "claude-sonnet-4-6"
 
 # ─── TOKEN TRACKING ───────────────────────────────────────────────────────
 
-# Pricing per 1M tokens (USD) — Claude Opus 4.6, updated 2026-04
-_PRICE_INPUT  = 15.0
-_PRICE_OUTPUT = 75.0
-_PRICE_CACHE_CREATE = 18.75  # cache write
-_PRICE_CACHE_READ   = 1.50   # cache hit
+# Best-effort fallback pricing for Opus 4.6. The canonical run cost comes from
+# `total_cost_usd` returned by the CLI, which is what the benchmark uses.
+_PRICE_INPUT = 5.0
+_PRICE_OUTPUT = 25.0
+_PRICE_CACHE_CREATE = 6.25
+_PRICE_CACHE_READ = 0.50
 
 
 class TokenTracker:
@@ -62,6 +65,14 @@ class TokenTracker:
 
     def __init__(self):
         self.calls: list[dict] = []   # per-call records
+        self.total_input = 0
+        self.total_output = 0
+        self.total_cache_create = 0
+        self.total_cache_read = 0
+        self.total_cost = 0.0
+
+    def reset(self):
+        self.calls.clear()
         self.total_input = 0
         self.total_output = 0
         self.total_cache_create = 0
@@ -145,35 +156,33 @@ def run_claude(
 ) -> str:
     """Run a single claude -p call, track tokens, and return text output."""
     try:
-        cmd = ["claude", "-p", prompt, "--output-format", "json"]
-        if model:
-            cmd += ["--model", model]
-        if max_budget is not None:
-            cmd += ["--max-budget-usd", str(max_budget)]
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=timeout,
+        result = run_claude_prompt(
+            prompt,
             cwd=cwd,
-            env={**os.environ, "CLAUDE_AUTO_ACCEPT_PERMISSIONS": "true"},
+            timeout=timeout,
+            output_format="json",
+            model=model,
+            max_budget=max_budget,
+            auto_accept_permissions=True,
         )
-        raw = result.stdout or ""
+        raw = result.get("raw", "")
+        if result.get("timed_out"):
+            return "[TIMEOUT]"
 
         # Parse JSON to extract usage + text
         try:
-            data = json.loads(raw)
+            data = result.get("parsed") or json.loads(raw)
             text = data.get("result", "")
-            usage = data.get("usage", {})
-            cost = data.get("total_cost_usd", 0.0)
+            usage = result.get("usage", {}) or data.get("usage", {})
+            cost = result.get("total_cost_usd", 0.0) or data.get("total_cost_usd", 0.0)
             token_tracker.record(agent_name, usage, cost)
             return text
         except (json.JSONDecodeError, KeyError):
             # Fallback: treat raw output as text (old claude versions)
             return raw
 
-    except subprocess.TimeoutExpired:
-        return "[TIMEOUT]"
+    except ClaudeCliUnavailable as e:
+        return f"[ERROR: Claude CLI unavailable: {e}]"
     except Exception as e:
         return f"[ERROR: {e}]"
 
@@ -335,7 +344,13 @@ For EACH assigned file:
 """
 
 
-def build_specialist_prompts(source_dir: str, recon: dict, platform: str) -> list[dict]:
+def build_specialist_prompts(
+    source_dir: str,
+    recon: dict,
+    platform: str,
+    model_deep: str,
+    model_fast: str,
+) -> list[dict]:
     """Build prompts for each specialist agent based on recon results."""
     files = recon.get("files", [])
     groups = recon.get("pattern_groups", {})
@@ -356,14 +371,14 @@ def build_specialist_prompts(source_dir: str, recon: dict, platform: str) -> lis
         specialists.append({
             "name": "tvl_accounting_A",
             "focus": "TVL and accounting analysis",
-            "model": MODEL_OPUS,
+            "model": model_deep,
             "prompt": _tvl_prompt(source_dir, conn_a, summary),
         })
     if conn_b:
         specialists.append({
             "name": "tvl_accounting_B",
             "focus": "TVL and accounting analysis (second group)",
-            "model": MODEL_OPUS,
+            "model": model_deep,
             "prompt": _tvl_prompt(source_dir, conn_b, summary),
         })
 
@@ -371,7 +386,7 @@ def build_specialist_prompts(source_dir: str, recon: dict, platform: str) -> lis
     specialists.append({
         "name": "position_lifecycle",
         "focus": "Position registry and lifecycle tracking",
-        "model": MODEL_SONNET,
+        "model": model_fast,
         "prompt": f"""You are a smart contract security specialist focused on POSITION LIFECYCLE BUGS.
 
 SOURCE: {source_dir}
@@ -394,7 +409,7 @@ Trace round-trip per connector: deposit → register → TVL → withdraw → de
     specialists.append({
         "name": "access_control_fundflow",
         "focus": "Access control, fund flow, and cross-contract attacks",
-        "model": MODEL_SONNET,
+        "model": model_fast,
         "prompt": f"""You are a smart contract security specialist focused on ACCESS CONTROL and FUND FLOW BUGS.
 
 SOURCE: {source_dir}
@@ -420,7 +435,7 @@ CODEBASE MAP:
     specialists.append({
         "name": "external_semantics",
         "focus": "External protocol integration correctness",
-        "model": MODEL_OPUS,
+        "model": model_deep,
         "prompt": f"""You are a smart contract security specialist focused on EXTERNAL PROTOCOL INTEGRATION BUGS.
 
 SOURCE: {source_dir}
@@ -445,7 +460,7 @@ Build a table: | Connector | External Call | Expected | Actual | Match? |
         specialists.append({
             "name": "core_logic",
             "focus": "Core contract logic (manager, registry, governance)",
-            "model": MODEL_OPUS,
+            "model": model_deep,
             "prompt": f"""You are a smart contract security specialist focused on CORE CONTRACT LOGIC BUGS.
 
 SOURCE: {source_dir}
@@ -462,16 +477,16 @@ Focus: queue/batch accounting (stuck queues, share miscalculation), modifier/acc
     return specialists
 
 
-def run_specialist(spec: dict, source_dir: str, timeout: int) -> dict:
+def run_specialist(spec: dict, source_dir: str, timeout: int, budget_specialist: float) -> dict:
     """Run a single specialist agent."""
     name = spec["name"]
-    model = spec.get("model", MODEL_OPUS)
+    model = spec.get("model", DEFAULT_MODEL_DEEP)
     print(f"    [{name}] Starting — {spec['focus']} [{model}]")
     start = time.time()
 
     output = run_claude(
         spec["prompt"], source_dir, timeout=timeout,
-        agent_name=name, model=model, max_budget=BUDGET_SPECIALIST,
+        agent_name=name, model=model, max_budget=budget_specialist,
     )
     elapsed = time.time() - start
 
@@ -490,16 +505,24 @@ def run_specialist(spec: dict, source_dir: str, timeout: int) -> dict:
     }
 
 
-def run_specialists(source_dir: str, recon: dict, platform: str, timeout: int) -> list[dict]:
+def run_specialists(
+    source_dir: str,
+    recon: dict,
+    platform: str,
+    timeout: int,
+    model_deep: str,
+    model_fast: str,
+    budget_specialist: float,
+) -> list[dict]:
     """Phase 2: Run all specialist agents in parallel."""
-    specs = build_specialist_prompts(source_dir, recon, platform)
+    specs = build_specialist_prompts(source_dir, recon, platform, model_deep, model_fast)
 
     print(f"\n[Phase 2] Running {len(specs)} specialist agents in parallel...")
 
     results = []
     with ThreadPoolExecutor(max_workers=MAX_PARALLEL_AGENTS) as executor:
         futures = {
-            executor.submit(run_specialist, spec, source_dir, timeout): spec
+            executor.submit(run_specialist, spec, source_dir, timeout, budget_specialist): spec
             for spec in specs
         }
         for future in as_completed(futures):
@@ -518,6 +541,8 @@ def run_specialists(source_dir: str, recon: dict, platform: str, timeout: int) -
                 })
 
     total_findings = sum(r["finding_count"] for r in results)
+    if results and all(r["output"].startswith("[ERROR:") for r in results):
+        raise RuntimeError(results[0]["output"])
     print(f"\n    Total findings from specialists: {total_findings}")
     return results
 
@@ -554,7 +579,14 @@ def _extract_findings(output: str) -> str:
     return "\n\n".join(findings)
 
 
-def run_merger(source_dir: str, specialist_results: list[dict], platform: str) -> str:
+def run_merger(
+    source_dir: str,
+    specialist_results: list[dict],
+    platform: str,
+    model_deep: str,
+    budget_merger: float,
+    merge_timeout: int,
+) -> str:
     """Phase 3: Merge, deduplicate, triage, and produce final report."""
     print("\n[Phase 3] Merging findings...")
     start = time.time()
@@ -601,8 +633,8 @@ Report format:
 """
 
     output = run_claude(
-        prompt, source_dir, timeout=MERGE_TIMEOUT,
-        agent_name="merger", model=MODEL_OPUS, max_budget=BUDGET_MERGER,
+        prompt, source_dir, timeout=merge_timeout,
+        agent_name="merger", model=model_deep, max_budget=budget_merger,
     )
     elapsed = time.time() - start
     print(f"    Merge completed in {elapsed:.0f}s")
@@ -622,14 +654,23 @@ def orchestrate(
     source_dir: str,
     platform: str = "codearena",
     timeout_per_agent: int = TIMEOUT_PER_AGENT,
+    model_deep: str = DEFAULT_MODEL_DEEP,
+    model_fast: str = DEFAULT_MODEL_FAST,
+    specialist_budget: float = DEFAULT_SPECIALIST_BUDGET,
+    merger_budget: float = DEFAULT_MERGER_BUDGET,
+    merge_timeout: int = MERGE_TIMEOUT,
 ) -> dict:
     """Run the full multi-agent audit orchestration."""
     total_start = time.time()
+    token_tracker.reset()
 
     print(f"\n{'='*70}")
     print(f"Multi-Agent Audit Orchestrator")
     print(f"Source: {source_dir}")
     print(f"Platform: {platform}")
+    print(f"Deep model: {model_deep}")
+    print(f"Fast model: {model_fast}")
+    print(f"Budgets: specialists=${specialist_budget:.2f}, merger=${merger_budget:.2f}")
     print(f"{'='*70}")
 
     # Phase 1: Recon
@@ -642,10 +683,25 @@ def orchestrate(
         print("    WARNING: No .sol files found in scope")
 
     # Phase 2: Specialists
-    specialist_results = run_specialists(source_dir, recon, platform, timeout_per_agent)
+    specialist_results = run_specialists(
+        source_dir,
+        recon,
+        platform,
+        timeout_per_agent,
+        model_deep,
+        model_fast,
+        specialist_budget,
+    )
 
     # Phase 3: Merge
-    final_output = run_merger(source_dir, specialist_results, platform)
+    final_output = run_merger(
+        source_dir,
+        specialist_results,
+        platform,
+        model_deep,
+        merger_budget,
+        merge_timeout,
+    )
 
     total_elapsed = time.time() - total_start
 
@@ -658,6 +714,7 @@ def orchestrate(
         "source_dir": source_dir,
         "platform": platform,
         "total_elapsed": round(total_elapsed, 1),
+        "total_cost_usd": round(token_tracker.total_cost, 4),
         "token_usage": token_tracker.to_dict(),
         "recon": recon,
         "specialist_results": [
@@ -671,13 +728,27 @@ def orchestrate(
 
 # ─── EVMBENCH INTEGRATION ─────────────────────────────────────────────────
 
-def run_benchmark_orchestrated(audit_id: str, timeout: int = 600):
+def run_benchmark_orchestrated(
+    audit_id: str,
+    timeout: int = 600,
+    deep_model: str = DEFAULT_MODEL_DEEP,
+    fast_model: str = DEFAULT_MODEL_FAST,
+    specialist_budget: float = DEFAULT_SPECIALIST_BUDGET,
+    merger_budget: float = DEFAULT_MERGER_BUDGET,
+    merge_timeout: int = MERGE_TIMEOUT,
+    label: str | None = None,
+    use_llm_judge: bool = True,
+):
     """Run the orchestrator on an EVMBench audit and score results."""
     # Import scoring from skill runner
     sys.path.insert(0, str(Path(__file__).parent / "benchmark"))
     from evmbench_skill_runner import (
-        load_audit_config, load_finding_details, clone_audit_source,
-        score_audit_result, RESULTS_DIR, save_results,
+        clone_audit_source,
+        load_audit_config,
+        load_finding_details,
+        normalize_model_id,
+        score_audit_result,
+        RESULTS_DIR,
     )
 
     print(f"\nEVMBench Orchestrated Benchmark — {audit_id}")
@@ -693,7 +764,18 @@ def run_benchmark_orchestrated(audit_id: str, timeout: int = 600):
         return
 
     # Run orchestrator
-    result = orchestrate(str(source_dir), platform="codearena", timeout_per_agent=timeout)
+    deep_model = normalize_model_id(deep_model)
+    fast_model = normalize_model_id(fast_model)
+    result = orchestrate(
+        str(source_dir),
+        platform="codearena",
+        timeout_per_agent=timeout,
+        model_deep=deep_model,
+        model_fast=fast_model,
+        specialist_budget=specialist_budget,
+        merger_budget=merger_budget,
+        merge_timeout=merge_timeout,
+    )
 
     # Combine all outputs for scoring
     combined_output = result["final_output"]
@@ -709,7 +791,7 @@ def run_benchmark_orchestrated(audit_id: str, timeout: int = 600):
     # Score
     score = score_audit_result(
         audit_id, combined_output, audit_config, finding_details,
-        use_llm_judge=True,
+        use_llm_judge=use_llm_judge,
     )
 
     print(f"\n{'='*70}")
@@ -728,10 +810,16 @@ def run_benchmark_orchestrated(audit_id: str, timeout: int = 600):
     # Save results
     summary = {
         "timestamp": datetime.now().isoformat(),
-        "model": "claude-opus-4-6",
+        "label": label or "orchestrated",
+        "model": deep_model,
+        "deep_model": deep_model,
+        "fast_model": fast_model,
         "mode": "orchestrated",
         "audit_id": audit_id,
         "total_elapsed": result["total_elapsed"],
+        "total_cost_usd": result.get("total_cost_usd", 0.0),
+        "specialist_budget": specialist_budget,
+        "merger_budget": merger_budget,
         "token_usage": result.get("token_usage", {}),
         "agents": result["specialist_results"],
         **score,
@@ -752,6 +840,11 @@ def main():
     parser.add_argument("source_dir", help="Path to source code directory")
     parser.add_argument("--platform", default="codearena", help="Platform (codearena, sherlock, cantina, etc.)")
     parser.add_argument("--timeout", type=int, default=TIMEOUT_PER_AGENT, help=f"Timeout per agent in seconds (default: {TIMEOUT_PER_AGENT})")
+    parser.add_argument("--deep-model", default=DEFAULT_MODEL_DEEP, help="Model for deep semantic agents and merger")
+    parser.add_argument("--fast-model", default=DEFAULT_MODEL_FAST, help="Model for fast pattern-matching agents")
+    parser.add_argument("--specialist-budget", type=float, default=DEFAULT_SPECIALIST_BUDGET, help="Budget cap per specialist agent")
+    parser.add_argument("--merger-budget", type=float, default=DEFAULT_MERGER_BUDGET, help="Budget cap for merger agent")
+    parser.add_argument("--merge-timeout", type=int, default=MERGE_TIMEOUT, help="Timeout for the merger stage")
     parser.add_argument("--benchmark", action="store_true", help="Run as EVMBench benchmark")
     parser.add_argument("--audit-id", type=str, help="EVMBench audit ID (for --benchmark)")
     args = parser.parse_args()
@@ -760,9 +853,26 @@ def main():
         if not args.audit_id:
             print("Error: --audit-id required with --benchmark")
             sys.exit(1)
-        run_benchmark_orchestrated(args.audit_id, timeout=args.timeout)
+        run_benchmark_orchestrated(
+            args.audit_id,
+            timeout=args.timeout,
+            deep_model=args.deep_model,
+            fast_model=args.fast_model,
+            specialist_budget=args.specialist_budget,
+            merger_budget=args.merger_budget,
+            merge_timeout=args.merge_timeout,
+        )
     else:
-        result = orchestrate(args.source_dir, platform=args.platform, timeout_per_agent=args.timeout)
+        result = orchestrate(
+            args.source_dir,
+            platform=args.platform,
+            timeout_per_agent=args.timeout,
+            model_deep=args.deep_model,
+            model_fast=args.fast_model,
+            specialist_budget=args.specialist_budget,
+            merger_budget=args.merger_budget,
+            merge_timeout=args.merge_timeout,
+        )
         print(f"\nFinal output length: {len(result['final_output'])} chars")
 
 

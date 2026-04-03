@@ -72,7 +72,7 @@ Post-cutoff results are encouraging, but the sample is too small (4 vulns, all f
 2. **Use Exploit mode as secondary metric** — most rigorous, requires end-to-end on-chain execution
 3. **Detect mode on post-cutoff only** — if using Detect, restrict to 2025-06+ audits
 4. **Do not report pre-cutoff Detect scores as capability evidence** — they may reflect memorization
-5. **Run official EVMBench harness for Patch/Exploit** — requires Docker + API key, uses programmatic grading
+5. **Separate the two execution paths clearly** — the official upstream EVMBench harness may require Docker + API-style credentials, while the repo-local Blitz wrappers use `claude -p` and can run from a logged-in Claude Code subscription session
 
 ## How Other Papers Should Handle This
 

@@ -36,9 +36,14 @@ import yaml
 from datetime import datetime
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from claude_cli import ClaudeCliUnavailable, run_claude_prompt
+
 # ─── PATHS ──────────────────────────────────────────────────────────────────
 
-REPO_ROOT = Path(__file__).parent.parent
 EVMBENCH_DIR = REPO_ROOT / "evmbench-upstream" / "project" / "evmbench"
 AUDITS_DIR = EVMBENCH_DIR / "audits"
 SOURCES_DIR = REPO_ROOT / "evmbench-sources"
@@ -183,44 +188,29 @@ def run_agent_patch(audit_id: str, source_dir: Path, scope_files: list[str],
         f"Do NOT create new test files. Do NOT modify test files.\n"
     )
 
-    cmd = [
-        "claude", "-p", prompt,
-        "--output-format", "json",
-        "--permission-mode", "bypassPermissions",
-        "--add-dir", str(source_dir),
-    ]
-    if model:
-        cmd.extend(["--model", model])
-    if max_budget:
-        cmd.extend(["--max-budget-usd", str(max_budget)])
-
     token_usage = {}
     total_cost_usd = 0.0
     start = time.time()
 
     try:
-        result = subprocess.run(
-            cmd, capture_output=True, text=True, timeout=TIMEOUT_PER_AUDIT,
+        result = run_claude_prompt(
+            prompt,
             cwd=str(source_dir),
-            env={**os.environ, "CLAUDE_AUTO_ACCEPT_PERMISSIONS": "true"},
+            timeout=TIMEOUT_PER_AUDIT,
+            output_format="json",
+            permission_mode="bypassPermissions",
+            add_dir=str(source_dir),
+            model=model,
+            max_budget=max_budget,
+            auto_accept_permissions=True,
         )
-        raw = result.stdout or ""
-        try:
-            jr = json.loads(raw)
-            output = jr.get("result", "")
-            token_usage = jr.get("usage", {})
-            total_cost_usd = jr.get("total_cost_usd", 0.0)
-        except json.JSONDecodeError:
-            output = raw
-    except subprocess.TimeoutExpired as e:
-        raw = (e.stdout or "") if isinstance(e.stdout, str) else (e.stdout or b"").decode(errors="replace")
-        try:
-            jr = json.loads(raw)
-            output = jr.get("result", "") or "[TIMEOUT]"
-            token_usage = jr.get("usage", {})
-            total_cost_usd = jr.get("total_cost_usd", 0.0)
-        except (json.JSONDecodeError, ValueError):
-            output = "[TIMEOUT]"
+        output = result["text"] if not result.get("timed_out") else "[TIMEOUT]"
+        token_usage = result.get("usage", {})
+        total_cost_usd = result.get("total_cost_usd", 0.0)
+        unavailable = False
+    except ClaudeCliUnavailable as e:
+        output = f"[CLAUDE_UNAVAILABLE] {e}"
+        unavailable = True
 
     elapsed = time.time() - start
 
@@ -229,6 +219,7 @@ def run_agent_patch(audit_id: str, source_dir: Path, scope_files: list[str],
         "elapsed_seconds": round(elapsed, 1),
         "token_usage": token_usage,
         "total_cost_usd": total_cost_usd,
+        "unavailable": unavailable,
     }
 
 
@@ -375,6 +366,9 @@ def run_patch_benchmark(audit_ids: list[str], dry_run: bool = False,
         raw = run_agent_patch(audit_id, source_dir, scope_files,
                               model=model, max_budget=max_budget)
         all_raw.append({**raw, "audit_id": audit_id})
+
+        if raw.get("unavailable"):
+            raise RuntimeError(raw["output"])
 
         usage = raw.get("token_usage", {})
         cost = raw.get("total_cost_usd", 0)

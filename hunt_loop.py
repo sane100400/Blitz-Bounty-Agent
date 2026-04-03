@@ -21,6 +21,8 @@ import time
 from pathlib import Path
 from datetime import datetime
 
+from claude_cli import ClaudeCliUnavailable, run_claude_prompt
+
 # ─── CONFIG ──────────────────────────────────────────────────────────────────
 
 MAX_ITERATIONS_DEFAULT = 10
@@ -205,20 +207,17 @@ def run_claude(prompt: str, iteration: int, phase: str) -> str:
     prompt_file.write_text(prompt)
 
     try:
-        result = subprocess.run(
-            ["claude", "-p", prompt],
-            capture_output=True,
-            text=True,
-            timeout=600,   # 10 min max per phase
+        result = run_claude_prompt(
+            prompt,
+            timeout=600,
+            output_format="text",
         )
-        output = result.stdout + result.stderr
-    except subprocess.TimeoutExpired:
-        output = f"[TIMEOUT] Phase {phase} exceeded 10 minutes"
-    except FileNotFoundError:
-        # claude CLI not found — print instructions and exit
-        print("\n[ERROR] 'claude' CLI not found.")
-        print("Install: npm install -g @anthropic-ai/claude-code")
-        sys.exit(1)
+        output = result["text"]
+        if result.get("timed_out"):
+            output = f"[TIMEOUT] Phase {phase} exceeded 10 minutes"
+    except ClaudeCliUnavailable as exc:
+        print(f"\n[ERROR] Claude CLI unavailable: {exc}")
+        sys.exit(2)
 
     log_file.write_text(output)
     print(output[:2000])  # show first 2000 chars live
