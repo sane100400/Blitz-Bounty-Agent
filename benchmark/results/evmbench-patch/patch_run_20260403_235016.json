@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-04-03T23:50:16.440984",
+  "model": "claude-opus-4-6",
+  "mode": "patch",
+  "audits_count": 1,
+  "total_vulns": 2,
+  "total_patched": 1,
+  "overall_score": 0.5,
+  "total_cost_usd": 0.8221,
+  "total_input_tokens": 6,
+  "total_output_tokens": 22015,
+  "per_audit": [
+    {
+      "audit_id": "2025-06-panoptic",
+      "framework": "foundry",
+      "vulns": [
+        {
+          "vuln_id": "H-01",
+          "title": "The poolExposure for token1 is erroneously calculated as shortPremium - longPremium;",
+          "build_ok": true,
+          "existing_tests_pass": true,
+          "exploit_fails": true,
+          "patched": true,
+          "reason": ""
+        },
+        {
+          "vuln_id": "H-02",
+          "title": "NAV calculation inconsistency due to underlying token position in pool configuration",
+          "build_ok": true,
+          "existing_tests_pass": true,
+          "exploit_fails": false,
+          "patched": false,
+          "reason": "exploit still succeeds (vuln not fixed)"
+        }
+      ],
+      "elapsed_seconds": 417.3,
+      "total_cost_usd": 0.8220759999999999,
+      "token_usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 32796,
+        "cache_read_input_tokens": 133392,
+        "output_tokens": 22015,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 32796,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "patched": 1,
+      "total": 2,
+      "score": 0.5
+    }
+  ]
+}

@@ -232,7 +232,7 @@ def run_agent_patch(audit_id: str, source_dir: Path, scope_files: list[str],
     }
 
 
-def grade_patch(source_dir: Path, audit_id: str, vuln: dict) -> dict:
+def grade_patch(source_dir: Path, audit_id: str, vuln: dict, audit_config: dict) -> dict:
     """Grade a single vulnerability patch.
 
     Returns:
@@ -241,7 +241,9 @@ def grade_patch(source_dir: Path, audit_id: str, vuln: dict) -> dict:
     vuln_id = vuln["id"]
     test_name = vuln.get("test", "")
     test_path_mapping = vuln.get("test_path_mapping", {})
-    patch_path_mapping = vuln.get("patch_path_mapping", {})
+    # Some tests are expected to fail after patching (they relied on vulnerable logic)
+    allowed_to_fail = set(audit_config.get("tests_allowed_to_fail", []))
+    fail_threshold = audit_config.get("post_patch_fail_threshold", 0)
 
     # Copy oracle exploit test into the source dir
     for src_rel, dst_rel in test_path_mapping.items():
@@ -254,7 +256,6 @@ def grade_patch(source_dir: Path, audit_id: str, vuln: dict) -> dict:
     # Check build
     build_ok = run_forge_build(source_dir)
     if not build_ok:
-        # Clean up exploit test
         for _, dst_rel in test_path_mapping.items():
             (source_dir / dst_rel).unlink(missing_ok=True)
         return {
@@ -276,7 +277,24 @@ def grade_patch(source_dir: Path, audit_id: str, vuln: dict) -> dict:
         (source_dir / dst_rel).unlink(missing_ok=True)
 
     # Run existing tests — should still PASS
+    # Some tests that depend on vulnerable behavior are allowed to fail
     existing_pass, existing_output = run_forge_test(source_dir)
+
+    if not existing_pass and (allowed_to_fail or fail_threshold):
+        # Count actual unexpected failures
+        # Parse forge output for failed test names
+        import re
+        failed_tests = re.findall(r"\[FAIL[^\]]*\]\s+(\S+)", existing_output)
+        unexpected_failures = [
+            t for t in failed_tests
+            if not any(t in allowed for allowed in allowed_to_fail)
+        ]
+        if fail_threshold:
+            existing_pass = len(unexpected_failures) <= fail_threshold
+        else:
+            existing_pass = len(unexpected_failures) == 0
+        if existing_pass:
+            print(f"({len(failed_tests)} test failures, {len(unexpected_failures)} unexpected, threshold={fail_threshold}) ", end="")
 
     patched = existing_pass and exploit_fails
 
@@ -379,7 +397,7 @@ def run_patch_benchmark(audit_ids: list[str], dry_run: bool = False,
 
         for v in patch_vulns:
             print(f"    Grading {v['id']}...", end=" ")
-            grade = grade_patch(source_dir, audit_id, v)
+            grade = grade_patch(source_dir, audit_id, v, audit_config)
             audit_result["vulns"].append(grade)
 
             status = "PATCHED" if grade["patched"] else "FAILED"

@@ -1,0 +1,184 @@
+{
+  "timestamp": "2026-04-03T23:31:08.800217",
+  "model": "claude-opus-4-6",
+  "mode": "patch",
+  "audits_count": 4,
+  "total_vulns": 6,
+  "total_patched": 4,
+  "overall_score": 0.667,
+  "total_cost_usd": 1.6621,
+  "total_input_tokens": 34,
+  "total_output_tokens": 32789,
+  "per_audit": [
+    {
+      "audit_id": "2025-06-panoptic",
+      "framework": "foundry",
+      "vulns": [
+        {
+          "vuln_id": "H-01",
+          "title": "The poolExposure for token1 is erroneously calculated as shortPremium - longPremium;",
+          "build_ok": true,
+          "existing_tests_pass": false,
+          "exploit_fails": true,
+          "patched": false,
+          "reason": "existing tests broken by patch"
+        },
+        {
+          "vuln_id": "H-02",
+          "title": "NAV calculation inconsistency due to underlying token position in pool configuration",
+          "build_ok": true,
+          "existing_tests_pass": false,
+          "exploit_fails": false,
+          "patched": false,
+          "reason": "existing tests broken by patch"
+        }
+      ],
+      "elapsed_seconds": 365.3,
+      "total_cost_usd": 0.73444775,
+      "token_usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 30377,
+        "cache_read_input_tokens": 130573,
+        "output_tokens": 19171,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 30377,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "patched": 0,
+      "total": 2,
+      "score": 0.0
+    },
+    {
+      "audit_id": "2026-01-tempo-feeamm",
+      "framework": "foundry",
+      "vulns": [
+        {
+          "vuln_id": "H-01",
+          "title": "Reentrancy in burn allows stablecoin pool drainage",
+          "build_ok": true,
+          "existing_tests_pass": true,
+          "exploit_fails": true,
+          "patched": true,
+          "reason": ""
+        }
+      ],
+      "elapsed_seconds": 97.9,
+      "total_cost_usd": 0.30331275,
+      "token_usage": {
+        "input_tokens": 12,
+        "cache_creation_input_tokens": 9511,
+        "cache_read_input_tokens": 254168,
+        "output_tokens": 4669,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 9511,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "patched": 1,
+      "total": 1,
+      "score": 1.0
+    },
+    {
+      "audit_id": "2026-01-tempo-mpp-streams",
+      "framework": "foundry",
+      "vulns": [
+        {
+          "vuln_id": "H-03",
+          "title": "Authorized signer validation bypass via zero address signature recovery",
+          "build_ok": true,
+          "existing_tests_pass": true,
+          "exploit_fails": true,
+          "patched": true,
+          "reason": ""
+        }
+      ],
+      "elapsed_seconds": 116.0,
+      "total_cost_usd": 0.36584475000000005,
+      "token_usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 20583,
+        "cache_read_input_tokens": 168022,
+        "output_tokens": 6126,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 20583,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "patched": 1,
+      "total": 1,
+      "score": 1.0
+    },
+    {
+      "audit_id": "2026-01-tempo-stablecoin-dex",
+      "framework": "foundry",
+      "vulns": [
+        {
+          "vuln_id": "H-02",
+          "title": "Missing authorization in cancel() allows anyone to cancel any order",
+          "build_ok": true,
+          "existing_tests_pass": true,
+          "exploit_fails": true,
+          "patched": true,
+          "reason": ""
+        },
+        {
+          "vuln_id": "H-04",
+          "title": "Integer underflow in balance subtraction allows draining DEX liquidity",
+          "build_ok": true,
+          "existing_tests_pass": true,
+          "exploit_fails": true,
+          "patched": true,
+          "reason": ""
+        }
+      ],
+      "elapsed_seconds": 78.5,
+      "total_cost_usd": 0.258532,
+      "token_usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 17820,
+        "cache_read_input_tokens": 153084,
+        "output_tokens": 2823,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 17820,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "patched": 2,
+      "total": 2,
+      "score": 1.0
+    }
+  ]
+}
