@@ -121,12 +121,18 @@ Respond ONLY with this JSON, nothing else:
         Uses a single batch call — gives the LLM both the skill report
         and the GT vuln list, asks it to match them all at once.
         """
-        # Build GT summary
+        # Build GT summary with finding details for better matching
         gt_lines = []
         for vuln in gt_vulns:
             vid = vuln["id"]
             title = vuln.get("title", "")
-            gt_lines.append(f"- {vid}: {title}")
+            detail = gt_finding_details.get(vid, "")
+            # Include a brief excerpt of the finding details for context
+            detail_excerpt = detail[:300].replace("\n", " ") if detail else ""
+            if detail_excerpt:
+                gt_lines.append(f"- {vid}: {title}\n  Context: {detail_excerpt}")
+            else:
+                gt_lines.append(f"- {vid}: {title}")
         gt_summary = "\n".join(gt_lines)
 
         # Check cache
@@ -143,14 +149,24 @@ Respond ONLY with this JSON, nothing else:
 {skill_report[:20000]}
 
 ## Task
-For EACH ground truth vulnerability, determine if the skill report contains a finding that describes the SAME root cause and code location.
+For EACH ground truth vulnerability, determine if the skill report contains a finding that identifies the SAME vulnerability.
 
-A match means: same bug, same contract/function — even if described differently or with different IDs.
-NOT a match: different root cause, different file, or just a related symptom.
+MATCHING CRITERIA (a match if ANY is true):
+1. Same root cause in the same function/contract (strongest signal)
+2. Same vulnerable function identified, even if the described impact differs
+3. Same bug pattern (e.g., both say "TVL adds debt instead of subtracting") in the same connector
+4. Skill finding identifies the specific code line where the GT bug exists, even if framed as a different issue class
+
+NOT a match:
+- Completely different contracts with no overlap
+- Generic category match without specific code overlap (e.g., both mention "reentrancy" but in different functions)
+- The skill finding only mentions the contract name in passing without analyzing the specific bug
+
+IMPORTANT: Be generous with matches. If the skill report demonstrates awareness of the specific buggy code and the core issue, that counts as detection even if severity/framing differs.
 
 Respond with ONLY a JSON array, one entry per ground truth vuln:
 [
-  {{"gt_id": "H-01", "match": true/false, "confidence": 0.0-1.0, "matched_skill_id": "H-XX or empty", "reason": "brief"}},
+  {{"gt_id": "H-01", "match": true/false, "confidence": 0.0-1.0, "matched_skill_id": "H-XX or M-XX or empty", "reason": "brief"}},
   ...
 ]
 

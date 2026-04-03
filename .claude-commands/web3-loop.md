@@ -134,6 +134,12 @@ COVERAGE FOCUS: Read these files that haven't been analyzed yet:
 ALSO review drop history:
 [from hunt-state.md]
 
+MANDATORY CHECKS on each new file:
+- External call verification: verify return value semantics, token receivers, function variants
+- Position lifecycle: trace all add/remove/update calls, verify boolean flags and position IDs
+- Fund flow: map cross-contract token paths, check access control on token transfer functions
+- Token edge cases: blacklist tokens in loops, fee-on-transfer, oracle decimal scaling
+
 Generate 3-5 NEW attack scenarios.
 For each: attack class, file:line, step-by-step, severity, why it's a bug.
 ```

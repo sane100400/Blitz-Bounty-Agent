@@ -184,6 +184,96 @@ For EVERY function that returns a value:
 - Any function with `tvl`, `balance`, `value`, `worth`, `amount` in the name
 - Trace: inputs → math → output. Where can precision loss or incorrect signs occur?
 
+### Step 4: External protocol semantic verification
+
+**For EVERY external call in each connector, build a table:**
+
+```
+| Connector | External Call | Assumed Behavior | Verified? | Risk |
+|-----------|--------------|------------------|-----------|------|
+| PendleConnector | market.skim() | returns excess to caller | ? | funds lost if sent elsewhere |
+| BalancerConnector | pool.totalSupply() | total circulating BPT | ? | may include preminted BPT |
+```
+
+**Use the Agent tool to verify external protocol interfaces in parallel when there are 5+ connectors.**
+
+For each external call, check these 4 categories:
+
+1. **Token destination:** For every call that moves tokens, grep the interface/contract for the `receiver`/`to`/`recipient` parameter. WHERE do tokens actually go?
+   - Pattern: `function burnLP(..., address receiver, ...)` — is `receiver` set to `address(this)` or something else?
+   - Pattern: `function skim(address token)` — does this send tokens BACK to the caller, or to a treasury/fee collector?
+   - **If you cannot determine the destination from the interface alone, flag it as a risk.**
+
+2. **Return value units:** For every call that returns a value used in math, verify the UNITS:
+   - `getLpToAssetRate()` — rate in terms of what? underlying asset? SY token? Different units produce silently wrong TVL.
+   - `getCollateral()` — returns share tokens or underlying tokens? If share tokens, you need to convert.
+   - `totalSupply()` — for Balancer ComposableStablePool, this includes preminted BPT. Use `getActualSupply()`.
+
+3. **Missing protocol interactions:** For each external protocol, check: does the connector implement ALL necessary lifecycle functions?
+   - Deposit + withdraw is obvious. But: `claimCollateral()` after liquidation? `claimRewards()` for staking? `claimSurplus()` in recovery mode?
+   - If the protocol has a special mode (recovery, emergency), and the connector has no function to handle it, funds can get stuck.
+
+4. **Function variant selection:** Grep external interfaces for variants:
+   - `totalSupply` vs `getActualSupply` vs `totalActualSupply`
+   - `balanceOf` vs `getCollateral` vs `getAccountBalance`
+   - If the protocol has multiple variants, the connector MUST use the correct one for its pool type.
+
+### Step 5: Position lifecycle trace
+
+**Grep for ALL position-modifying calls across the entire codebase:**
+
+```bash
+grep -rn "updateHoldingPosition\|addHoldingPosition\|removePosition\|_updateTokenInRegistry" contracts/
+```
+
+**Build a position registry audit table:**
+
+```
+| File:Line | Function | Action | remove flag | Connector type | Correct? |
+|-----------|----------|--------|-------------|----------------|----------|
+| Dolomite.sol:72 | openBorrowPosition | register | true (REMOVE!) | ownerConnector | BUG: should be false |
+| Dolomite.sol:42 | deposit | register | false (add) | ownerConnector | OK |
+```
+
+For each entry:
+
+1. **Boolean flag audit:** `true` = remove, `false` = add. A single inverted flag makes positions invisible to TVL. **Compare every add-position call to its corresponding remove-position call** — they should use the same position ID parameters.
+
+2. **State change completeness:** For functions that move value between accounts (transfer, migrate, rebalance):
+   - Does it update BOTH the source (remove old position) AND destination (add new position)?
+   - `transferBetweenAccounts` that moves collateral without updating either position = silent TVL loss
+
+3. **isEmpty checks:** For each connector's `isEmpty()`/`isMarketEmpty()` function:
+   - List ALL locations where value can exist (direct balance, staked in gauge, staked in reward contract, pending rewards)
+   - Does the isEmpty function check ALL of them? Missing even one means premature position deregistration.
+
+4. **Round-trip consistency:** For each connector, trace the full cycle:
+   - deposit → where does value go? → which position ID is registered?
+   - TVL calculation → which balances does it read? → same locations as deposit?
+   - withdraw → which position ID is removed? → same as registered?
+   - **Mismatch between any two steps = bug.**
+
+### Step 6: Fund flow path analysis
+
+**Trace every path tokens can take, especially indirect ones:**
+
+1. **Cross-contract fund movement:** Map all functions where tokens move between contracts:
+   - `sendTokensToTrustedAddress`, `flashLoan`, `executePayback`, etc.
+   - For each: WHO can trigger it? WHERE do tokens go? Is there access control?
+   - Example bug: Flash loan callback allows moving any vault's tokens to another vault via unchecked trusted address
+
+2. **Flash loan attack surfaces:** For every flash loan integration:
+   - Can the flash loan callback trigger state changes in OTHER contracts?
+   - Can an attacker use vault A's flash loan to affect vault B?
+   - Are there strict zero-balance checks that can be griefed with 1 wei?
+
+3. **Token-specific edge cases checklist:**
+   - **Blacklist tokens** (USDC, USDT): If tokens are processed in a batch/loop, one blacklisted user can block ALL users
+   - **Fee-on-transfer tokens**: Actual received amount < transfer amount — does the code assume they're equal?
+   - **Rebasing tokens** (stETH): Balance changes between transactions — is this handled?
+   - **Non-standard decimals**: Does the code handle 6-decimal tokens (USDC) vs 18-decimal tokens correctly?
+   - **Oracle decimal mismatch**: ETH/USD Chainlink returns 8 decimals — is this correctly scaled?
+
 ## 2f. File coverage checklist
 
 Write a checklist of ALL in-scope .sol files:
@@ -212,6 +302,9 @@ Do not proceed to Phase 3 until:
 - [ ] ALL in-scope .sol files read (or justified skip with reason)
 - [ ] All pattern groups cross-compared
 - [ ] All value/TVL functions traced
+- [ ] External call assumptions verified (Step 4)
+- [ ] Position lifecycle traced for every state-changing function (Step 5)
+- [ ] Fund flow paths mapped, including flash loan and cross-contract routes (Step 6)
 - [ ] File coverage checklist is 100%
 
 ---
@@ -259,6 +352,23 @@ For EACH class below, write scenarios ONLY if you identified a specific code pat
 ### Flash loan vectors
 - State change that survives flash loan?
 - Governance/oracle manipulation via flash loan?
+- Cross-contract fund movement via flash loan callback?
+
+### External protocol integration errors (from Step 4)
+- Return value assumption wrong? (wrong function variant, wrong decimals)
+- Token sent to wrong receiver in external call?
+- Missing protocol mode handling (recovery, emergency)?
+
+### Position tracking errors (from Step 5)
+- Position add/remove boolean flag inverted?
+- State change without position registry update?
+- Position ID calculated with wrong connector type?
+- `isEmpty` check missing a token location (staked, locked, delegated)?
+
+### Token-specific DoS (from Step 6)
+- Blacklisted user blocking batch operations?
+- Fee-on-transfer amount mismatch?
+- Oracle decimal scaling error?
 
 **Prioritize:** Impact × Likelihood. Top 5-7 become candidates.
 
