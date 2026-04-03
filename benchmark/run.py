@@ -16,6 +16,7 @@ Usage:
 
 import argparse
 import json
+import shlex
 import subprocess
 import sys
 import time
@@ -42,17 +43,25 @@ def run_single_case(case: dict, model: str, mode: str = "immunefi") -> dict:
     """Run a single benchmark case and capture output."""
     start = time.time()
 
-    # Build the claude command
-    if mode == "immunefi":
-        skill = "immunefi-hunt"
-        args = f"{case['protocol']}"
+    case_mode = case.get("mode", mode)
+    case_setup = case.get("setup", {})
+
+    if case_mode == "immunefi":
+        target = case.get("target", case["protocol"])
+        platform = case.get("platform", "immunefi")
+        rpc_url = case.get("rpc_url", case_setup.get("rpc_url"))
     else:
-        skill = "audit-hunt"
-        args = f"{case.get('setup', {}).get('repo', case['protocol'])}"
+        target = case.get("target", case_setup.get("repo", case["protocol"]))
+        platform = case.get("platform", "codearena")
+        rpc_url = None
+
+    prompt = f"/web3-hunt {shlex.quote(str(target))} {platform}"
+    if rpc_url:
+        prompt += f" {shlex.quote(str(rpc_url))}"
 
     cmd = [
         "claude", "-p",
-        f"/{skill} {args}",
+        prompt,
         "--model", model,
         "--output-format", "text",
     ]

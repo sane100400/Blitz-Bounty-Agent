@@ -106,13 +106,6 @@ Claude Code 안에서 바로 호출하는 모드입니다.
 - `/web3-hunt`
 - `/web3-loop`
 
-레거시 커맨드도 남아 있습니다.
-
-- `/audit-hunt`
-- `/audit-loop`
-- `/immunefi-hunt`
-- `/immunefi-loop`
-
 예시:
 
 ```bash

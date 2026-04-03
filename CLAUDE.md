@@ -52,10 +52,6 @@ bash benchmark/evmbench_setup.sh  # one-time setup
 cd poc-forge && forge test --match-contract Finding_PoC -vv
 ```
 
-### Legacy commands
-
-`/immunefi-hunt`, `/immunefi-loop`, `/audit-hunt`, `/audit-loop` still work but prefer `/web3-hunt` and `/web3-loop`.
-
 ## Architecture
 
 ```
