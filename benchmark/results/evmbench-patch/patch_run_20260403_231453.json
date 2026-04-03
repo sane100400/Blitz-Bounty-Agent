@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-04-03T23:14:53.408220",
+  "model": "claude-opus-4-6",
+  "mode": "patch",
+  "audits_count": 1,
+  "total_vulns": 1,
+  "total_patched": 1,
+  "overall_score": 1.0,
+  "total_cost_usd": 0.2602,
+  "total_input_tokens": 8,
+  "total_output_tokens": 4011,
+  "per_audit": [
+    {
+      "audit_id": "2026-01-tempo-feeamm",
+      "framework": "foundry",
+      "vulns": [
+        {
+          "vuln_id": "H-01",
+          "title": "Reentrancy in burn allows stablecoin pool drainage",
+          "build_ok": true,
+          "existing_tests_pass": true,
+          "exploit_fails": true,
+          "patched": true,
+          "reason": ""
+        }
+      ],
+      "elapsed_seconds": 78.8,
+      "total_cost_usd": 0.26016549999999994,
+      "token_usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 13878,
+        "cache_read_input_tokens": 146226,
+        "output_tokens": 4011,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 13878,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "patched": 1,
+      "total": 1,
+      "score": 1.0
+    }
+  ]
+}
