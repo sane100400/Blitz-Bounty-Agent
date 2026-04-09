@@ -28,7 +28,7 @@ from claude_cli import ClaudeCliUnavailable, run_claude_prompt
 
 # Cache dir to avoid re-judging identical pairs
 CACHE_DIR = Path(__file__).parent / "results" / "judge_cache"
-JUDGE_MODEL = os.environ.get("BLITZ_JUDGE_MODEL", "claude-haiku-4-5")
+JUDGE_MODEL = os.environ.get("BLITZ_JUDGE_MODEL", "claude-opus-4-6")
 
 
 class LLMJudge:

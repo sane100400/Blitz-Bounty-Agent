@@ -6,7 +6,7 @@ Runs structured analysis in a subprocess loop, accumulates multiple findings,
 auto-runs Foundry tests for each PoC, and generates submission-ready reports.
 
 Usage:
-    python3 audit_loop.py <contest-url> <platform> [max_iterations] [rpc-url]
+    python3 audit_loop.py <contest-url> <platform> [max_iterations] [rpc-url] [max_cost_usd]
 
 Platforms:
     sherlock    → auto-submits via `gh issue create` in the contest repo
@@ -35,9 +35,11 @@ from claude_cli import ClaudeCliUnavailable, run_claude_prompt
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 
 MAX_ITERATIONS_DEFAULT = 12
+MAX_COST_DEFAULT = 5.00      # USD — auto-stop when exceeded
+CONSECUTIVE_DRY_LIMIT = 3   # stop after N iterations with no GO candidate
 STATE_FILE  = "audit-state.json"
 LOG_DIR     = Path("audit-logs")
-REPORTS_DIR = Path("audit-reports")
+REPORTS_DIR = Path("audit-reports")  # written inside contest working dir
 
 # Signals Claude must emit
 SIGNAL_FOUND     = "AUDIT_SIGNAL:FOUND:"      # AUDIT_SIGNAL:FOUND:finding-name:High
@@ -66,6 +68,7 @@ def load_state() -> dict:
         "drop_history":   [],        # [{iteration, candidate, reason, lesson}]
         "poc_failures":   [],        # [{iteration, candidate, failure_reason}]
         "lessons":        [],
+        "total_cost_usd": 0.0,
         "start_time":     datetime.now().isoformat(),
     }
 
@@ -166,6 +169,7 @@ HOTSPOTS: <comma-separated list of file:function>
 def build_hunt_prompt(state: dict) -> str:
     ctx = _context_block(state)
     platform = state["platform"]
+    iteration = state["iteration"]
 
     # Platform-specific judging notes
     judging_notes = {
@@ -176,13 +180,34 @@ def build_hunt_prompt(state: dict) -> str:
         "hackenproof": "Check program scope for impact categories.",
     }.get(platform, "")
 
+    # Type focus rotation — each iteration prioritizes a different attack class
+    focus_types = [
+        ("value_math", "VALUE/MATH: trace every value function, check precision, rounding, share price manipulation, ERC4626 edge cases"),
+        ("access_reentry", "ACCESS/REENTRANCY: map all auth patterns, find missing guards, trace external calls for state-before-call bugs"),
+        ("oracle_economic", "ORACLE/ECONOMIC: check all price sources (spot vs TWAP, staleness, decimals), flash loan amplification, fee bypass"),
+        ("cross_contract", "CROSS-CONTRACT/INTEGRATION: trace deposit→withdraw end-to-end, compare pattern group implementations, external protocol semantics"),
+        ("edge_cases", "EDGE CASES/TOKEN: deposit(0), withdraw(max), fee-on-transfer, blacklist DoS, zero-share division, dust griefing"),
+    ]
+    focus_idx = (iteration - 1) % len(focus_types)
+    focus_name, focus_desc = focus_types[focus_idx]
+
     return f"""
 You are running Phase 2+3 (Attack Surface + Triage) of an audit competition hunt.
-This is iteration {state['iteration']}.
+This is iteration {iteration}.
 
 {ctx}
 
 JUDGING NOTES FOR {platform.upper()}: {judging_notes}
+
+ITERATION FOCUS: {focus_desc}
+Prioritize this attack class, but still report any bug you find regardless of type.
+
+KNOWN LLM FAILURE MODES — avoid these:
+- If you think a function lacks a check, READ every modifier and parent contract first. The check may be inherited.
+- Severity must match provable impact: High = direct fund theft/permanent freeze with concrete attack steps. No "could potentially".
+- "Uses transfer() → reentrancy" is INVALID without showing: (a) no nonReentrant guard, (b) specific dirty state during callback, (c) concrete profit path.
+- Verify every file:line reference is from the correct contract. Do not confuse similarly-named functions across contracts.
+- Every finding needs satisfied preconditions: caller has the right role, pool is in correct state, values are in exploitable range.
 
 Your task — find NEW bugs not in the already-confirmed list above:
 
@@ -354,7 +379,7 @@ Manual review
 
 # ─── CLAUDE INVOCATION ────────────────────────────────────────────────────────
 
-def run_claude(prompt: str, iteration: int, phase: str) -> str:
+def run_claude(prompt: str, iteration: int, phase: str, state: dict | None = None) -> str:
     LOG_DIR.mkdir(exist_ok=True)
     REPORTS_DIR.mkdir(exist_ok=True)
 
@@ -373,9 +398,14 @@ def run_claude(prompt: str, iteration: int, phase: str) -> str:
             prompt,
             cwd=str(Path.cwd()),
             timeout=900,
-            output_format="text",
+            output_format="json",
         )
-        output = result["text"]
+        parsed = result.get("parsed", {})
+        output = (parsed.get("result", "") if isinstance(parsed, dict) else "") or result.get("raw", "")
+        cost = float(result.get("total_cost_usd", 0.0) or (parsed.get("total_cost_usd", 0.0) if isinstance(parsed, dict) else 0.0))
+        if state is not None and cost > 0:
+            state["total_cost_usd"] = state.get("total_cost_usd", 0.0) + cost
+            print(f"  cost: ${cost:.4f} (cumulative: ${state['total_cost_usd']:.4f})")
         if result.get("timed_out"):
             output = f"[TIMEOUT] Phase {phase} exceeded 15 minutes"
     except ClaudeCliUnavailable as exc:
@@ -512,6 +542,7 @@ def main():
     platform     = sys.argv[2].lower()
     max_iter     = int(sys.argv[3]) if len(sys.argv) > 3 else MAX_ITERATIONS_DEFAULT
     rpc          = sys.argv[4] if len(sys.argv) > 4 else ""
+    max_cost     = float(sys.argv[5]) if len(sys.argv) > 5 else MAX_COST_DEFAULT
 
     valid_platforms = {"sherlock", "codearena", "cantina", "codehawks", "hackenproof"}
     if platform not in valid_platforms:
@@ -530,6 +561,7 @@ def main():
   Contest:  {contest_url}
   Platform: {platform}
   Max iter: {max_iter}
+  Cost cap: ${max_cost:.2f}
   State:    {STATE_FILE}
 ╚══════════════════════════════════════════════════════════════╝
 """)
@@ -537,7 +569,7 @@ def main():
     # ── Phase 1: Recon (once) ──────────────────────────────────────────────────
     if not state["recon_done"]:
         print("\n[PHASE 1] CONTEST RECON + CODEBASE MAPPING")
-        output = run_claude(build_recon_prompt(state), 0, "recon")
+        output = run_claude(build_recon_prompt(state), 0, "recon", state)
 
         if SIGNAL_RECON in output:
             state["recon_done"] = True
@@ -548,11 +580,23 @@ def main():
                     state["prize_pool"] = line.split(":", 1)[1].strip()
                 elif line.startswith("REPO_PATH:"):
                     state["repo_path"] = line.split(":", 1)[1].strip()
+                elif line.startswith("IN_SCOPE_COUNT:"):
+                    try:
+                        state["in_scope_count"] = int(line.split(":", 1)[1].strip())
+                    except ValueError:
+                        pass
             save_state(state)
             print(f"\n[✓] Recon complete.")
             print(f"    Deadline:  {state.get('deadline', 'unknown')}")
             print(f"    Prize:     {state.get('prize_pool', 'unknown')}")
             print(f"    Repo:      {state.get('repo_path', 'unknown')}")
+
+            # ROI screening — warn on large codebases
+            n_files = state.get("in_scope_count", 0)
+            if n_files > 100:
+                print(f"\n    ⚠ LOW ROI WARNING: {n_files} in-scope files — large codebase, consider tight cost cap")
+            elif n_files > 50:
+                print(f"\n    ⚠ MEDIUM ROI: {n_files} in-scope files — proceed with cost awareness")
         else:
             print("\n[!] Recon did not emit RECON_DONE. Check logs. Continuing.")
             state["recon_done"] = True
@@ -563,9 +607,16 @@ def main():
             save_state(state)
 
     # ── Phase 2–5: Hunt loop ───────────────────────────────────────────────────
+    consecutive_dry = 0
+
     while state["iteration"] < max_iter:
         state["iteration"] += 1
         save_state(state)
+
+        # ── Cost cap check ─────────────────────────────────────────────────
+        if state.get("total_cost_usd", 0) >= max_cost:
+            print(f"\n[$$] Cost cap reached: ${state['total_cost_usd']:.2f} >= ${max_cost:.2f}")
+            break
 
         n_confirmed = len(confirmed_findings(state))
         print(f"\n{'═'*64}")
@@ -573,10 +624,12 @@ def main():
         print(f"  Confirmed findings: {n_confirmed}")
         print(f"  Drops so far:       {len(state['drop_history'])}")
         print(f"  PoC failures:       {len(state['poc_failures'])}")
+        print(f"  Cost so far:        ${state.get('total_cost_usd', 0):.4f} / ${max_cost:.2f}")
+        print(f"  Consecutive dry:    {consecutive_dry} / {CONSECUTIVE_DRY_LIMIT}")
         print(f"{'═'*64}")
 
         # ── Phase 2+3: Hunt + Triage ───────────────────────────────────────
-        output = run_claude(build_hunt_prompt(state), state["iteration"], "hunt")
+        output = run_claude(build_hunt_prompt(state), state["iteration"], "hunt", state)
         result = parse_output(output)
 
         if result["action"] == "EXHAUSTED":
@@ -584,6 +637,7 @@ def main():
             break
 
         if result["action"] == "DROP":
+            consecutive_dry += 1
             for d in result["drops"]:
                 state["drop_history"].append({
                     "iteration": state["iteration"],
@@ -595,13 +649,21 @@ def main():
             state["lessons"].extend(lessons)
             save_state(state)
             print(f"\n[→] Candidates dropped. Feeding {len(result['drops'])} reasons into next iteration.")
+            if consecutive_dry >= CONSECUTIVE_DRY_LIMIT:
+                print(f"\n[✗] {CONSECUTIVE_DRY_LIMIT} consecutive dry iterations — early exit.")
+                break
             continue
 
         if result["action"] in ("CONTINUE",):
+            consecutive_dry += 1
             print(f"\n[→] No GO candidates this iteration. Continuing.")
+            if consecutive_dry >= CONSECUTIVE_DRY_LIMIT:
+                print(f"\n[✗] {CONSECUTIVE_DRY_LIMIT} consecutive dry iterations — early exit.")
+                break
             continue
 
         if result["action"] == "GO":
+            consecutive_dry = 0  # reset on GO
             candidate = result["candidate"]
             severity  = result.get("severity", "Medium")
             location  = result.get("location", "unknown")
@@ -615,6 +677,7 @@ def main():
                 build_poc_prompt(state, candidate, severity, location, desc),
                 state["iteration"],
                 "poc",
+                state,
             )
             poc_result = parse_output(poc_output)
 

@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-Autonomous smart contract security toolkit powered by Claude Code. Two modes:
+Autonomous smart contract security toolkit powered by Claude Code orchestration. Two modes:
 - **Audit competitions** (Cantina, Sherlock, Code4rena, CodeHawks) — all code is target, duplicates pay, Foundry mock PoC
 - **Immunefi bug bounties** — post-audit code focus, dup check before PoC, mainnet fork only
+
+All flows use `claude -p` subprocess orchestration (subscription-based, no API key required).
 
 ## Commands
 
@@ -28,19 +30,26 @@ Autonomous smart contract security toolkit powered by Claude Code. Two modes:
 python3 hunt_loop.py <immunefi-url> <rpc-url> [max_iterations]
 python3 audit_loop.py <contest-url> <platform> [max_iterations] [rpc-url]
 python3 audit_orchestrator.py <source-dir> [--platform codearena] [--timeout 900]
+python3 audit_orchestrator.py <source-dir> --architecture cache-multipass  # sequential lens-based passes
 ```
 
 ### Benchmarks
 
 ```bash
-# EVMBench via our skill wrapper
-python3 benchmark/evmbench_skill_runner.py --split detect-tasks
-python3 benchmark/evmbench_skill_runner.py --audit 2024-04-noya
+# EVMBench detect mode — multiple strategies
+python3 benchmark/evmbench_skill_runner.py --split detect-tasks                    # skill (default)
+python3 benchmark/evmbench_skill_runner.py --audit 2024-04-noya --strategy raw     # raw baseline
+python3 benchmark/evmbench_skill_runner.py --audit 2024-04-noya --strategy checklist  # structured checklist
+python3 benchmark/evmbench_skill_runner.py --audit 2024-04-noya --strategy tiered  # Sonnet sweep → Opus deep
+python3 benchmark/evmbench_skill_runner.py --strategy tiered --sweep-model haiku   # Haiku sweep variant
 python3 benchmark/evmbench_skill_runner.py --compare
+
+# EVMBench patch mode (find + fix)
+python3 benchmark/evmbench_patch_runner.py --post-cutoff
+python3 benchmark/evmbench_patch_runner.py --audit 2026-01-tempo-feeamm
 
 # Custom suites
 python3 benchmark/run.py --suite known-vulns
-python3 benchmark/run.py --compare
 
 # EVMBench official harness (requires Docker + uv)
 bash benchmark/evmbench_setup.sh  # one-time setup
@@ -66,9 +75,12 @@ Both feed into the same phase pipeline:
 
 **`audit_orchestrator.py`** is a multi-agent variant: runs parallel specialist agents (recon → parallel vulnerability analysis → merge/triage) via `ThreadPoolExecutor`.
 
-**Benchmark system** has two tracks:
-- `evmbench_skill_runner.py` — wraps EVMBench cases through our `/web3-hunt` skill, uses `llm_judge.py` (Haiku-based semantic matcher) for scoring against ground truth. This path uses `claude -p`, so a logged-in Claude Code subscription session is sufficient; no `ANTHROPIC_API_KEY` is required.
-- `run.py` — custom benchmark suites defined in `benchmark/suites/`, config in `benchmark/config.yaml`
+**Benchmark system:**
+- `evmbench_skill_runner.py` — detect mode, wraps EVMBench through `/web3-hunt` skill
+- `evmbench_patch_runner.py` — patch mode, agent finds + fixes vulns, graded by forge tests
+- `evmbench_common.py` — shared audit inventory, config, cloning utilities
+- `llm_judge.py` — Haiku-based semantic matcher for scoring against ground truth
+- `run.py` — custom benchmark suites defined in `benchmark/suites/`
 
 ## Key Rules for Vulnerability Hunting
 
@@ -91,9 +103,8 @@ Both feed into the same phase pipeline:
 - Claude Code CLI, Foundry (`forge`/`cast`/`anvil`), Python 3.10+, PyYAML
 - Optional: Docker + uv (EVMBench official harness), `gh` CLI (Sherlock auto-submit)
 
-## Auth Notes
+## Auth
 
-- Main repo flows use `claude -p` and are designed to run on a logged-in Claude Code subscription session.
-- `ANTHROPIC_API_KEY` is optional for those flows.
-- Upstream EVMBench official harness is a separate path and may require API-style credentials depending on the solver.
-- Quick check: `python3 benchmark/claude_subscription_check.py --probe`
+All flows use `claude -p` on a logged-in Claude Code subscription session. No `ANTHROPIC_API_KEY` required.
+Quick check: `python3 benchmark/claude_subscription_check.py --probe`
+

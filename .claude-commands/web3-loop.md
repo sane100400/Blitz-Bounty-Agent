@@ -206,6 +206,8 @@ New lessons: [what this iteration taught]
 2. ✅ **COVERAGE COMPLETE** (audit): 100% files read + no new candidates → report all findings, stop
 3. ❌ **EXHAUSTED**: N consecutive iterations produce zero new candidates from unread files
 4. ⏱️ **MAX**: iteration count exceeds maximum
+5. 💰 **COST CAP**: cumulative LLM cost exceeds budget (default: $5 audit, $3 bounty) → stop and report what's found
+6. 🔄 **CONSECUTIVE DRY**: 3 consecutive iterations with no GO candidate → early exit (diminishing returns)
 
 On stop, print summary:
 - Total files: X, Analyzed: Y (Z%)

@@ -42,6 +42,14 @@ Set variables:
 
 6. **Trace every value function.** Every function returning balance/TVL/price/shares must be traced: what's added, what's subtracted, does it handle debt, does it include staked tokens?
 
+7. **Verify before reporting — LLM failure modes.** You have known blind spots:
+   - TRACE the actual guards: if you think a function is unprotected, read every modifier and inherited function before reporting. "No check for X" is wrong if X is checked in a modifier or parent contract.
+   - DO NOT inflate severity: High requires exact steps to steal or permanently freeze funds. If you cannot construct a concrete attack with preconditions satisfied, it is Medium at best.
+   - DO NOT pattern-match without context: "uses transfer() → reentrancy" is invalid if the function has nonReentrant or follows CEI. State the SPECIFIC state variable that is dirty during the callback.
+   - DO NOT confuse contracts: verify every code reference is from the correct contract, not a similarly-named function in another file.
+   - DO NOT report theoretical bugs: every finding must include proof that all preconditions can actually be met on-chain.
+   - PROVE the impact with numbers: "attacker profits X tokens" with the math, not "attacker could potentially profit."
+
 ### Mode-specific principles
 
 **If MODE = audit:**
@@ -313,6 +321,8 @@ Do not proceed to Phase 3 until:
 
 **Goal:** Generate concrete attack scenarios from the attacker's perspective.
 
+**Reference examples:** Before generating scenarios, read `prompts/vuln_examples.md` (from the Blitz-Bounty-Agent repository root) for real CVE diffs and vulnerable/fixed pairs. Each category below has a real exploit pattern — match your candidates against these. If your candidate doesn't structurally resemble a known exploit, reconsider.
+
 For EACH class below, write scenarios ONLY if you identified a specific code path:
 
 ### Value extraction
@@ -369,6 +379,42 @@ For EACH class below, write scenarios ONLY if you identified a specific code pat
 - Blacklisted user blocking batch operations?
 - Fee-on-transfer amount mismatch?
 - Oracle decimal scaling error?
+
+### Type-specific trace-back process
+
+Use the matching process block for each candidate's attack class:
+
+<process type="value_extraction">
+1. List every function that returns balance/shares/TVL/price
+2. For each: what is added? what is subtracted? is debt handled?
+3. Compare deposit path math vs withdraw path math — are they inverse?
+4. Check rounding direction: does it ALWAYS favor the protocol?
+5. Test: deposit(1 wei), deposit(0), withdraw(max) — edge cases
+</process>
+
+<process type="access_control">
+1. List every external/public state-changing function
+2. For each: what modifier? what require? what inherited check?
+3. Compare pairs: if funcA has onlyOwner and funcB doesn't, find WHY
+4. Check initialize(): has initializer modifier? Can be called twice?
+5. Check signature functions: does ecrecover result get checked against address(0)?
+</process>
+
+<process type="oracle_price">
+1. Identify every price/rate source (Chainlink, Uniswap, custom)
+2. For each: is it spot (flash-loan manipulable) or time-weighted?
+3. Check staleness: is there a maxAge/heartbeat check?
+4. Check decimals: Chainlink ETH/USD = 8 decimals, token = 18 — scaled correctly?
+5. Check L2: sequencer uptime oracle consulted?
+</process>
+
+<process type="reentrancy">
+1. List every external call (call, transfer, safeTransfer, external function)
+2. For each: what state is updated BEFORE vs AFTER the call?
+3. Check: is there nonReentrant? Does it cover ALL entry points?
+4. Check cross-function: can callback enter a DIFFERENT function that reads dirty state?
+5. Check read-only reentrancy: can a view function return wrong values during callback?
+</process>
 
 **Prioritize:** Impact × Likelihood. Top 5-7 become candidates.
 

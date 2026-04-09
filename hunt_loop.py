@@ -6,10 +6,10 @@ Runs /bounty-hunt in a subprocess loop, feeding drop reasons back
 into each iteration until a valid finding is confirmed.
 
 Usage:
-    python3 hunt_loop.py <immunefi-url> <rpc-url> [max_iterations]
+    python3 hunt_loop.py <immunefi-url> <rpc-url> [max_iterations] [max_cost_usd]
 
 Example:
-    python3 hunt_loop.py "https://immunefi.com/bug-bounty/balancer" "https://1rpc.io/eth" 10
+    python3 hunt_loop.py "https://immunefi.com/bug-bounty/balancer" "https://1rpc.io/eth" 10 3.00
 """
 
 import subprocess
@@ -26,6 +26,8 @@ from claude_cli import ClaudeCliUnavailable, run_claude_prompt
 # ─── CONFIG ──────────────────────────────────────────────────────────────────
 
 MAX_ITERATIONS_DEFAULT = 10
+MAX_COST_DEFAULT = 3.00      # USD — auto-stop when exceeded
+CONSECUTIVE_DRY_LIMIT = 3   # stop after N iterations with no GO candidate
 STATE_FILE = "hunt-state.json"
 LOG_DIR = Path("hunt-logs")
 
@@ -53,6 +55,7 @@ def load_state() -> dict:
         "active_finding": None,
         "gist_url": None,
         "report_file": None,
+        "total_cost_usd": 0.0,
         "start_time": datetime.now().isoformat(),
     }
 
@@ -192,8 +195,8 @@ Tasks:
 
     return phase_prompts.get(phase, "")
 
-def run_claude(prompt: str, iteration: int, phase: str) -> str:
-    """Run claude CLI with the given prompt, return stdout."""
+def run_claude(prompt: str, iteration: int, phase: str, state: dict | None = None) -> str:
+    """Run claude CLI with the given prompt, return stdout. Tracks cost if state provided."""
     LOG_DIR.mkdir(exist_ok=True)
     log_file = LOG_DIR / f"iter{iteration:02d}_{phase}_{int(time.time())}.log"
 
@@ -210,9 +213,14 @@ def run_claude(prompt: str, iteration: int, phase: str) -> str:
         result = run_claude_prompt(
             prompt,
             timeout=600,
-            output_format="text",
+            output_format="json",
         )
-        output = result["text"]
+        parsed = result.get("parsed", {})
+        output = (parsed.get("result", "") if isinstance(parsed, dict) else "") or result.get("raw", "")
+        cost = float(result.get("total_cost_usd", 0.0) or (parsed.get("total_cost_usd", 0.0) if isinstance(parsed, dict) else 0.0))
+        if state is not None and cost > 0:
+            state["total_cost_usd"] = state.get("total_cost_usd", 0.0) + cost
+            print(f"  cost: ${cost:.4f} (cumulative: ${state['total_cost_usd']:.4f})")
         if result.get("timed_out"):
             output = f"[TIMEOUT] Phase {phase} exceeded 10 minutes"
     except ClaudeCliUnavailable as exc:
@@ -288,6 +296,7 @@ def main():
     target       = sys.argv[1]
     rpc          = sys.argv[2] if len(sys.argv) > 2 else "https://1rpc.io/eth"
     max_iter     = int(sys.argv[3]) if len(sys.argv) > 3 else MAX_ITERATIONS_DEFAULT
+    max_cost     = float(sys.argv[4]) if len(sys.argv) > 4 else MAX_COST_DEFAULT
 
     state = load_state()
     state["target"] = target
@@ -300,6 +309,7 @@ def main():
   Target:   {target}
   RPC:      {rpc}
   Max iter: {max_iter}
+  Cost cap: ${max_cost:.2f}
   State:    {STATE_FILE}
 ╚══════════════════════════════════════════════════════════╝
 """)
@@ -308,7 +318,7 @@ def main():
     if not state["recon_done"]:
         print("\n[PHASE A] RECON + UNAUDITED DIFF")
         prompt = build_prompt("recon", state)
-        output = run_claude(prompt, 0, "recon")
+        output = run_claude(prompt, 0, "recon", state)
 
         if "RECON_DONE" in output:
             state["recon_done"] = True
@@ -316,27 +326,62 @@ def main():
             for line in output.split("\n"):
                 if line.startswith("LAST_AUDIT_DATE:"):
                     state["last_audit_date"] = line.split(":", 1)[1].strip()
+                elif line.startswith("WONTFIX_COUNT:"):
+                    try:
+                        state["wontfix_count"] = int(line.split(":", 1)[1].strip())
+                    except ValueError:
+                        pass
+                elif line.startswith("IN_SCOPE_COUNT:"):
+                    try:
+                        state["in_scope_count"] = int(line.split(":", 1)[1].strip())
+                    except ValueError:
+                        pass
+                elif line.startswith("UNAUDITED_FILES_COUNT:"):
+                    try:
+                        state["unaudited_count"] = int(line.split(":", 1)[1].strip())
+                    except ValueError:
+                        pass
             save_state(state)
             print(f"\n[✓] Recon complete. Last audit: {state.get('last_audit_date', 'unknown')}")
+
+            # ROI screening for Immunefi targets
+            n_scope = state.get("in_scope_count", 0)
+            n_unaudited = state.get("unaudited_count", 0)
+            n_wontfix = state.get("wontfix_count", 0)
+            if n_scope > 50:
+                print(f"    ⚠ LOW ROI: {n_scope} in-scope contracts — heavily audited protocol")
+            if n_unaudited == 0:
+                print(f"    ⚠ LOW ROI: 0 unaudited files — all code has been reviewed")
+            if n_wontfix > 20:
+                print(f"    ⚠ LOW ROI: {n_wontfix} WONTFIX items — mature, well-defended codebase")
         else:
             print("\n[!] Recon did not emit RECON_DONE. Continuing anyway.")
             state["recon_done"] = True
             save_state(state)
 
     # ── Phase B–D: Hunt loop ─────────────────────────────────────────────────
+    consecutive_dry = 0
+
     while state["iteration"] < max_iter:
         state["iteration"] += 1
         save_state(state)
 
+        # ── Cost cap check ─────────────────────────────────────────────────
+        if state.get("total_cost_usd", 0) >= max_cost:
+            print(f"\n[$$] Cost cap reached: ${state['total_cost_usd']:.2f} >= ${max_cost:.2f}")
+            break
+
         print(f"\n{'═'*60}")
         print(f"  ITERATION {state['iteration']} / {max_iter}")
-        print(f"  Drops so far: {len(state['drop_history'])}")
-        print(f"  PoC failures: {len(state['poc_failures'])}")
+        print(f"  Drops so far:     {len(state['drop_history'])}")
+        print(f"  PoC failures:     {len(state['poc_failures'])}")
+        print(f"  Cost so far:      ${state.get('total_cost_usd', 0):.4f} / ${max_cost:.2f}")
+        print(f"  Consecutive dry:  {consecutive_dry} / {CONSECUTIVE_DRY_LIMIT}")
         print(f"{'═'*60}")
 
         # ── Phase B+C: Hunt + Triage ─────────────────────────────────────
         prompt = build_prompt("hunt", state)
-        output = run_claude(prompt, state["iteration"], "hunt")
+        output = run_claude(prompt, state["iteration"], "hunt", state)
         result = parse_output(output, state)
 
         if result["action"] == "EXHAUSTED":
@@ -349,6 +394,7 @@ def main():
             break
 
         if result["action"] == "DROP":
+            consecutive_dry += 1
             for d in result["drops"]:
                 state["drop_history"].append({
                     "iteration": state["iteration"],
@@ -361,9 +407,13 @@ def main():
             state["lessons"].extend(lesson_match)
             save_state(state)
             print(f"\n[→] All candidates dropped. Feeding {len(result['drops'])} reasons into next iteration.")
+            if consecutive_dry >= CONSECUTIVE_DRY_LIMIT:
+                print(f"\n[✗] {CONSECUTIVE_DRY_LIMIT} consecutive dry iterations — early exit.")
+                break
             continue
 
         if result["action"] == "GO":
+            consecutive_dry = 0  # reset on GO
             candidate  = result["candidate"]
             desc       = result["description"]
             print(f"\n[GO] Candidate: {candidate} — {desc}")
@@ -371,7 +421,7 @@ def main():
 
             # ── Phase D: PoC ─────────────────────────────────────────────
             poc_prompt = build_prompt("poc", state, extra=f"{candidate}: {desc}")
-            poc_output = run_claude(poc_prompt, state["iteration"], "poc")
+            poc_output = run_claude(poc_prompt, state["iteration"], "poc", state)
             poc_result = parse_output(poc_output, state)
 
             if poc_result["action"] == "FOUND":
@@ -401,7 +451,11 @@ def main():
                 continue
 
         # CONTINUE or unknown
+        consecutive_dry += 1
         print(f"\n[→] No GO candidates this iteration. Next.")
+        if consecutive_dry >= CONSECUTIVE_DRY_LIMIT:
+            print(f"\n[✗] {CONSECUTIVE_DRY_LIMIT} consecutive dry iterations — early exit.")
+            break
 
     # ── Loop ended without finding ───────────────────────────────────────────
     if state["status"] != "FOUND":
@@ -411,6 +465,7 @@ def main():
   Iterations: {state['iteration']}
   Total drops: {len(state['drop_history'])}
   PoC failures: {len(state['poc_failures'])}
+  Total cost:  ${state.get('total_cost_usd', 0):.4f}
   State saved: {STATE_FILE}
 
   UNCERTAIN items for manual review:

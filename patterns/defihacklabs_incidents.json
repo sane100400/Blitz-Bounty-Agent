@@ -1,0 +1,7217 @@
+{
+  "total": 677,
+  "by_group": {
+    "business-logic": [
+      {
+        "date": "20260310",
+        "name": "AlkemiEarn",
+        "category": "business-logic"
+      },
+      {
+        "date": "20260120",
+        "name": "SynapLogic",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20250813",
+        "name": "Grizzifi",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250720",
+        "name": "Stepp2p",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250716",
+        "name": "VDS",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250705",
+        "name": "RANT",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250702",
+        "name": "FPC",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250612",
+        "name": "AAVEBoost",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250526",
+        "name": "YDT",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250408",
+        "name": "Laundromat",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250307",
+        "name": "UNI",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250223",
+        "name": "HegicOptions",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20250211",
+        "name": "FourMeme",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250114",
+        "name": "IdolsNFT",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250113",
+        "name": "Mosca2",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250112",
+        "name": "Unilend",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250110",
+        "name": "JPulsepot",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250107",
+        "name": "IPC",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20250106",
+        "name": "Mosca",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20241218",
+        "name": "Slurpy",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20241216",
+        "name": "BTC24H",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20241214",
+        "name": "JHY",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20241210",
+        "name": "LABUBUToken",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20241124",
+        "name": "Proxy_b7e1",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20241117",
+        "name": "MFT",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20241107",
+        "name": "ChiSale",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20241105",
+        "name": "RPP",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240920",
+        "name": "DOGGO",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240915",
+        "name": "WXETA",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240913",
+        "name": "OTSeaStaking",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240902",
+        "name": "Pythia",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240820",
+        "name": "COCO",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240812",
+        "name": "iVest",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240711",
+        "name": "SBT",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240628",
+        "name": "Will",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240627",
+        "name": "APEMAGA",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240618",
+        "name": "INcufi",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240617",
+        "name": "Dyson_money",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240616",
+        "name": "WIFCOIN_ETH",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240611",
+        "name": "Crb2",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240611",
+        "name": "JokInTheBox",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240608",
+        "name": "YYStoken",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240606",
+        "name": "SteamSwap",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240606",
+        "name": "MineSTM",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240604",
+        "name": "NCD",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240531",
+        "name": "Liquiditytokens",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240528",
+        "name": "Tradeonorion",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240528",
+        "name": "EXcommunity",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240526",
+        "name": "NORMIE",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240512",
+        "name": "TGC",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240430",
+        "name": "Yield",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240424",
+        "name": "XBridge",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240419",
+        "name": "HedgeyFinance",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240416",
+        "name": "SATX",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240415",
+        "name": "GFA",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240414",
+        "name": "Hackathon",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240409",
+        "name": "UPS",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240402",
+        "name": "HoppyFrogERC",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240401",
+        "name": "ATM",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240401",
+        "name": "OpenLeverage",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240328",
+        "name": "LavaLending",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240314",
+        "name": "ARK",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240314",
+        "name": "MO",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240313",
+        "name": "IT",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240312",
+        "name": "BBT",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240309",
+        "name": "Juice",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240307",
+        "name": "GHT",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240306",
+        "name": "TGBS",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240223",
+        "name": "Zoomer",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240223",
+        "name": "BlueberryProtocol",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20240130",
+        "name": "XSIJ",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20240102",
+        "name": "MIC",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231222",
+        "name": "PineProtocol",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231217",
+        "name": "FloorProtocol",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231216",
+        "name": "KEST",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231214",
+        "name": "PHIL",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231213",
+        "name": "HYPR",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231207",
+        "name": "HNet",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231205",
+        "name": "BEARNDAO",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231201",
+        "name": "UnverifiedContr_0x431abb",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231125",
+        "name": "TheNFTV2",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20231117",
+        "name": "ShibaToken",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231116",
+        "name": "WECO",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231115",
+        "name": "XAI",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231107",
+        "name": "RBalancer",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231101",
+        "name": "SwampFinance",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231028",
+        "name": "AstridProtocol",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231022",
+        "name": "OpenLeverage",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231012",
+        "name": "Platypus",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231008",
+        "name": "ZS",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20231005",
+        "name": "DePayRouter",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230909",
+        "name": "BFCToken",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230908",
+        "name": "APIG",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230902",
+        "name": "DAppSocial",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230821",
+        "name": "EHIVE",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230724",
+        "name": "Palmswap",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230721",
+        "name": "SUT",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230720",
+        "name": "Utopia",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230720",
+        "name": "FFIST",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230718",
+        "name": "APEDAO",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230712",
+        "name": "WGPT",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230617",
+        "name": "Pawnfi",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230523",
+        "name": "LFI",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230513",
+        "name": "Bitpaidio",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230511",
+        "name": "SellToken01",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230502",
+        "name": "Level",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230427",
+        "name": "SiloFinance",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230424",
+        "name": "Axioma",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230313",
+        "name": "EulerFinance",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230222",
+        "name": "DYNA",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230217",
+        "name": "Starlink",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230217",
+        "name": "Platypusdefi",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230118",
+        "name": "QTN Token",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230118",
+        "name": "UPS Token",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230110",
+        "name": "BRA",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20230103",
+        "name": "GDS",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20221213",
+        "name": "ElasticSwap",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20221129",
+        "name": "SEAMAN",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20221121",
+        "name": "SDAO",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20221105",
+        "name": "BDEX",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20220804",
+        "name": "EtnProduct",
+        "category": "business-logic-flaw"
+      },
+      {
+        "date": "20210804",
+        "name": "Popsicle",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20210516",
+        "name": "bEarn",
+        "category": "logic-flaw"
+      },
+      {
+        "date": "20210502",
+        "name": "Spartan",
+        "category": "logic-flaw"
+      }
+    ],
+    "oracle-price": [
+      {
+        "date": "20260120",
+        "name": "Makina",
+        "category": "price-oracle-manipulation"
+      },
+      {
+        "date": "20251110",
+        "name": "DRLVaultV3",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250918",
+        "name": "NGP",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250816",
+        "name": "d3xai",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250815",
+        "name": "PDZ",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250813",
+        "name": "YuliAI",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250623",
+        "name": "GradientMakerPool",
+        "category": "price-oracle-manipulation"
+      },
+      {
+        "date": "20250509",
+        "name": "Nalakuvara_LotteryTicket50",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250426",
+        "name": "Lifeprotocol",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250320",
+        "name": "BBXToken",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250307",
+        "name": "SBRToken",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250208",
+        "name": "Peapods Finance",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250121",
+        "name": "Ast",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20250111",
+        "name": "RoulettePotV2",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20241006",
+        "name": "SASHAToken",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20241002",
+        "name": "LavaLending",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240924",
+        "name": "MARA",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240923",
+        "name": "PestoToken",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240910",
+        "name": "Caterpillar_Coin_CUT",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240905",
+        "name": "HANAToken",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240806",
+        "name": "Novax",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240610",
+        "name": "UwuLend - Price Manipulation",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240507",
+        "name": "SATURN",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240422",
+        "name": "Z123",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240325",
+        "name": "ZongZi",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240305",
+        "name": "Woofi",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240213",
+        "name": "MINER BSC",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240205",
+        "name": "BurnsDefi",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240127",
+        "name": "CitadelFinance",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20240104",
+        "name": "Gamma",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231231",
+        "name": "Channels BUSD&USDC",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231217",
+        "name": "Bob",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231211",
+        "name": "GoodCompound",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231209",
+        "name": "BCT",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231206",
+        "name": "ElephantStatus",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231205",
+        "name": "MAMO",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231130",
+        "name": "EEE",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231129",
+        "name": "Burntbubba",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231117",
+        "name": "Token8633_9419",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231018",
+        "name": "MicDao",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231013",
+        "name": "BelugaDex",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20231011",
+        "name": "BH",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230907",
+        "name": "HCT",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230829",
+        "name": "EAC",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230819",
+        "name": "BTC20",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230814",
+        "name": "ZunamiProtocol",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230801",
+        "name": "NeutraFinance",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230726",
+        "name": "Carson",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230722",
+        "name": "ConicFinance02",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230611",
+        "name": "SellToken04",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230606",
+        "name": "VINU",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230606",
+        "name": "UN",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230531",
+        "name": "ERC20TokenBank",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230513",
+        "name": "SellToken02",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230512",
+        "name": "LW",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20230503",
+        "name": "NeverFall",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20230428",
+        "name": "0vix",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20230402",
+        "name": "Allbridge",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20230308",
+        "name": "DKP",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20230202",
+        "name": "BonqDAO",
+        "category": "price-oracle-manipulation"
+      },
+      {
+        "date": "20230111",
+        "name": "ROE",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20221214",
+        "name": "Nmbplatform",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20221212",
+        "name": "BGLD",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20221211",
+        "name": "Lodestar",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20221210",
+        "name": "MUMUG",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20221210",
+        "name": "TIFIToken",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20221205",
+        "name": "BBOX",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20221014",
+        "name": "INUKO Token",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20221006",
+        "name": "RES-Token",
+        "category": "pair-manipulate"
+      },
+      {
+        "date": "20220929",
+        "name": "BXH",
+        "category": "flashloan--price-oracle-manipulation"
+      },
+      {
+        "date": "20220923",
+        "name": "RADT-DAO",
+        "category": "pair-manipulate"
+      },
+      {
+        "date": "20220908",
+        "name": "YYDS",
+        "category": "pair-manipulate"
+      },
+      {
+        "date": "20220905",
+        "name": "ZoomproFinance",
+        "category": "flashloans--price-manipulation"
+      },
+      {
+        "date": "20220816",
+        "name": "Circle_2",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20220813",
+        "name": "Circle",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20220807",
+        "name": "EGD Finance",
+        "category": "flashloans--price-manipulation"
+      },
+      {
+        "date": "20220713",
+        "name": "SpaceGodzilla",
+        "category": "flashloans--price-manipulation"
+      },
+      {
+        "date": "20220616",
+        "name": "InverseFinance",
+        "category": "flashloan--price-oracle-manipulation"
+      },
+      {
+        "date": "20220606",
+        "name": "Discover",
+        "category": "flashloan--price-oracle-manipulation"
+      },
+      {
+        "date": "20220529",
+        "name": "NOVO Protocol",
+        "category": "flashloan--price-oracle-manipulation"
+      },
+      {
+        "date": "20220428",
+        "name": "DEUS DAO",
+        "category": "flashloan--price-oracle-manipulation"
+      },
+      {
+        "date": "20220412",
+        "name": "ElephantMoney",
+        "category": "flashloan--price-oracle-manipulation"
+      },
+      {
+        "date": "20220321",
+        "name": "OneRing Finance",
+        "category": "flashloan--price-oracle-manipulation"
+      },
+      {
+        "date": "20211130",
+        "name": "MonoX Finance",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20211027",
+        "name": "Cream Finance",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20211015",
+        "name": "Indexed Finance",
+        "category": "price-manipulation"
+      },
+      {
+        "date": "20210804",
+        "name": "WaultFinance",
+        "category": "flashloan-price-manipulation"
+      },
+      {
+        "date": "20210519",
+        "name": "PancakeBunny",
+        "category": "price-oracle-manipulation"
+      }
+    ],
+    "access-control": [
+      {
+        "date": "20251007",
+        "name": "TokenHolder",
+        "category": "access-control"
+      },
+      {
+        "date": "20250827",
+        "name": "0xf340",
+        "category": "access-control"
+      },
+      {
+        "date": "20250823",
+        "name": "ABCCApp",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20250820",
+        "name": "MulticallWithXera",
+        "category": "access-control"
+      },
+      {
+        "date": "20250820",
+        "name": "0x8d2e",
+        "category": "access-control"
+      },
+      {
+        "date": "20250815",
+        "name": "SizeCredit",
+        "category": "access-control"
+      },
+      {
+        "date": "20250728",
+        "name": "SuperRare",
+        "category": "access-control"
+      },
+      {
+        "date": "20250705",
+        "name": "Unverified_54cd",
+        "category": "access-control"
+      },
+      {
+        "date": "20250629",
+        "name": "Stead",
+        "category": "access-control"
+      },
+      {
+        "date": "20250625",
+        "name": "Unverified_b5cb",
+        "category": "access-control"
+      },
+      {
+        "date": "20250617",
+        "name": "MetaPool",
+        "category": "access-control"
+      },
+      {
+        "date": "20250610",
+        "name": "unverified_8490",
+        "category": "access-control"
+      },
+      {
+        "date": "20250528",
+        "name": "Corkprotocol",
+        "category": "access-control"
+      },
+      {
+        "date": "20250524",
+        "name": "RICE",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20250514",
+        "name": "Unwarp",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20250404",
+        "name": "AIRWA",
+        "category": "access-control"
+      },
+      {
+        "date": "20250411",
+        "name": "Unverified 0x6077",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20250215",
+        "name": "unverified_d4f1",
+        "category": "access-control"
+      },
+      {
+        "date": "20250108",
+        "name": "HORS",
+        "category": "access-control"
+      },
+      {
+        "date": "20241203",
+        "name": "Pledge",
+        "category": "access-control"
+      },
+      {
+        "date": "20241126",
+        "name": "NFTG",
+        "category": "access-control"
+      },
+      {
+        "date": "20241123",
+        "name": "Ak1111",
+        "category": "access-control"
+      },
+      {
+        "date": "20241120",
+        "name": "MainnetSettler",
+        "category": "access-control"
+      },
+      {
+        "date": "20241109",
+        "name": "X319",
+        "category": "access-control"
+      },
+      {
+        "date": "20241107",
+        "name": "CoW",
+        "category": "access-control"
+      },
+      {
+        "date": "20241022",
+        "name": "Erc20transfer",
+        "category": "access-control"
+      },
+      {
+        "date": "20240920",
+        "name": "Shezmu",
+        "category": "access-control"
+      },
+      {
+        "date": "20240918",
+        "name": "Unverified_766a",
+        "category": "access-control"
+      },
+      {
+        "date": "20240913",
+        "name": "Unverified_5697",
+        "category": "access-control"
+      },
+      {
+        "date": "20240912",
+        "name": "Unverified_03f9",
+        "category": "access-control"
+      },
+      {
+        "date": "20240911",
+        "name": "INUMI",
+        "category": "access-control"
+      },
+      {
+        "date": "20240911",
+        "name": "INUMI_db27",
+        "category": "access-control"
+      },
+      {
+        "date": "20240911",
+        "name": "AIRBTC",
+        "category": "access-control"
+      },
+      {
+        "date": "20240905",
+        "name": "Unverified_a89f",
+        "category": "access-control"
+      },
+      {
+        "date": "20240905",
+        "name": "PLN",
+        "category": "access-control"
+      },
+      {
+        "date": "20240904",
+        "name": "Unverified_16d0",
+        "category": "access-control"
+      },
+      {
+        "date": "20240828",
+        "name": "Unverified_667d",
+        "category": "access-control"
+      },
+      {
+        "date": "20240711",
+        "name": "GAX",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20240703",
+        "name": "UnverifiedContr_0x452E25",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20240601",
+        "name": "VeloCore",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20240529",
+        "name": "MetaDragon",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20240510",
+        "name": "GFOX",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20240412",
+        "name": "GROKD",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20240329",
+        "name": "ETHFIN",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20240323",
+        "name": "CGT",
+        "category": "incorrect-access-control"
+      },
+      {
+        "date": "20240320",
+        "name": "Paraswap",
+        "category": "incorrect-access-control"
+      },
+      {
+        "date": "20240210",
+        "name": "FILX DN404",
+        "category": "access-control"
+      },
+      {
+        "date": "20240202",
+        "name": "ADC",
+        "category": "incorrect-access-control"
+      },
+      {
+        "date": "20240122",
+        "name": "DAO_SoulMate",
+        "category": "incorrect-access-control"
+      },
+      {
+        "date": "20240115",
+        "name": "Shell_MEV_0xa898",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20240110",
+        "name": "Freedom",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20231129",
+        "name": "AIS",
+        "category": "access-control"
+      },
+      {
+        "date": "20231112",
+        "name": "MEV_0x8c2d",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20231112",
+        "name": "MEV_0xa247",
+        "category": "incorrect-access-control"
+      },
+      {
+        "date": "20231107",
+        "name": "MEVbot",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20231102",
+        "name": "BRAND",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20230921",
+        "name": "CEXISWAP",
+        "category": "incorrect-access-control"
+      },
+      {
+        "date": "20230801",
+        "name": "LeetSwap",
+        "category": "access-control"
+      },
+      {
+        "date": "20230715",
+        "name": "USDTStakingContract28",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20230708",
+        "name": "CIVNFT",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20230708",
+        "name": "Civfund",
+        "category": "lack-of-access-control"
+      },
+      {
+        "date": "20230615",
+        "name": "DEPUSDT_LEVUSDC",
+        "category": "incorrect-access-control"
+      },
+      {
+        "date": "20230506",
+        "name": "Melo",
+        "category": "access-control"
+      },
+      {
+        "date": "20230227",
+        "name": "LaunchZone",
+        "category": "access-control"
+      },
+      {
+        "date": "20230227",
+        "name": "SwapX",
+        "category": "access-control"
+      },
+      {
+        "date": "20221214",
+        "name": "FPR",
+        "category": "access-control"
+      },
+      {
+        "date": "20221025",
+        "name": "ULME",
+        "category": "access-control"
+      },
+      {
+        "date": "20221018",
+        "name": "HPAY",
+        "category": "access-control"
+      },
+      {
+        "date": "20221017",
+        "name": "Uerii Token",
+        "category": "access-control"
+      },
+      {
+        "date": "20220902",
+        "name": "ShadowFi",
+        "category": "access-control"
+      },
+      {
+        "date": "20220208",
+        "name": "Sandbox LAND",
+        "category": "access-control"
+      },
+      {
+        "date": "20210607",
+        "name": "88mph NFT",
+        "category": "access-control"
+      },
+      {
+        "date": "20200618",
+        "name": "Bancor Protocol",
+        "category": "access-control"
+      }
+    ],
+    "reentrancy": [
+      {
+        "date": "20250222",
+        "name": "Unverified_35bc",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20241227",
+        "name": "Bizness",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20241210",
+        "name": "CloberDEX",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20241111",
+        "name": "DeltaPrime",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240714",
+        "name": "Minterest",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240702",
+        "name": "MRP",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240514",
+        "name": "PredyFinance",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240412",
+        "name": "SumerMoney",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240228",
+        "name": "SMOOFSStaking",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240220",
+        "name": "EGGX",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240219",
+        "name": "RuggedArt",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240129",
+        "name": "PeapodsFinance",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240128",
+        "name": "BarleyFinance",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20240125",
+        "name": "NBLGAME",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20231216",
+        "name": "NFTTrader",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20231007",
+        "name": "StarsArena",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20230926",
+        "name": "XSDWETHpool",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20230916",
+        "name": "uniclyNFT",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20230809",
+        "name": "EarningFram",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20230711",
+        "name": "Libertify",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20230710",
+        "name": "ArcadiaFi",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20230612",
+        "name": "Sturdy Finance",
+        "category": "read-only-reentrancy"
+      },
+      {
+        "date": "20230411",
+        "name": "Paribus",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20230405",
+        "name": "Sentiment",
+        "category": "read-only-reentrancy"
+      },
+      {
+        "date": "20230210",
+        "name": "dForce",
+        "category": "read-only-reentrancy"
+      },
+      {
+        "date": "20230203",
+        "name": "Orion Protocol",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20230116",
+        "name": "MidasCapital",
+        "category": "read-only-reentrancy"
+      },
+      {
+        "date": "20221223",
+        "name": "Defrost",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20221110",
+        "name": "DFXFinance",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20221026",
+        "name": "N00d Token",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20221024",
+        "name": "Market",
+        "category": "read-only-reentrancy"
+      },
+      {
+        "date": "20221001",
+        "name": "Thunder Brawl",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20220710",
+        "name": "Omni NFT",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20220430",
+        "name": "Rari Capital/Fei Protocol",
+        "category": "flashloan-attack--reentrancy"
+      },
+      {
+        "date": "20220327",
+        "name": "Revest Finance",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20220305",
+        "name": "Bacon Protocol",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20211221",
+        "name": "Visor Finance",
+        "category": "reentrancy"
+      },
+      {
+        "date": "20210830",
+        "name": "Cream Finance",
+        "category": "flashloan-attack--reentrancy"
+      },
+      {
+        "date": "20210817",
+        "name": "XSURGE",
+        "category": "flashloan-attack--reentrancy"
+      },
+      {
+        "date": "20181007",
+        "name": "SpankChain",
+        "category": "reentrancy"
+      }
+    ],
+    "input-validation": [
+      {
+        "date": "20250831",
+        "name": "Hexotic",
+        "category": "incorrect-input-validation"
+      },
+      {
+        "date": "20250318",
+        "name": "DCFToken",
+        "category": "lack-of-slippage-protection"
+      },
+      {
+        "date": "20240923",
+        "name": "Bankroll_Network",
+        "category": "incorrect-input-validation"
+      },
+      {
+        "date": "20240801",
+        "name": "Convergence",
+        "category": "incorrect-input-validation"
+      },
+      {
+        "date": "20240724",
+        "name": "Spectra_finance",
+        "category": "incorrect-input-validation"
+      },
+      {
+        "date": "20240723",
+        "name": "MEVbot_0xdd7c",
+        "category": "incorrect-input-validation"
+      },
+      {
+        "date": "20240716",
+        "name": "Lifiprotocol",
+        "category": "incorrect-input-validation"
+      },
+      {
+        "date": "20240712",
+        "name": "DoughFina",
+        "category": "incorrect-input-validation"
+      },
+      {
+        "date": "20240510",
+        "name": "TSURU",
+        "category": "insufficient-validation"
+      },
+      {
+        "date": "20240424",
+        "name": "YIEDL",
+        "category": "input-validation"
+      },
+      {
+        "date": "20240329",
+        "name": "PrismaFi",
+        "category": "insufficient-validation"
+      },
+      {
+        "date": "20240101",
+        "name": "OrbitChain",
+        "category": "incorrect-input-validation"
+      },
+      {
+        "date": "20231128",
+        "name": "FiberRouter",
+        "category": "input-validation"
+      },
+      {
+        "date": "20231110",
+        "name": "GrokToken",
+        "category": "lack-of-slippage-protection"
+      },
+      {
+        "date": "20231106",
+        "name": "TheStandard_io",
+        "category": "lack-of-slippage-protection"
+      },
+      {
+        "date": "20231030",
+        "name": "LaEeb",
+        "category": "lack-slippage-protection"
+      },
+      {
+        "date": "20230930",
+        "name": "FireBirdPair",
+        "category": "lack-slippage-protection"
+      },
+      {
+        "date": "20230818",
+        "name": "ExactlyProtocol",
+        "category": "insufficient-validation"
+      },
+      {
+        "date": "20230802",
+        "name": "CurveBurner",
+        "category": "lack-slippage-protection"
+      },
+      {
+        "date": "20230731",
+        "name": "GYMNET",
+        "category": "insufficient-validation"
+      },
+      {
+        "date": "20230717",
+        "name": "NewFi",
+        "category": "lack-slippage-protection"
+      },
+      {
+        "date": "20230621",
+        "name": "BabyDogeCoin02",
+        "category": "lack-slippage-protection"
+      },
+      {
+        "date": "20230529",
+        "name": "BabyDogeCoin",
+        "category": "lack-slippage-protection"
+      },
+      {
+        "date": "20221211",
+        "name": "MEVbot_0x28d9",
+        "category": "insufficient-validation"
+      }
+    ],
+    "math-precision": [
+      {
+        "date": "20251103",
+        "name": "BalancerV2",
+        "category": "precision-loss"
+      },
+      {
+        "date": "20250724",
+        "name": "SWAPPStaking",
+        "category": "incorrect-reward-calculation"
+      },
+      {
+        "date": "20250108",
+        "name": "LPMine",
+        "category": "incorrect-reward-calculation"
+      },
+      {
+        "date": "20250104",
+        "name": "SorStaking",
+        "category": "incorrect-reward-calculation"
+      },
+      {
+        "date": "20240514",
+        "name": "Sonne Finance",
+        "category": "precision-loss"
+      },
+      {
+        "date": "20240427",
+        "name": "BNBX",
+        "category": "precision-loss"
+      },
+      {
+        "date": "20240410",
+        "name": "BigBangSwap",
+        "category": "precision-loss"
+      },
+      {
+        "date": "20231230",
+        "name": "ChannelsFinance",
+        "category": "compoundv2-inflation-attack"
+      },
+      {
+        "date": "20231228",
+        "name": "CCV",
+        "category": "precision-loss"
+      },
+      {
+        "date": "20231228",
+        "name": "DominoTT",
+        "category": "precision-loss"
+      },
+      {
+        "date": "20231125",
+        "name": "MetaLend",
+        "category": "compoundv2-inflation-attack"
+      },
+      {
+        "date": "20231122",
+        "name": "KyberSwap",
+        "category": "precision-loss"
+      },
+      {
+        "date": "20231111",
+        "name": "Mahalend",
+        "category": "donate-inflation-exchangerate--rounding-error"
+      },
+      {
+        "date": "20231110",
+        "name": "Raft_fi",
+        "category": "donate-inflation-exchangerate--rounding-error"
+      },
+      {
+        "date": "20231019",
+        "name": "kTAF",
+        "category": "compoundv2-inflation-attack"
+      },
+      {
+        "date": "20231013",
+        "name": "WiseLending",
+        "category": "donate-inflation-exchangerate--rounding-error"
+      },
+      {
+        "date": "20230704",
+        "name": "BaoCommunity",
+        "category": "donate-inflation-exchangerate--rounding-error"
+      },
+      {
+        "date": "20230617",
+        "name": "MidasCapitalXYZ",
+        "category": "precision-loss"
+      },
+      {
+        "date": "20230415",
+        "name": "HundredFinance",
+        "category": "donate-inflation-exchangerate--rounding-error"
+      },
+      {
+        "date": "20221027",
+        "name": "VTF",
+        "category": "incorrect-reward-calculation"
+      },
+      {
+        "date": "20221001",
+        "name": "RL",
+        "category": "incorrect-reward-calculation"
+      },
+      {
+        "date": "20220909",
+        "name": "DPC",
+        "category": "incorrect-reward-calculation"
+      }
+    ],
+    "arbitrary-call": [
+      {
+        "date": "20250726",
+        "name": "MulticallWithETH",
+        "category": "arbitrary-call"
+      },
+      {
+        "date": "20240814",
+        "name": "YodlRouter",
+        "category": "arbitrary-call"
+      },
+      {
+        "date": "20240531",
+        "name": "MixedSwapRouter",
+        "category": "arbitrary-call"
+      },
+      {
+        "date": "20240420",
+        "name": "Rico",
+        "category": "arbitrary-call"
+      },
+      {
+        "date": "20240415",
+        "name": "ChaingeFinance",
+        "category": "arbitrary-external-call"
+      },
+      {
+        "date": "20240228",
+        "name": "Seneca",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20240117",
+        "name": "BmiZapper",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20231031",
+        "name": "UniBotRouter",
+        "category": "arbitrary-external-call"
+      },
+      {
+        "date": "20231024",
+        "name": "MaestroRouter2",
+        "category": "arbitrary-external-call"
+      },
+      {
+        "date": "20230929",
+        "name": "DEXRouter",
+        "category": "arbitrary-external-call"
+      },
+      {
+        "date": "20230620",
+        "name": "MIM",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20230218",
+        "name": "RevertFinance",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20230217",
+        "name": "Dexible",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20230207",
+        "name": "CowSwap",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20221225",
+        "name": "Rubic",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20221109",
+        "name": "brahTOPG",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20221108",
+        "name": "MEV_0ad8",
+        "category": "arbitrary-call"
+      },
+      {
+        "date": "20221024",
+        "name": "MulticallWithoutCheck",
+        "category": "arbitrary-external-call-vulnerability"
+      },
+      {
+        "date": "20221011",
+        "name": "Rabby Wallet SwapRouter",
+        "category": "arbitrary-external-call-vulnerability"
+      }
+    ],
+    "token-accounting": [
+      {
+        "date": "20230905",
+        "name": "QuantumWN",
+        "category": "rebasing-logic-issue"
+      },
+      {
+        "date": "20230905",
+        "name": "JumpFarm",
+        "category": "rebasing-logic-issue"
+      },
+      {
+        "date": "20230905",
+        "name": "HeavensGate",
+        "category": "rebasing-logic-issue"
+      },
+      {
+        "date": "20230905",
+        "name": "FloorDAO",
+        "category": "rebasing-logic-issue"
+      },
+      {
+        "date": "20230824",
+        "name": "GSS",
+        "category": "skim-token-balance"
+      },
+      {
+        "date": "20230509",
+        "name": "MCC",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20230509",
+        "name": "HODL",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20230419",
+        "name": "OLIFE",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20230322",
+        "name": "BIGFI",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20230210",
+        "name": "Sheep Token",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20230206",
+        "name": "FDP Token",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20230130",
+        "name": "BEVO",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20230126",
+        "name": "TomInu Token",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20230119",
+        "name": "SHOCO Token",
+        "category": "reflection-token"
+      },
+      {
+        "date": "20220809",
+        "name": "ANCH",
+        "category": "skim-token-balance"
+      },
+      {
+        "date": "20220524",
+        "name": "HackDao",
+        "category": "skim-token-balance"
+      }
+    ],
+    "flash-loan": [
+      {
+        "date": "20241119",
+        "name": "PolterFinance",
+        "category": "flashloan-attack"
+      },
+      {
+        "date": "20241026",
+        "name": "CompoundFork",
+        "category": "flashloan-attack"
+      },
+      {
+        "date": "20221202",
+        "name": "OverNight",
+        "category": "flashloan-attack"
+      },
+      {
+        "date": "20221117",
+        "name": "UEarnPool",
+        "category": "flashloan-attack"
+      },
+      {
+        "date": "20221107",
+        "name": "MooCAKECTX",
+        "category": "flashloan-attack"
+      },
+      {
+        "date": "20211123",
+        "name": "Ploutoz Finance",
+        "category": "flash-loan"
+      },
+      {
+        "date": "20210527",
+        "name": "JulSwap",
+        "category": "flash-loan"
+      },
+      {
+        "date": "20210308",
+        "name": "DODO",
+        "category": "flashloan-attack"
+      },
+      {
+        "date": "20201026",
+        "name": "Harvest Finance",
+        "category": "flashloan-attack"
+      }
+    ],
+    "rug-pull": [
+      {
+        "date": "20250520",
+        "name": "IRYSAI",
+        "category": "rug-pull"
+      },
+      {
+        "date": "20250416",
+        "name": "Roar",
+        "category": "rug-pull"
+      },
+      {
+        "date": "20250327",
+        "name": "YziAIToken",
+        "category": "rug-pull"
+      },
+      {
+        "date": "20241107",
+        "name": "UniV2",
+        "category": "rug-pull"
+      },
+      {
+        "date": "20241029",
+        "name": "BUBAI",
+        "category": "rug-pull"
+      }
+    ],
+    "business-loigc": [
+      {
+        "date": "20230630",
+        "name": "MyAi",
+        "category": "business-loigc"
+      },
+      {
+        "date": "20230627",
+        "name": "STRAC",
+        "category": "business-loigc"
+      },
+      {
+        "date": "20230623",
+        "name": "SHIDO",
+        "category": "business-loigc"
+      },
+      {
+        "date": "20230619",
+        "name": "Contract_0x7657",
+        "category": "business-loigc"
+      }
+    ],
+    "share-price-manipulation": [
+      {
+        "date": "20260302",
+        "name": "Curve LlamaLend",
+        "category": "share-price-manipulation"
+      },
+      {
+        "date": "20250709",
+        "name": "GMX",
+        "category": "share-price-manipulation"
+      },
+      {
+        "date": "20250626",
+        "name": "ResupplyFi",
+        "category": "share-price-manipulation"
+      }
+    ],
+    "misconfiguration": [
+      {
+        "date": "20250813",
+        "name": "coinbase",
+        "category": "misconfiguration"
+      },
+      {
+        "date": "20240813",
+        "name": "VOW",
+        "category": "misconfiguration"
+      },
+      {
+        "date": "20230413",
+        "name": "yearnFinance",
+        "category": "misconfiguration"
+      }
+    ],
+    "flashloan": [
+      {
+        "date": "20240816",
+        "name": "OMPxContract",
+        "category": "flashloan"
+      },
+      {
+        "date": "20220517",
+        "name": "ApeCoin",
+        "category": "flashloan"
+      },
+      {
+        "date": "20220424",
+        "name": "Wiener DOGE",
+        "category": "flashloan"
+      }
+    ],
+    "precission-loss": [
+      {
+        "date": "20240311",
+        "name": "Binemon",
+        "category": "precission-loss"
+      },
+      {
+        "date": "20240130",
+        "name": "MIMSpell",
+        "category": "precission-loss"
+      },
+      {
+        "date": "20231106",
+        "name": "KR",
+        "category": "precission-loss"
+      }
+    ],
+    "lack-of-validation": [
+      {
+        "date": "20240222",
+        "name": "SwarmMarkets",
+        "category": "lack-of-validation"
+      },
+      {
+        "date": "20240221",
+        "name": "DeezNutz404",
+        "category": "lack-of-validation"
+      },
+      {
+        "date": "20240215",
+        "name": "Babyloogn",
+        "category": "lack-of-validation"
+      }
+    ],
+    "no-input-validation": [
+      {
+        "date": "20221118",
+        "name": "Polynomial",
+        "category": "no-input-validation"
+      },
+      {
+        "date": "20221116",
+        "name": "SheepFarm",
+        "category": "no-input-validation"
+      },
+      {
+        "date": "20221021",
+        "name": "OlympusDAO",
+        "category": "no-input-validation"
+      }
+    ],
+    "incorrect-burn-logic": [
+      {
+        "date": "20260222",
+        "name": "LAXO Token",
+        "category": "incorrect-burn-logic"
+      },
+      {
+        "date": "20250717",
+        "name": "WETC",
+        "category": "incorrect-burn-logic"
+      }
+    ],
+    "faulty-oracle": [
+      {
+        "date": "20260215",
+        "name": "Moonwell",
+        "category": "faulty-oracle"
+      },
+      {
+        "date": "20251104",
+        "name": "Moonwell",
+        "category": "faulty-oracle"
+      }
+    ],
+    "overflow": [
+      {
+        "date": "20260109",
+        "name": "TRU",
+        "category": "overflow"
+      },
+      {
+        "date": "20180424",
+        "name": "SmartMesh",
+        "category": "overflow"
+      }
+    ],
+    "bussiness-logic-flaw": [
+      {
+        "date": "20260101",
+        "name": "PRXVT",
+        "category": "bussiness-logic-flaw"
+      },
+      {
+        "date": "20230712",
+        "name": "Platypus",
+        "category": "bussiness-logic-flaw"
+      }
+    ],
+    "arbitrage": [
+      {
+        "date": "20250830",
+        "name": "EverValueCoin",
+        "category": "arbitrage"
+      },
+      {
+        "date": "20250527",
+        "name": "UsualMoney",
+        "category": "arbitrage"
+      }
+    ],
+    "incorrect-dividends-calculation": [
+      {
+        "date": "20250619",
+        "name": "BankrollStack",
+        "category": "incorrect-dividends-calculation"
+      },
+      {
+        "date": "20250619",
+        "name": "BankrollNetwork",
+        "category": "incorrect-dividends-calculation"
+      }
+    ],
+    "flashloan-price-oracle-manipulation": [
+      {
+        "date": "20250426",
+        "name": "ImpermaxV3",
+        "category": "flashloan-price-oracle-manipulation"
+      },
+      {
+        "date": "20220906",
+        "name": "NXUSD",
+        "category": "flashloan-price-oracle-manipulation"
+      }
+    ],
+    "not-slippage-protection": [
+      {
+        "date": "20250416",
+        "name": "YVToken",
+        "category": "not-slippage-protection"
+      },
+      {
+        "date": "20250304",
+        "name": "Pump",
+        "category": "not-slippage-protection"
+      }
+    ],
+    "invalid-signature-verification": [
+      {
+        "date": "20250123",
+        "name": "ODOS",
+        "category": "invalid-signature-verification"
+      },
+      {
+        "date": "20230703",
+        "name": "AzukiDAO",
+        "category": "invalid-signature-verification"
+      }
+    ],
+    "integer-underflow": [
+      {
+        "date": "20240708",
+        "name": "LW",
+        "category": "integer-underflow"
+      },
+      {
+        "date": "20240529",
+        "name": "SCROLL",
+        "category": "integer-underflow"
+      }
+    ],
+    "loss-of-precision": [
+      {
+        "date": "20240705",
+        "name": "DeFiPlaza",
+        "category": "loss-of-precision"
+      },
+      {
+        "date": "20240102",
+        "name": "RadiantCapital",
+        "category": "loss-of-precision"
+      }
+    ],
+    "unverified-external-call": [
+      {
+        "date": "20240417",
+        "name": "UnverifiedContr_0x00C409",
+        "category": "unverified-external-call"
+      },
+      {
+        "date": "20240309",
+        "name": "UnizenIO",
+        "category": "unverified-external-call"
+      }
+    ],
+    "sandwich-attack": [
+      {
+        "date": "20240408",
+        "name": "SQUID",
+        "category": "sandwich-attack"
+      },
+      {
+        "date": "20210125",
+        "name": "Sushi Badger Digg",
+        "category": "sandwich-attack"
+      }
+    ],
+    "storage-collision": [
+      {
+        "date": "20231225",
+        "name": "Telcoin",
+        "category": "storage-collision"
+      },
+      {
+        "date": "20230224",
+        "name": "EFVault",
+        "category": "storage-collision"
+      }
+    ],
+    "pool-manipulation": [
+      {
+        "date": "20231008",
+        "name": "pSeudoEth",
+        "category": "pool-manipulation"
+      },
+      {
+        "date": "20230924",
+        "name": "KubSplit",
+        "category": "pool-manipulation"
+      }
+    ],
+    "price-manipulation-attack": [
+      {
+        "date": "20230707",
+        "name": "LUSD",
+        "category": "price-manipulation-attack"
+      },
+      {
+        "date": "20230704",
+        "name": "BambooIA",
+        "category": "price-manipulation-attack"
+      }
+    ],
+    "unchecked-user-input": [
+      {
+        "date": "20230514",
+        "name": "SellToken03",
+        "category": "unchecked-user-input"
+      },
+      {
+        "date": "20230409",
+        "name": "SushiSwap",
+        "category": "unchecked-user-input"
+      }
+    ],
+    "integer-overflow": [
+      {
+        "date": "20230315",
+        "name": "Poolz",
+        "category": "integer-overflow"
+      },
+      {
+        "date": "20180422",
+        "name": "Beauty Chain",
+        "category": "integer-overflow"
+      }
+    ],
+    "predicting-random-numbers": [
+      {
+        "date": "20221205",
+        "name": "RFB",
+        "category": "predicting-random-numbers"
+      },
+      {
+        "date": "20220824",
+        "name": "LuckyTiger NFT",
+        "category": "predicting-random-numbers"
+      }
+    ],
+    "verify-flashloan-callback": [
+      {
+        "date": "20221119",
+        "name": "AnnexFinance",
+        "category": "verify-flashloan-callback"
+      },
+      {
+        "date": "20221014",
+        "name": "EFLeverVault",
+        "category": "verify-flashloan-callback"
+      }
+    ],
+    "transfer-logic-flaw": [
+      {
+        "date": "20221020",
+        "name": "HEALTH Token",
+        "category": "transfer-logic-flaw"
+      },
+      {
+        "date": "20221018",
+        "name": "PLTD Token",
+        "category": "transfer-logic-flaw"
+      }
+    ],
+    "underflow": [
+      {
+        "date": "20220803",
+        "name": "Qixi",
+        "category": "underflow"
+      },
+      {
+        "date": "20220320",
+        "name": "Umbrella Network",
+        "category": "underflow"
+      }
+    ],
+    "accesscontrol": [
+      {
+        "date": "20220706",
+        "name": "FlippazOne NFT",
+        "category": "accesscontrol"
+      },
+      {
+        "date": "20220608",
+        "name": "GYMNetwork",
+        "category": "accesscontrol"
+      }
+    ],
+    "private-key-compromised": [
+      {
+        "date": "20220624",
+        "name": "Harmony's Horizon Bridge",
+        "category": "private-key-compromised"
+      },
+      {
+        "date": "20210305",
+        "name": "Paid Network",
+        "category": "private-key-compromised"
+      }
+    ],
+    "swap-metapool-attack": [
+      {
+        "date": "20220430",
+        "name": "Saddle Finance",
+        "category": "swap-metapool-attack"
+      },
+      {
+        "date": "20211214",
+        "name": "Nerve Bridge",
+        "category": "swap-metapool-attack"
+      }
+    ],
+    "bridge": [
+      {
+        "date": "20220329",
+        "name": "Ronin Network",
+        "category": "bridge"
+      },
+      {
+        "date": "20220205",
+        "name": "Meter",
+        "category": "bridge"
+      }
+    ],
+    "erc667-reentrancy": [
+      {
+        "date": "20220315",
+        "name": "Agave Finance",
+        "category": "erc667-reentrancy"
+      },
+      {
+        "date": "20220315",
+        "name": "Hundred Finance",
+        "category": "erc667-reentrancy"
+      }
+    ],
+    "flashloan--reentrancy": [
+      {
+        "date": "20220313",
+        "name": "Paraluni",
+        "category": "flashloan--reentrancy"
+      },
+      {
+        "date": "20211218",
+        "name": "Grim Finance",
+        "category": "flashloan--reentrancy"
+      }
+    ],
+    "deflationary-token-uncompatible": [
+      {
+        "date": "20210912",
+        "name": "ZABU Finance",
+        "category": "deflationary-token-uncompatible"
+      },
+      {
+        "date": "20210628",
+        "name": "SafeDollar",
+        "category": "deflationary-token-uncompatible"
+      }
+    ],
+    "bridge-logic-flaw": [
+      {
+        "date": "20210710",
+        "name": "Chainswap",
+        "category": "bridge-logic-flaw"
+      },
+      {
+        "date": "20210702",
+        "name": "Chainswap",
+        "category": "bridge-logic-flaw"
+      }
+    ],
+    "cross-contract-reentrancy": [
+      {
+        "date": "20210508",
+        "name": "Rari Capital",
+        "category": "cross-contract-reentrancy"
+      },
+      {
+        "date": "20210508",
+        "name": "Value Defi",
+        "category": "cross-contract-reentrancy"
+      }
+    ],
+    "erc777-reentrancy": [
+      {
+        "date": "20200419",
+        "name": "LendfMe",
+        "category": "erc777-reentrancy"
+      },
+      {
+        "date": "20200418",
+        "name": "UniSwapV1",
+        "category": "erc777-reentrancy"
+      }
+    ],
+    "borrowbehalf--donation-attack": [
+      {
+        "date": "20260315",
+        "name": "Venus THE",
+        "category": "borrowbehalf--donation-attack"
+      }
+    ],
+    "incorrect-fee-logic": [
+      {
+        "date": "20260112",
+        "name": "MTToken",
+        "category": "incorrect-fee-logic"
+      }
+    ],
+    "unit-mismatch": [
+      {
+        "date": "20260110",
+        "name": "FutureSwap",
+        "category": "unit-mismatch"
+      }
+    ],
+    "unsafe-math": [
+      {
+        "date": "20251201",
+        "name": "yETH",
+        "category": "unsafe-math"
+      }
+    ],
+    "post-insolvency-check": [
+      {
+        "date": "20251020",
+        "name": "SharwaFinance",
+        "category": "post-insolvency-check"
+      }
+    ],
+    "bypassed-insolvency-check": [
+      {
+        "date": "20251004",
+        "name": "MIMSpell3",
+        "category": "bypassed-insolvency-check"
+      }
+    ],
+    "arbitary-external-call": [
+      {
+        "date": "20250913",
+        "name": "Kame",
+        "category": "arbitary-external-call"
+      }
+    ],
+    "arbitrary-user-input": [
+      {
+        "date": "20250812",
+        "name": "Bebop",
+        "category": "arbitrary-user-input"
+      }
+    ],
+    "incorrect-token-burn-mechanism": [
+      {
+        "date": "20250811",
+        "name": "WXC",
+        "category": "incorrect-token-burn-mechanism"
+      }
+    ],
+    "incorrect-dividends": [
+      {
+        "date": "20250620",
+        "name": "Gangsterfinance",
+        "category": "incorrect-dividends"
+      }
+    ],
+    "deflationary-token": [
+      {
+        "date": "20250518",
+        "name": "KRC",
+        "category": "deflationary-token"
+      }
+    ],
+    "price-manipulation-not-confirmed": [
+      {
+        "date": "20250511",
+        "name": "MBUToken",
+        "category": "price-manipulation-not-confirmed"
+      }
+    ],
+    "claim-rewards-without-protection": [
+      {
+        "date": "20250418",
+        "name": "BTNFT",
+        "category": "claim-rewards-without-protection"
+      }
+    ],
+    "storage-slot1-collision": [
+      {
+        "date": "20250330",
+        "name": "LeverageSIR",
+        "category": "storage-slot1-collision"
+      }
+    ],
+    "unsafecast": [
+      {
+        "date": "20250328",
+        "name": "Alkimiya_IO",
+        "category": "unsafecast"
+      }
+    ],
+    "unprotected-function": [
+      {
+        "date": "20250316",
+        "name": "wKeyDAO",
+        "category": "unprotected-function"
+      }
+    ],
+    "weak-random-mint": [
+      {
+        "date": "20250314",
+        "name": "H2O",
+        "category": "weak-random-mint"
+      }
+    ],
+    "free-mint-bug": [
+      {
+        "date": "20250311",
+        "name": "DUCKVADER",
+        "category": "free-mint-bug"
+      }
+    ],
+    "arbitrary-yul-calldata": [
+      {
+        "date": "20250305",
+        "name": "1inch Fusion V1 Settlement",
+        "category": "arbitrary-yul-calldata"
+      }
+    ],
+    "donation-attack": [
+      {
+        "date": "20250227",
+        "name": "Venus_ZKSync",
+        "category": "donation-attack"
+      }
+    ],
+    "reentrancy-on-sell-nft": [
+      {
+        "date": "20250221",
+        "name": "StepHeroNFTs",
+        "category": "reentrancy-on-sell-nft"
+      }
+    ],
+    "phishing-attack": [
+      {
+        "date": "20250221",
+        "name": "Bybit",
+        "category": "phishing-attack"
+      }
+    ],
+    "bad-oracle": [
+      {
+        "date": "20250118",
+        "name": "Paribus",
+        "category": "bad-oracle"
+      }
+    ],
+    "unprotected-public-function": [
+      {
+        "date": "20250104",
+        "name": "98#Token",
+        "category": "unprotected-public-function"
+      }
+    ],
+    "pair-balance-manipulation": [
+      {
+        "date": "20250101",
+        "name": "LAURAToken",
+        "category": "pair-balance-manipulation"
+      }
+    ],
+    "improper-input-validation": [
+      {
+        "date": "20241223",
+        "name": "Moonhacker",
+        "category": "improper-input-validation"
+      }
+    ],
+    "integer-truncation": [
+      {
+        "date": "20241121",
+        "name": "Matez",
+        "category": "integer-truncation"
+      }
+    ],
+    "vulnerable-price-dependency": [
+      {
+        "date": "20241114",
+        "name": "vETH",
+        "category": "vulnerable-price-dependency"
+      }
+    ],
+    "flashmint-receive-error": [
+      {
+        "date": "20241022",
+        "name": "VISTA",
+        "category": "flashmint-receive-error"
+      }
+    ],
+    "overpriced-asset-in-oracle": [
+      {
+        "date": "20241013",
+        "name": "MorphoBlue",
+        "category": "overpriced-asset-in-oracle"
+      }
+    ],
+    "price-manipulation-inflate-attack": [
+      {
+        "date": "20241011",
+        "name": "P719Token",
+        "category": "price-manipulation-inflate-attack"
+      }
+    ],
+    "oracle-price-manipulation": [
+      {
+        "date": "20241006",
+        "name": "HYDT",
+        "category": "oracle-price-manipulation"
+      }
+    ],
+    "wrong-price-calculation": [
+      {
+        "date": "20241005",
+        "name": "AIZPTToken",
+        "category": "wrong-price-calculation"
+      }
+    ],
+    "pair-manipulation-with-transfer-function": [
+      {
+        "date": "20241001",
+        "name": "FireToken",
+        "category": "pair-manipulation-with-transfer-function"
+      }
+    ],
+    "fake-market": [
+      {
+        "date": "20240926",
+        "name": "OnyxDAO",
+        "category": "fake-market"
+      }
+    ],
+    "swap-eth/btc-1/1-in-mint-function": [
+      {
+        "date": "20240926",
+        "name": "Bedrock_DeFi",
+        "category": "swap-eth/btc-1/1-in-mint-function"
+      }
+    ],
+    "reentrancy-and-reward-manipulation": [
+      {
+        "date": "20240903",
+        "name": "Penpiexyz_io",
+        "category": "reentrancy-and-reward-manipulation"
+      }
+    ],
+    "arbitrary-call-error": [
+      {
+        "date": "20240828",
+        "name": "AAVE",
+        "category": "arbitrary-call-error"
+      }
+    ],
+    "price-out-of-date": [
+      {
+        "date": "20240816",
+        "name": "Zenterest",
+        "category": "price-out-of-date"
+      }
+    ],
+    "insufficient-permission-check": [
+      {
+        "date": "20240610",
+        "name": "Bazaar",
+        "category": "insufficient-permission-check"
+      }
+    ],
+    "weak-rng": [
+      {
+        "date": "20240527",
+        "name": "RedKeysCoin",
+        "category": "weak-rng"
+      }
+    ],
+    "sandwich-ack": [
+      {
+        "date": "20240522",
+        "name": "Burner",
+        "category": "sandwich-ack"
+      }
+    ],
+    "signature-malleability-vulnerability": [
+      {
+        "date": "20240516",
+        "name": "TCH",
+        "category": "signature-malleability-vulnerability"
+      }
+    ],
+    "self-transfer": [
+      {
+        "date": "20240508",
+        "name": "GPU",
+        "category": "self-transfer"
+      }
+    ],
+    "reward-distribution-problem": [
+      {
+        "date": "20240506",
+        "name": "OSN",
+        "category": "reward-distribution-problem"
+      }
+    ],
+    "uninitialized-proxy": [
+      {
+        "date": "20240430",
+        "name": "PikeFinance",
+        "category": "uninitialized-proxy"
+      }
+    ],
+    "bad-access-control": [
+      {
+        "date": "20240425",
+        "name": "NGFS",
+        "category": "bad-access-control"
+      }
+    ],
+    "bad-reflection": [
+      {
+        "date": "20240416",
+        "name": "MARS_DEFI",
+        "category": "bad-reflection"
+      }
+    ],
+    "insufficient-validation-and-price-manipulation": [
+      {
+        "date": "20240412",
+        "name": "FIL314",
+        "category": "insufficient-validation-and-price-manipulation"
+      }
+    ],
+    "manipulating-price": [
+      {
+        "date": "20240404",
+        "name": "WSM",
+        "category": "manipulating-price"
+      }
+    ],
+    "token-balance-doubles-on-transfer-to-self": [
+      {
+        "date": "20240321",
+        "name": "SSS",
+        "category": "token-balance-doubles-on-transfer-to-self"
+      }
+    ],
+    "public-internal-function": [
+      {
+        "date": "20240306",
+        "name": "ALP",
+        "category": "public-internal-function"
+      }
+    ],
+    "oracle-bad-price": [
+      {
+        "date": "20240223",
+        "name": "CompoundUni",
+        "category": "oracle-bad-price"
+      }
+    ],
+    "bad-function-implementation": [
+      {
+        "date": "20240221",
+        "name": "GAIN",
+        "category": "bad-function-implementation"
+      }
+    ],
+    "lack-of-validation-data": [
+      {
+        "date": "20240216",
+        "name": "ParticleTrade",
+        "category": "lack-of-validation-data"
+      }
+    ],
+    "precision-truncation": [
+      {
+        "date": "20240215",
+        "name": "DualPools",
+        "category": "precision-truncation"
+      }
+    ],
+    "lack-of-validation-dst-address": [
+      {
+        "date": "20240215",
+        "name": "Miner",
+        "category": "lack-of-validation-dst-address"
+      }
+    ],
+    "reentrancy--business-logic-flaw": [
+      {
+        "date": "20240211",
+        "name": "Game",
+        "category": "reentrancy--business-logic-flaw"
+      }
+    ],
+    "interger-underflow": [
+      {
+        "date": "20240208",
+        "name": "Pandora404",
+        "category": "interger-underflow"
+      }
+    ],
+    "lack-of-validation-userdata": [
+      {
+        "date": "20240201",
+        "name": "AffineDeFi",
+        "category": "lack-of-validation-userdata"
+      }
+    ],
+    "lack-of-calldata-validation": [
+      {
+        "date": "20240117",
+        "name": "SocketGateway",
+        "category": "lack-of-calldata-validation"
+      }
+    ],
+    "bad-healthfactor-check": [
+      {
+        "date": "20240112",
+        "name": "WiseLending",
+        "category": "bad-healthfactor-check"
+      }
+    ],
+    "unauthorized-transferfrom": [
+      {
+        "date": "20240110",
+        "name": "LQDX Alert",
+        "category": "unauthorized-transferfrom"
+      }
+    ],
+    "lack-of-validation-pool": [
+      {
+        "date": "20231220",
+        "name": "TransitFinance",
+        "category": "lack-of-validation-pool"
+      }
+    ],
+    "lack-of-input-validation--reentrancy": [
+      {
+        "date": "20231216",
+        "name": "GoodDollar",
+        "category": "lack-of-input-validation--reentrancy"
+      }
+    ],
+    "arbitrary-address-spoofing-attack": [
+      {
+        "date": "20231206",
+        "name": "TIME",
+        "category": "arbitrary-address-spoofing-attack"
+      }
+    ],
+    "inflation-attack": [
+      {
+        "date": "20231202",
+        "name": "bZxProtocol",
+        "category": "inflation-attack"
+      }
+    ],
+    "price-manipulation-via-reentrancy": [
+      {
+        "date": "20231130",
+        "name": "CAROLProtocol",
+        "category": "price-manipulation-via-reentrancy"
+      }
+    ],
+    "lack-of-slippage-control": [
+      {
+        "date": "20231115",
+        "name": "EHX",
+        "category": "lack-of-slippage-control"
+      }
+    ],
+    "bad-k-value-verification": [
+      {
+        "date": "20231115",
+        "name": "LinkDAO",
+        "category": "bad-k-value-verification"
+      }
+    ],
+    "instant-rewards-unlocked": [
+      {
+        "date": "20231114",
+        "name": "OKC Project",
+        "category": "instant-rewards-unlocked"
+      }
+    ],
+    "lack-of-msgsender-address-verification": [
+      {
+        "date": "20231106",
+        "name": "TrustPad",
+        "category": "lack-of-msgsender-address-verification"
+      }
+    ],
+    "deflationary-token-attack": [
+      {
+        "date": "20231102",
+        "name": "3913Token",
+        "category": "deflationary-token-attack"
+      }
+    ],
+    "precission-loss-vulnerability": [
+      {
+        "date": "20231101",
+        "name": "OnyxProtocol",
+        "category": "precission-loss-vulnerability"
+      }
+    ],
+    "div-precision-loss": [
+      {
+        "date": "20231018",
+        "name": "HopeLend",
+        "category": "div-precision-loss"
+      }
+    ],
+    "parameter-manipulation": [
+      {
+        "date": "20230911",
+        "name": "0x0DEX",
+        "category": "parameter-manipulation"
+      }
+    ],
+    "rounding-error--business-logic-flaw": [
+      {
+        "date": "20230827",
+        "name": "Balancer",
+        "category": "rounding-error--business-logic-flaw"
+      }
+    ],
+    "flawed-price-calculation": [
+      {
+        "date": "20230826",
+        "name": "SVT",
+        "category": "flawed-price-calculation"
+      }
+    ],
+    "fault-logic": [
+      {
+        "date": "20230802",
+        "name": "Uwerx",
+        "category": "fault-logic"
+      }
+    ],
+    "vyper-compiler-bug--reentrancy": [
+      {
+        "date": "20230730",
+        "name": "Curve",
+        "category": "vyper-compiler-bug--reentrancy"
+      }
+    ],
+    "signature-replay": [
+      {
+        "date": "20230723",
+        "name": "MintoFinance",
+        "category": "signature-replay"
+      }
+    ],
+    "read-only-reentrancy--misconfiguration": [
+      {
+        "date": "20230721",
+        "name": "ConicFinance",
+        "category": "read-only-reentrancy--misconfiguration"
+      }
+    ],
+    "invalid-emergency-withdraw-mechanism": [
+      {
+        "date": "20230718",
+        "name": "BNO",
+        "category": "invalid-emergency-withdraw-mechanism"
+      }
+    ],
+    "twap-oracle-manipulation": [
+      {
+        "date": "20230711",
+        "name": "RodeoFinance",
+        "category": "twap-oracle-manipulation"
+      }
+    ],
+    "v3migrator-exploit": [
+      {
+        "date": "20230630",
+        "name": "Biswap",
+        "category": "v3migrator-exploit"
+      }
+    ],
+    "manipulation-of-prices-using-flashloan": [
+      {
+        "date": "20230628",
+        "name": "Themis",
+        "category": "manipulation-of-prices-using-flashloan"
+      }
+    ],
+    "business-loigc-flaw": [
+      {
+        "date": "20230627",
+        "name": "UnverifiedContr_9ad32",
+        "category": "business-loigc-flaw"
+      }
+    ],
+    "reflection-tokens": [
+      {
+        "date": "20230621",
+        "name": "BUNN",
+        "category": "reflection-tokens"
+      }
+    ],
+    "incorrect-handling-of-permissions": [
+      {
+        "date": "20230618",
+        "name": "ARA",
+        "category": "incorrect-handling-of-permissions"
+      }
+    ],
+    "uniswap-skim-token-balance-attack": [
+      {
+        "date": "20230615",
+        "name": "CFC",
+        "category": "uniswap-skim-token-balance-attack"
+      }
+    ],
+    "manipulation-of-funds-through-fluctuations-in-the-amount-of-exchangeable-assets": [
+      {
+        "date": "20230607",
+        "name": "CompounderFinance",
+        "category": "manipulation-of-funds-through-fluctuations-in-the-amount-of-exchangeable-assets"
+      }
+    ],
+    "unverified-contract-wrong-approval": [
+      {
+        "date": "20230602",
+        "name": "NST SimpleSwap",
+        "category": "unverified-contract-wrong-approval"
+      }
+    ],
+    "flashloan-attack-and-smart-contract-vulnerability": [
+      {
+        "date": "20230601",
+        "name": "DDCoin",
+        "category": "flashloan-attack-and-smart-contract-vulnerability"
+      }
+    ],
+    "calculation-issues-during-liquidity-migration": [
+      {
+        "date": "20230601",
+        "name": "Cellframenet",
+        "category": "calculation-issues-during-liquidity-migration"
+      }
+    ],
+    "protocol-specific-price-manipulation": [
+      {
+        "date": "20230529",
+        "name": "Jimbo",
+        "category": "protocol-specific-price-manipulation"
+      }
+    ],
+    "wrong-balance-check": [
+      {
+        "date": "20230529",
+        "name": "FAPEN",
+        "category": "wrong-balance-check"
+      }
+    ],
+    "wrong-visibility-in-function": [
+      {
+        "date": "20230529",
+        "name": "NOON_NO",
+        "category": "wrong-visibility-in-function"
+      }
+    ],
+    "fee-machenism-exploitation": [
+      {
+        "date": "20230525",
+        "name": "GPT",
+        "category": "fee-machenism-exploitation"
+      }
+    ],
+    "improper-access-control-of-close-source-contract": [
+      {
+        "date": "20230524",
+        "name": "LocalTrade",
+        "category": "improper-access-control-of-close-source-contract"
+      }
+    ],
+    "outdated-global-variable": [
+      {
+        "date": "20230524",
+        "name": "CS",
+        "category": "outdated-global-variable"
+      }
+    ],
+    "lack-of-permission-control": [
+      {
+        "date": "20230514",
+        "name": "landNFT",
+        "category": "lack-of-permission-control"
+      }
+    ],
+    "reward-calculation-error": [
+      {
+        "date": "20230510",
+        "name": "SNK",
+        "category": "reward-calculation-error"
+      }
+    ],
+    "wrong-implemention": [
+      {
+        "date": "20230505",
+        "name": "DEI",
+        "category": "wrong-implemention"
+      }
+    ],
+    "error-k-value-attack": [
+      {
+        "date": "20230416",
+        "name": "Swapos V2",
+        "category": "error-k-value-attack"
+      }
+    ],
+    "unrestricted-approval": [
+      {
+        "date": "20230412",
+        "name": "MetaPoint",
+        "category": "unrestricted-approval"
+      }
+    ],
+    "yield-protocol-flaw": [
+      {
+        "date": "20230328",
+        "name": "THENA",
+        "category": "yield-protocol-flaw"
+      }
+    ],
+    "dbw--business-logic-flaw": [
+      {
+        "date": "20230325",
+        "name": "DBW",
+        "category": "dbw--business-logic-flaw"
+      }
+    ],
+    "flashloan--scaledbalanceof-manipulation": [
+      {
+        "date": "20230317",
+        "name": "ParaSpace NFT",
+        "category": "flashloan--scaledbalanceof-manipulation"
+      }
+    ],
+    "access-control--arbitrary-external-call": [
+      {
+        "date": "20230307",
+        "name": "Phoenix",
+        "category": "access-control--arbitrary-external-call"
+      }
+    ],
+    "balance-recalculation-bug": [
+      {
+        "date": "20230203",
+        "name": "Spherax USDs",
+        "category": "balance-recalculation-bug"
+      }
+    ],
+    "thoreumfinance-business-logic-flaw": [
+      {
+        "date": "20230119",
+        "name": "ThoreumFinance",
+        "category": "thoreumfinance-business-logic-flaw"
+      }
+    ],
+    "no-input-parameter-check": [
+      {
+        "date": "20230117",
+        "name": "OmniEstate",
+        "category": "no-input-parameter-check"
+      }
+    ],
+    "incorrect-parameter-setting": [
+      {
+        "date": "20230111",
+        "name": "UFDao",
+        "category": "incorrect-parameter-setting"
+      }
+    ],
+    "insufficient-validation--flashloan": [
+      {
+        "date": "20221230",
+        "name": "DFS",
+        "category": "insufficient-validation--flashloan"
+      }
+    ],
+    "insufficient-validation--reentrancy": [
+      {
+        "date": "20221229",
+        "name": "JAY",
+        "category": "insufficient-validation--reentrancy"
+      }
+    ],
+    "malicious-unlimted-minting-rugged": [
+      {
+        "date": "20221209",
+        "name": "NOVAToken",
+        "category": "malicious-unlimted-minting-rugged"
+      }
+    ],
+    "business-logic-flaw--flashloan-price-manipulation": [
+      {
+        "date": "20221207",
+        "name": "AES",
+        "category": "business-logic-flaw--flashloan-price-manipulation"
+      }
+    ],
+    "flashloan--price-manipulation": [
+      {
+        "date": "20221201",
+        "name": "APC",
+        "category": "flashloan--price-manipulation"
+      }
+    ],
+    "business-logic-flaw--access-control": [
+      {
+        "date": "20221129",
+        "name": "MBC & ZZSH",
+        "category": "business-logic-flaw--access-control"
+      }
+    ],
+    "protocol-token-incompatible": [
+      {
+        "date": "20221123",
+        "name": "NUM",
+        "category": "protocol-token-incompatible"
+      }
+    ],
+    "lack-of-permission-check": [
+      {
+        "date": "20221122",
+        "name": "AUR",
+        "category": "lack-of-permission-check"
+      }
+    ],
+    "price-caching-design-defect": [
+      {
+        "date": "20221108",
+        "name": "Kashi",
+        "category": "price-caching-design-defect"
+      }
+    ],
+    "liquidity-migration-exploit": [
+      {
+        "date": "20221027",
+        "name": "Team Finance",
+        "category": "liquidity-migration-exploit"
+      }
+    ],
+    "incorrect-signature-verification": [
+      {
+        "date": "20221019",
+        "name": "BEGO Token",
+        "category": "incorrect-signature-verification"
+      }
+    ],
+    "mevbot-a47b": [
+      {
+        "date": "20221014",
+        "name": "MEVBOT a47b",
+        "category": "mevbot-a47b"
+      }
+    ],
+    "flashloan-manipulate-price": [
+      {
+        "date": "20221012",
+        "name": "ATK",
+        "category": "flashloan-manipulate-price"
+      }
+    ],
+    "insufficient-access-control": [
+      {
+        "date": "20221011",
+        "name": "Templedao",
+        "category": "insufficient-access-control"
+      }
+    ],
+    "public-functioncall": [
+      {
+        "date": "20221010",
+        "name": "Carrot",
+        "category": "public-functioncall"
+      }
+    ],
+    "malicious-proposal-mint--transfer-ownership": [
+      {
+        "date": "20221009",
+        "name": "Xave Finance",
+        "category": "malicious-proposal-mint--transfer-ownership"
+      }
+    ],
+    "incorrect-owner-address-validation": [
+      {
+        "date": "20221002",
+        "name": "Transit Swap",
+        "category": "incorrect-owner-address-validation"
+      }
+    ],
+    "parameter-access-control": [
+      {
+        "date": "20221001",
+        "name": "BabySwap",
+        "category": "parameter-access-control"
+      }
+    ],
+    "badc0de": [
+      {
+        "date": "20220928",
+        "name": "MEVBOT Badc0de",
+        "category": "badc0de"
+      }
+    ],
+    "flashloans-attack": [
+      {
+        "date": "20220908",
+        "name": "NewFreeDAO",
+        "category": "flashloans-attack"
+      }
+    ],
+    "broken-access-control": [
+      {
+        "date": "20220908",
+        "name": "Ragnarok Online Invasion",
+        "category": "broken-access-control"
+      }
+    ],
+    "business-logic-flaw--missing-check-for-number-of-nft-to-mint": [
+      {
+        "date": "20220902",
+        "name": "Bad Guys by RPF",
+        "category": "business-logic-flaw--missing-check-for-number-of-nft-to-mint"
+      }
+    ],
+    "incorrect-logic-check": [
+      {
+        "date": "20220810",
+        "name": "XSTABLE Protocol",
+        "category": "incorrect-logic-check"
+      }
+    ],
+    "business-logic-flaw--incorrect-acceptable-merkle-root-checks": [
+      {
+        "date": "20220802",
+        "name": "Nomad Bridge",
+        "category": "business-logic-flaw--incorrect-acceptable-merkle-root-checks"
+      }
+    ],
+    "business-logic-flaw--lack-of-access-control-mechanism": [
+      {
+        "date": "20220801",
+        "name": "Reaper Farm",
+        "category": "business-logic-flaw--lack-of-access-control-mechanism"
+      }
+    ],
+    "business-logic-flaw--incorrect-recipient-balance-check-did-not-check-senderrecipient-in-transfer": [
+      {
+        "date": "20220725",
+        "name": "LPC",
+        "category": "business-logic-flaw--incorrect-recipient-balance-check-did-not-check-senderrecipient-in-transfer"
+      }
+    ],
+    "storage-collision--malicious-proposal": [
+      {
+        "date": "20220723",
+        "name": "Audius",
+        "category": "storage-collision--malicious-proposal"
+      }
+    ],
+    "optimism-nft-marketplace": [
+      {
+        "date": "20220701",
+        "name": "Quixotic - Optimism NFT Marketplace",
+        "category": "optimism-nft-marketplace"
+      }
+    ],
+    "infinite-number-of-loans": [
+      {
+        "date": "20220626",
+        "name": "XCarnival",
+        "category": "infinite-number-of-loans"
+      }
+    ],
+    "miscalculation-on-_spendallowance": [
+      {
+        "date": "20220618",
+        "name": "SNOOD",
+        "category": "miscalculation-on-_spendallowance"
+      }
+    ],
+    "wintermute": [
+      {
+        "date": "20220608",
+        "name": "Optimism - Wintermute",
+        "category": "wintermute"
+      }
+    ],
+    "malicious-proposal--price-oracle-manipulation": [
+      {
+        "date": "20220508",
+        "name": "Fortress Loans",
+        "category": "malicious-proposal--price-oracle-manipulation"
+      }
+    ],
+    "denial-of-service": [
+      {
+        "date": "20220423",
+        "name": "Akutar NFT",
+        "category": "denial-of-service"
+      }
+    ],
+    "dao--flashloan": [
+      {
+        "date": "20220416",
+        "name": "BeanstalkFarms",
+        "category": "dao--flashloan"
+      }
+    ],
+    "access-control--price-oracle-manipulation": [
+      {
+        "date": "20220415",
+        "name": "Rikkei Finance",
+        "category": "access-control--price-oracle-manipulation"
+      }
+    ],
+    "flashloan--token-migrate-flaw": [
+      {
+        "date": "20220409",
+        "name": "GYMNetwork",
+        "category": "flashloan--token-migrate-flaw"
+      }
+    ],
+    "custom-approval-logic": [
+      {
+        "date": "20220329",
+        "name": "Redacted Cartel",
+        "category": "custom-approval-logic"
+      }
+    ],
+    "bridges": [
+      {
+        "date": "20220320",
+        "name": "LI.FI",
+        "category": "bridges"
+      }
+    ],
+    "business-logic-in-mint": [
+      {
+        "date": "20220309",
+        "name": "Fantasm Finance",
+        "category": "business-logic-in-mint"
+      }
+    ],
+    "zero-fee": [
+      {
+        "date": "20220303",
+        "name": "TreasureDAO",
+        "category": "zero-fee"
+      }
+    ],
+    "dao": [
+      {
+        "date": "20220214",
+        "name": "BuildFinance - DAO",
+        "category": "dao"
+      }
+    ],
+    "any-token-is-destroyed": [
+      {
+        "date": "20220204",
+        "name": "TecraSpace",
+        "category": "any-token-is-destroyed"
+      }
+    ],
+    "bridge-address0safetransferfrom-does-not-revert": [
+      {
+        "date": "20220128",
+        "name": "Qubit Finance",
+        "category": "bridge-address0safetransferfrom-does-not-revert"
+      }
+    ],
+    "insufficient-token-validation": [
+      {
+        "date": "20220118",
+        "name": "Multichain (Anyswap)",
+        "category": "insufficient-token-validation"
+      }
+    ],
+    "bad-access-controal": [
+      {
+        "date": "20210903",
+        "name": "DAO Maker",
+        "category": "bad-access-controal"
+      }
+    ],
+    "bridge-getting-around-modifier-through-cross-chain-message": [
+      {
+        "date": "20210811",
+        "name": "Poly Network",
+        "category": "bridge-getting-around-modifier-through-cross-chain-message"
+      }
+    ],
+    "i-lost-keys-and-minting-ii-vulnerable-emergencywithdraw": [
+      {
+        "date": "20210728",
+        "name": "Levyathan Finance",
+        "category": "i-lost-keys-and-minting-ii-vulnerable-emergencywithdraw"
+      }
+    ],
+    "subscription-incentive-mechanism": [
+      {
+        "date": "20210625",
+        "name": "xWin Finance",
+        "category": "subscription-incentive-mechanism"
+      }
+    ],
+    "doesnt-burn-shares": [
+      {
+        "date": "20210622",
+        "name": "Eleven Finance",
+        "category": "doesnt-burn-shares"
+      }
+    ],
+    "incorrect-calculation": [
+      {
+        "date": "20210603",
+        "name": "PancakeHunny",
+        "category": "incorrect-calculation"
+      }
+    ],
+    "mathematical-flaw--reentrancy": [
+      {
+        "date": "20210527",
+        "name": "BurgerSwap",
+        "category": "mathematical-flaw--reentrancy"
+      }
+    ],
+    "miscalculation": [
+      {
+        "date": "20210428",
+        "name": "Uranium",
+        "category": "miscalculation"
+      }
+    ],
+    "slippage-proection-absent": [
+      {
+        "date": "20210204",
+        "name": "Yearn YDai",
+        "category": "slippage-proection-absent"
+      }
+    ],
+    "incorrect-transfer": [
+      {
+        "date": "20200912",
+        "name": "bzx",
+        "category": "incorrect-transfer"
+      }
+    ],
+    "msgvalue-in-loop": [
+      {
+        "date": "20200804",
+        "name": "Opyn Protocol",
+        "category": "msgvalue-in-loop"
+      }
+    ],
+    "token-incompatible": [
+      {
+        "date": "20200628",
+        "name": "Balancer Protocol",
+        "category": "token-incompatible"
+      }
+    ],
+    "accidentally-killed-it": [
+      {
+        "date": "20171106",
+        "name": "Parity - 'Accidentally Killed It'",
+        "category": "accidentally-killed-it"
+      }
+    ],
+    "delegatecall-to-unprotected-initwallet": [
+      {
+        "date": "20170719",
+        "name": "Parity Multisig",
+        "category": "delegatecall-to-unprotected-initwallet"
+      }
+    ]
+  },
+  "incidents": [
+    {
+      "date": "20260310",
+      "name": "AlkemiEarn",
+      "category": "business-logic"
+    },
+    {
+      "date": "20260315",
+      "name": "Venus THE",
+      "category": "borrowbehalf--donation-attack"
+    },
+    {
+      "date": "20260302",
+      "name": "Curve LlamaLend",
+      "category": "share-price-manipulation"
+    },
+    {
+      "date": "20260222",
+      "name": "LAXO Token",
+      "category": "incorrect-burn-logic"
+    },
+    {
+      "date": "20260215",
+      "name": "Moonwell",
+      "category": "faulty-oracle"
+    },
+    {
+      "date": "20260120",
+      "name": "Makina",
+      "category": "price-oracle-manipulation"
+    },
+    {
+      "date": "20260120",
+      "name": "SynapLogic",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20260112",
+      "name": "MTToken",
+      "category": "incorrect-fee-logic"
+    },
+    {
+      "date": "20260110",
+      "name": "FutureSwap",
+      "category": "unit-mismatch"
+    },
+    {
+      "date": "20260109",
+      "name": "TRU",
+      "category": "overflow"
+    },
+    {
+      "date": "20260101",
+      "name": "PRXVT",
+      "category": "bussiness-logic-flaw"
+    },
+    {
+      "date": "20251201",
+      "name": "yETH",
+      "category": "unsafe-math"
+    },
+    {
+      "date": "20251110",
+      "name": "DRLVaultV3",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20251104",
+      "name": "Moonwell",
+      "category": "faulty-oracle"
+    },
+    {
+      "date": "20251103",
+      "name": "BalancerV2",
+      "category": "precision-loss"
+    },
+    {
+      "date": "20251020",
+      "name": "SharwaFinance",
+      "category": "post-insolvency-check"
+    },
+    {
+      "date": "20251007",
+      "name": "TokenHolder",
+      "category": "access-control"
+    },
+    {
+      "date": "20251004",
+      "name": "MIMSpell3",
+      "category": "bypassed-insolvency-check"
+    },
+    {
+      "date": "20250918",
+      "name": "NGP",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250913",
+      "name": "Kame",
+      "category": "arbitary-external-call"
+    },
+    {
+      "date": "20250830",
+      "name": "EverValueCoin",
+      "category": "arbitrage"
+    },
+    {
+      "date": "20250831",
+      "name": "Hexotic",
+      "category": "incorrect-input-validation"
+    },
+    {
+      "date": "20250827",
+      "name": "0xf340",
+      "category": "access-control"
+    },
+    {
+      "date": "20250823",
+      "name": "ABCCApp",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20250820",
+      "name": "MulticallWithXera",
+      "category": "access-control"
+    },
+    {
+      "date": "20250820",
+      "name": "0x8d2e",
+      "category": "access-control"
+    },
+    {
+      "date": "20250816",
+      "name": "d3xai",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250815",
+      "name": "PDZ",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250815",
+      "name": "SizeCredit",
+      "category": "access-control"
+    },
+    {
+      "date": "20250813",
+      "name": "YuliAI",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250813",
+      "name": "coinbase",
+      "category": "misconfiguration"
+    },
+    {
+      "date": "20250813",
+      "name": "Grizzifi",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250812",
+      "name": "Bebop",
+      "category": "arbitrary-user-input"
+    },
+    {
+      "date": "20250811",
+      "name": "WXC",
+      "category": "incorrect-token-burn-mechanism"
+    },
+    {
+      "date": "20250728",
+      "name": "SuperRare",
+      "category": "access-control"
+    },
+    {
+      "date": "20250726",
+      "name": "MulticallWithETH",
+      "category": "arbitrary-call"
+    },
+    {
+      "date": "20250724",
+      "name": "SWAPPStaking",
+      "category": "incorrect-reward-calculation"
+    },
+    {
+      "date": "20250720",
+      "name": "Stepp2p",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250716",
+      "name": "VDS",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250709",
+      "name": "GMX",
+      "category": "share-price-manipulation"
+    },
+    {
+      "date": "20250705",
+      "name": "Unverified_54cd",
+      "category": "access-control"
+    },
+    {
+      "date": "20250705",
+      "name": "RANT",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250702",
+      "name": "FPC",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250629",
+      "name": "Stead",
+      "category": "access-control"
+    },
+    {
+      "date": "20250626",
+      "name": "ResupplyFi",
+      "category": "share-price-manipulation"
+    },
+    {
+      "date": "20250625",
+      "name": "Unverified_b5cb",
+      "category": "access-control"
+    },
+    {
+      "date": "20250623",
+      "name": "GradientMakerPool",
+      "category": "price-oracle-manipulation"
+    },
+    {
+      "date": "20250620",
+      "name": "Gangsterfinance",
+      "category": "incorrect-dividends"
+    },
+    {
+      "date": "20250619",
+      "name": "BankrollStack",
+      "category": "incorrect-dividends-calculation"
+    },
+    {
+      "date": "20250619",
+      "name": "BankrollNetwork",
+      "category": "incorrect-dividends-calculation"
+    },
+    {
+      "date": "20250617",
+      "name": "MetaPool",
+      "category": "access-control"
+    },
+    {
+      "date": "20250612",
+      "name": "AAVEBoost",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250610",
+      "name": "unverified_8490",
+      "category": "access-control"
+    },
+    {
+      "date": "20250528",
+      "name": "Corkprotocol",
+      "category": "access-control"
+    },
+    {
+      "date": "20250527",
+      "name": "UsualMoney",
+      "category": "arbitrage"
+    },
+    {
+      "date": "20250526",
+      "name": "YDT",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250524",
+      "name": "RICE",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20250520",
+      "name": "IRYSAI",
+      "category": "rug-pull"
+    },
+    {
+      "date": "20250518",
+      "name": "KRC",
+      "category": "deflationary-token"
+    },
+    {
+      "date": "20250514",
+      "name": "Unwarp",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20250511",
+      "name": "MBUToken",
+      "category": "price-manipulation-not-confirmed"
+    },
+    {
+      "date": "20250509",
+      "name": "Nalakuvara_LotteryTicket50",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250426",
+      "name": "Lifeprotocol",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250426",
+      "name": "ImpermaxV3",
+      "category": "flashloan-price-oracle-manipulation"
+    },
+    {
+      "date": "20250416",
+      "name": "Roar",
+      "category": "rug-pull"
+    },
+    {
+      "date": "20250408",
+      "name": "Laundromat",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250404",
+      "name": "AIRWA",
+      "category": "access-control"
+    },
+    {
+      "date": "20250418",
+      "name": "BTNFT",
+      "category": "claim-rewards-without-protection"
+    },
+    {
+      "date": "20250416",
+      "name": "YVToken",
+      "category": "not-slippage-protection"
+    },
+    {
+      "date": "20250411",
+      "name": "Unverified 0x6077",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20250330",
+      "name": "LeverageSIR",
+      "category": "storage-slot1-collision"
+    },
+    {
+      "date": "20250328",
+      "name": "Alkimiya_IO",
+      "category": "unsafecast"
+    },
+    {
+      "date": "20250327",
+      "name": "YziAIToken",
+      "category": "rug-pull"
+    },
+    {
+      "date": "20250320",
+      "name": "BBXToken",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250318",
+      "name": "DCFToken",
+      "category": "lack-of-slippage-protection"
+    },
+    {
+      "date": "20250316",
+      "name": "wKeyDAO",
+      "category": "unprotected-function"
+    },
+    {
+      "date": "20250314",
+      "name": "H2O",
+      "category": "weak-random-mint"
+    },
+    {
+      "date": "20250311",
+      "name": "DUCKVADER",
+      "category": "free-mint-bug"
+    },
+    {
+      "date": "20250307",
+      "name": "UNI",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250307",
+      "name": "SBRToken",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250305",
+      "name": "1inch Fusion V1 Settlement",
+      "category": "arbitrary-yul-calldata"
+    },
+    {
+      "date": "20250304",
+      "name": "Pump",
+      "category": "not-slippage-protection"
+    },
+    {
+      "date": "20250227",
+      "name": "Venus_ZKSync",
+      "category": "donation-attack"
+    },
+    {
+      "date": "20250223",
+      "name": "HegicOptions",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20250222",
+      "name": "Unverified_35bc",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20250221",
+      "name": "StepHeroNFTs",
+      "category": "reentrancy-on-sell-nft"
+    },
+    {
+      "date": "20250221",
+      "name": "Bybit",
+      "category": "phishing-attack"
+    },
+    {
+      "date": "20250215",
+      "name": "unverified_d4f1",
+      "category": "access-control"
+    },
+    {
+      "date": "20250211",
+      "name": "FourMeme",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250208",
+      "name": "Peapods Finance",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250123",
+      "name": "ODOS",
+      "category": "invalid-signature-verification"
+    },
+    {
+      "date": "20250121",
+      "name": "Ast",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250118",
+      "name": "Paribus",
+      "category": "bad-oracle"
+    },
+    {
+      "date": "20250114",
+      "name": "IdolsNFT",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250113",
+      "name": "Mosca2",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250112",
+      "name": "Unilend",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250111",
+      "name": "RoulettePotV2",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20250110",
+      "name": "JPulsepot",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250108",
+      "name": "HORS",
+      "category": "access-control"
+    },
+    {
+      "date": "20250108",
+      "name": "LPMine",
+      "category": "incorrect-reward-calculation"
+    },
+    {
+      "date": "20250107",
+      "name": "IPC",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250106",
+      "name": "Mosca",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20250104",
+      "name": "SorStaking",
+      "category": "incorrect-reward-calculation"
+    },
+    {
+      "date": "20250104",
+      "name": "98#Token",
+      "category": "unprotected-public-function"
+    },
+    {
+      "date": "20250101",
+      "name": "LAURAToken",
+      "category": "pair-balance-manipulation"
+    },
+    {
+      "date": "20241227",
+      "name": "Bizness",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20241223",
+      "name": "Moonhacker",
+      "category": "improper-input-validation"
+    },
+    {
+      "date": "20241218",
+      "name": "Slurpy",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20241216",
+      "name": "BTC24H",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20241214",
+      "name": "JHY",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20241210",
+      "name": "LABUBUToken",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20241210",
+      "name": "CloberDEX",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20241203",
+      "name": "Pledge",
+      "category": "access-control"
+    },
+    {
+      "date": "20241126",
+      "name": "NFTG",
+      "category": "access-control"
+    },
+    {
+      "date": "20241124",
+      "name": "Proxy_b7e1",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20241123",
+      "name": "Ak1111",
+      "category": "access-control"
+    },
+    {
+      "date": "20241121",
+      "name": "Matez",
+      "category": "integer-truncation"
+    },
+    {
+      "date": "20241120",
+      "name": "MainnetSettler",
+      "category": "access-control"
+    },
+    {
+      "date": "20241119",
+      "name": "PolterFinance",
+      "category": "flashloan-attack"
+    },
+    {
+      "date": "20241117",
+      "name": "MFT",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20241114",
+      "name": "vETH",
+      "category": "vulnerable-price-dependency"
+    },
+    {
+      "date": "20241111",
+      "name": "DeltaPrime",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20241109",
+      "name": "X319",
+      "category": "access-control"
+    },
+    {
+      "date": "20241107",
+      "name": "ChiSale",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20241107",
+      "name": "CoW",
+      "category": "access-control"
+    },
+    {
+      "date": "20241107",
+      "name": "UniV2",
+      "category": "rug-pull"
+    },
+    {
+      "date": "20241105",
+      "name": "RPP",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20241029",
+      "name": "BUBAI",
+      "category": "rug-pull"
+    },
+    {
+      "date": "20241026",
+      "name": "CompoundFork",
+      "category": "flashloan-attack"
+    },
+    {
+      "date": "20241022",
+      "name": "Erc20transfer",
+      "category": "access-control"
+    },
+    {
+      "date": "20241022",
+      "name": "VISTA",
+      "category": "flashmint-receive-error"
+    },
+    {
+      "date": "20241013",
+      "name": "MorphoBlue",
+      "category": "overpriced-asset-in-oracle"
+    },
+    {
+      "date": "20241011",
+      "name": "P719Token",
+      "category": "price-manipulation-inflate-attack"
+    },
+    {
+      "date": "20241006",
+      "name": "HYDT",
+      "category": "oracle-price-manipulation"
+    },
+    {
+      "date": "20241006",
+      "name": "SASHAToken",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20241005",
+      "name": "AIZPTToken",
+      "category": "wrong-price-calculation"
+    },
+    {
+      "date": "20241002",
+      "name": "LavaLending",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20241001",
+      "name": "FireToken",
+      "category": "pair-manipulation-with-transfer-function"
+    },
+    {
+      "date": "20240926",
+      "name": "OnyxDAO",
+      "category": "fake-market"
+    },
+    {
+      "date": "20240926",
+      "name": "Bedrock_DeFi",
+      "category": "swap-eth/btc-1/1-in-mint-function"
+    },
+    {
+      "date": "20240924",
+      "name": "MARA",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240923",
+      "name": "PestoToken",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240923",
+      "name": "Bankroll_Network",
+      "category": "incorrect-input-validation"
+    },
+    {
+      "date": "20240920",
+      "name": "DOGGO",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240920",
+      "name": "Shezmu",
+      "category": "access-control"
+    },
+    {
+      "date": "20240918",
+      "name": "Unverified_766a",
+      "category": "access-control"
+    },
+    {
+      "date": "20240915",
+      "name": "WXETA",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240913",
+      "name": "Unverified_5697",
+      "category": "access-control"
+    },
+    {
+      "date": "20240913",
+      "name": "OTSeaStaking",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240912",
+      "name": "Unverified_03f9",
+      "category": "access-control"
+    },
+    {
+      "date": "20240911",
+      "name": "INUMI",
+      "category": "access-control"
+    },
+    {
+      "date": "20240911",
+      "name": "INUMI_db27",
+      "category": "access-control"
+    },
+    {
+      "date": "20240911",
+      "name": "AIRBTC",
+      "category": "access-control"
+    },
+    {
+      "date": "20240910",
+      "name": "Caterpillar_Coin_CUT",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240905",
+      "name": "Unverified_a89f",
+      "category": "access-control"
+    },
+    {
+      "date": "20240905",
+      "name": "PLN",
+      "category": "access-control"
+    },
+    {
+      "date": "20240905",
+      "name": "HANAToken",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240904",
+      "name": "Unverified_16d0",
+      "category": "access-control"
+    },
+    {
+      "date": "20240903",
+      "name": "Penpiexyz_io",
+      "category": "reentrancy-and-reward-manipulation"
+    },
+    {
+      "date": "20240902",
+      "name": "Pythia",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240828",
+      "name": "Unverified_667d",
+      "category": "access-control"
+    },
+    {
+      "date": "20240828",
+      "name": "AAVE",
+      "category": "arbitrary-call-error"
+    },
+    {
+      "date": "20240820",
+      "name": "COCO",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240816",
+      "name": "Zenterest",
+      "category": "price-out-of-date"
+    },
+    {
+      "date": "20240816",
+      "name": "OMPxContract",
+      "category": "flashloan"
+    },
+    {
+      "date": "20240814",
+      "name": "YodlRouter",
+      "category": "arbitrary-call"
+    },
+    {
+      "date": "20240813",
+      "name": "VOW",
+      "category": "misconfiguration"
+    },
+    {
+      "date": "20240812",
+      "name": "iVest",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240806",
+      "name": "Novax",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240801",
+      "name": "Convergence",
+      "category": "incorrect-input-validation"
+    },
+    {
+      "date": "20240724",
+      "name": "Spectra_finance",
+      "category": "incorrect-input-validation"
+    },
+    {
+      "date": "20240723",
+      "name": "MEVbot_0xdd7c",
+      "category": "incorrect-input-validation"
+    },
+    {
+      "date": "20250717",
+      "name": "WETC",
+      "category": "incorrect-burn-logic"
+    },
+    {
+      "date": "20240716",
+      "name": "Lifiprotocol",
+      "category": "incorrect-input-validation"
+    },
+    {
+      "date": "20240714",
+      "name": "Minterest",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240712",
+      "name": "DoughFina",
+      "category": "incorrect-input-validation"
+    },
+    {
+      "date": "20240711",
+      "name": "SBT",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240711",
+      "name": "GAX",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240708",
+      "name": "LW",
+      "category": "integer-underflow"
+    },
+    {
+      "date": "20240705",
+      "name": "DeFiPlaza",
+      "category": "loss-of-precision"
+    },
+    {
+      "date": "20240703",
+      "name": "UnverifiedContr_0x452E25",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240702",
+      "name": "MRP",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240628",
+      "name": "Will",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240627",
+      "name": "APEMAGA",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240618",
+      "name": "INcufi",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240617",
+      "name": "Dyson_money",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240616",
+      "name": "WIFCOIN_ETH",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240611",
+      "name": "Crb2",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240611",
+      "name": "JokInTheBox",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240610",
+      "name": "UwuLend - Price Manipulation",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240610",
+      "name": "Bazaar",
+      "category": "insufficient-permission-check"
+    },
+    {
+      "date": "20240608",
+      "name": "YYStoken",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240606",
+      "name": "SteamSwap",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240606",
+      "name": "MineSTM",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240604",
+      "name": "NCD",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240601",
+      "name": "VeloCore",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240531",
+      "name": "Liquiditytokens",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240531",
+      "name": "MixedSwapRouter",
+      "category": "arbitrary-call"
+    },
+    {
+      "date": "20240529",
+      "name": "SCROLL",
+      "category": "integer-underflow"
+    },
+    {
+      "date": "20240529",
+      "name": "MetaDragon",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240528",
+      "name": "Tradeonorion",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240528",
+      "name": "EXcommunity",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240527",
+      "name": "RedKeysCoin",
+      "category": "weak-rng"
+    },
+    {
+      "date": "20240526",
+      "name": "NORMIE",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240522",
+      "name": "Burner",
+      "category": "sandwich-ack"
+    },
+    {
+      "date": "20240516",
+      "name": "TCH",
+      "category": "signature-malleability-vulnerability"
+    },
+    {
+      "date": "20240514",
+      "name": "Sonne Finance",
+      "category": "precision-loss"
+    },
+    {
+      "date": "20240514",
+      "name": "PredyFinance",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240512",
+      "name": "TGC",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240510",
+      "name": "GFOX",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240510",
+      "name": "TSURU",
+      "category": "insufficient-validation"
+    },
+    {
+      "date": "20240508",
+      "name": "GPU",
+      "category": "self-transfer"
+    },
+    {
+      "date": "20240507",
+      "name": "SATURN",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240506",
+      "name": "OSN",
+      "category": "reward-distribution-problem"
+    },
+    {
+      "date": "20240430",
+      "name": "Yield",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240430",
+      "name": "PikeFinance",
+      "category": "uninitialized-proxy"
+    },
+    {
+      "date": "20240427",
+      "name": "BNBX",
+      "category": "precision-loss"
+    },
+    {
+      "date": "20240425",
+      "name": "NGFS",
+      "category": "bad-access-control"
+    },
+    {
+      "date": "20240424",
+      "name": "XBridge",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240424",
+      "name": "YIEDL",
+      "category": "input-validation"
+    },
+    {
+      "date": "20240422",
+      "name": "Z123",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240420",
+      "name": "Rico",
+      "category": "arbitrary-call"
+    },
+    {
+      "date": "20240419",
+      "name": "HedgeyFinance",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240417",
+      "name": "UnverifiedContr_0x00C409",
+      "category": "unverified-external-call"
+    },
+    {
+      "date": "20240416",
+      "name": "SATX",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240416",
+      "name": "MARS_DEFI",
+      "category": "bad-reflection"
+    },
+    {
+      "date": "20240415",
+      "name": "GFA",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240415",
+      "name": "ChaingeFinance",
+      "category": "arbitrary-external-call"
+    },
+    {
+      "date": "20240414",
+      "name": "Hackathon",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240412",
+      "name": "FIL314",
+      "category": "insufficient-validation-and-price-manipulation"
+    },
+    {
+      "date": "20240412",
+      "name": "SumerMoney",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240412",
+      "name": "GROKD",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240410",
+      "name": "BigBangSwap",
+      "category": "precision-loss"
+    },
+    {
+      "date": "20240409",
+      "name": "UPS",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240408",
+      "name": "SQUID",
+      "category": "sandwich-attack"
+    },
+    {
+      "date": "20240404",
+      "name": "WSM",
+      "category": "manipulating-price"
+    },
+    {
+      "date": "20240402",
+      "name": "HoppyFrogERC",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240401",
+      "name": "ATM",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240401",
+      "name": "OpenLeverage",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240329",
+      "name": "ETHFIN",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240329",
+      "name": "PrismaFi",
+      "category": "insufficient-validation"
+    },
+    {
+      "date": "20240328",
+      "name": "LavaLending",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240325",
+      "name": "ZongZi",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240314",
+      "name": "ARK",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240323",
+      "name": "CGT",
+      "category": "incorrect-access-control"
+    },
+    {
+      "date": "20240321",
+      "name": "SSS",
+      "category": "token-balance-doubles-on-transfer-to-self"
+    },
+    {
+      "date": "20240320",
+      "name": "Paraswap",
+      "category": "incorrect-access-control"
+    },
+    {
+      "date": "20240314",
+      "name": "MO",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240313",
+      "name": "IT",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240312",
+      "name": "BBT",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240311",
+      "name": "Binemon",
+      "category": "precission-loss"
+    },
+    {
+      "date": "20240309",
+      "name": "Juice",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240309",
+      "name": "UnizenIO",
+      "category": "unverified-external-call"
+    },
+    {
+      "date": "20240307",
+      "name": "GHT",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240306",
+      "name": "ALP",
+      "category": "public-internal-function"
+    },
+    {
+      "date": "20240306",
+      "name": "TGBS",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240305",
+      "name": "Woofi",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240228",
+      "name": "Seneca",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20240228",
+      "name": "SMOOFSStaking",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240223",
+      "name": "Zoomer",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240223",
+      "name": "CompoundUni",
+      "category": "oracle-bad-price"
+    },
+    {
+      "date": "20240223",
+      "name": "BlueberryProtocol",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20240222",
+      "name": "SwarmMarkets",
+      "category": "lack-of-validation"
+    },
+    {
+      "date": "20240221",
+      "name": "DeezNutz404",
+      "category": "lack-of-validation"
+    },
+    {
+      "date": "20240221",
+      "name": "GAIN",
+      "category": "bad-function-implementation"
+    },
+    {
+      "date": "20240220",
+      "name": "EGGX",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240219",
+      "name": "RuggedArt",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240216",
+      "name": "ParticleTrade",
+      "category": "lack-of-validation-data"
+    },
+    {
+      "date": "20240215",
+      "name": "DualPools",
+      "category": "precision-truncation"
+    },
+    {
+      "date": "20240215",
+      "name": "Babyloogn",
+      "category": "lack-of-validation"
+    },
+    {
+      "date": "20240215",
+      "name": "Miner",
+      "category": "lack-of-validation-dst-address"
+    },
+    {
+      "date": "20240213",
+      "name": "MINER BSC",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240211",
+      "name": "Game",
+      "category": "reentrancy--business-logic-flaw"
+    },
+    {
+      "date": "20240210",
+      "name": "FILX DN404",
+      "category": "access-control"
+    },
+    {
+      "date": "20240208",
+      "name": "Pandora404",
+      "category": "interger-underflow"
+    },
+    {
+      "date": "20240205",
+      "name": "BurnsDefi",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240202",
+      "name": "ADC",
+      "category": "incorrect-access-control"
+    },
+    {
+      "date": "20240201",
+      "name": "AffineDeFi",
+      "category": "lack-of-validation-userdata"
+    },
+    {
+      "date": "20240130",
+      "name": "XSIJ",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240130",
+      "name": "MIMSpell",
+      "category": "precission-loss"
+    },
+    {
+      "date": "20240129",
+      "name": "PeapodsFinance",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240128",
+      "name": "BarleyFinance",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240127",
+      "name": "CitadelFinance",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240125",
+      "name": "NBLGAME",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20240122",
+      "name": "DAO_SoulMate",
+      "category": "incorrect-access-control"
+    },
+    {
+      "date": "20240117",
+      "name": "BmiZapper",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20240117",
+      "name": "SocketGateway",
+      "category": "lack-of-calldata-validation"
+    },
+    {
+      "date": "20240115",
+      "name": "Shell_MEV_0xa898",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240112",
+      "name": "WiseLending",
+      "category": "bad-healthfactor-check"
+    },
+    {
+      "date": "20240110",
+      "name": "Freedom",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20240110",
+      "name": "LQDX Alert",
+      "category": "unauthorized-transferfrom"
+    },
+    {
+      "date": "20240104",
+      "name": "Gamma",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20240102",
+      "name": "MIC",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20240102",
+      "name": "RadiantCapital",
+      "category": "loss-of-precision"
+    },
+    {
+      "date": "20240101",
+      "name": "OrbitChain",
+      "category": "incorrect-input-validation"
+    },
+    {
+      "date": "20231231",
+      "name": "Channels BUSD&USDC",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231230",
+      "name": "ChannelsFinance",
+      "category": "compoundv2-inflation-attack"
+    },
+    {
+      "date": "20231228",
+      "name": "CCV",
+      "category": "precision-loss"
+    },
+    {
+      "date": "20231228",
+      "name": "DominoTT",
+      "category": "precision-loss"
+    },
+    {
+      "date": "20231225",
+      "name": "Telcoin",
+      "category": "storage-collision"
+    },
+    {
+      "date": "20231222",
+      "name": "PineProtocol",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231220",
+      "name": "TransitFinance",
+      "category": "lack-of-validation-pool"
+    },
+    {
+      "date": "20231217",
+      "name": "Bob",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231217",
+      "name": "FloorProtocol",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231216",
+      "name": "GoodDollar",
+      "category": "lack-of-input-validation--reentrancy"
+    },
+    {
+      "date": "20231216",
+      "name": "KEST",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231216",
+      "name": "NFTTrader",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20231214",
+      "name": "PHIL",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231213",
+      "name": "HYPR",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231211",
+      "name": "GoodCompound",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231209",
+      "name": "BCT",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231207",
+      "name": "HNet",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231206",
+      "name": "TIME",
+      "category": "arbitrary-address-spoofing-attack"
+    },
+    {
+      "date": "20231206",
+      "name": "ElephantStatus",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231205",
+      "name": "MAMO",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231205",
+      "name": "BEARNDAO",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231202",
+      "name": "bZxProtocol",
+      "category": "inflation-attack"
+    },
+    {
+      "date": "20231201",
+      "name": "UnverifiedContr_0x431abb",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231130",
+      "name": "EEE",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231130",
+      "name": "CAROLProtocol",
+      "category": "price-manipulation-via-reentrancy"
+    },
+    {
+      "date": "20231129",
+      "name": "Burntbubba",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231129",
+      "name": "AIS",
+      "category": "access-control"
+    },
+    {
+      "date": "20231128",
+      "name": "FiberRouter",
+      "category": "input-validation"
+    },
+    {
+      "date": "20231125",
+      "name": "MetaLend",
+      "category": "compoundv2-inflation-attack"
+    },
+    {
+      "date": "20231125",
+      "name": "TheNFTV2",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20231122",
+      "name": "KyberSwap",
+      "category": "precision-loss"
+    },
+    {
+      "date": "20231117",
+      "name": "Token8633_9419",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231117",
+      "name": "ShibaToken",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231116",
+      "name": "WECO",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231115",
+      "name": "EHX",
+      "category": "lack-of-slippage-control"
+    },
+    {
+      "date": "20231115",
+      "name": "XAI",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231115",
+      "name": "LinkDAO",
+      "category": "bad-k-value-verification"
+    },
+    {
+      "date": "20231114",
+      "name": "OKC Project",
+      "category": "instant-rewards-unlocked"
+    },
+    {
+      "date": "20231112",
+      "name": "MEV_0x8c2d",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20231112",
+      "name": "MEV_0xa247",
+      "category": "incorrect-access-control"
+    },
+    {
+      "date": "20231111",
+      "name": "Mahalend",
+      "category": "donate-inflation-exchangerate--rounding-error"
+    },
+    {
+      "date": "20231110",
+      "name": "Raft_fi",
+      "category": "donate-inflation-exchangerate--rounding-error"
+    },
+    {
+      "date": "20231110",
+      "name": "GrokToken",
+      "category": "lack-of-slippage-protection"
+    },
+    {
+      "date": "20231107",
+      "name": "RBalancer",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231107",
+      "name": "MEVbot",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20231106",
+      "name": "TrustPad",
+      "category": "lack-of-msgsender-address-verification"
+    },
+    {
+      "date": "20231106",
+      "name": "TheStandard_io",
+      "category": "lack-of-slippage-protection"
+    },
+    {
+      "date": "20231106",
+      "name": "KR",
+      "category": "precission-loss"
+    },
+    {
+      "date": "20231102",
+      "name": "BRAND",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20231102",
+      "name": "3913Token",
+      "category": "deflationary-token-attack"
+    },
+    {
+      "date": "20231101",
+      "name": "SwampFinance",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231101",
+      "name": "OnyxProtocol",
+      "category": "precission-loss-vulnerability"
+    },
+    {
+      "date": "20231031",
+      "name": "UniBotRouter",
+      "category": "arbitrary-external-call"
+    },
+    {
+      "date": "20231030",
+      "name": "LaEeb",
+      "category": "lack-slippage-protection"
+    },
+    {
+      "date": "20231028",
+      "name": "AstridProtocol",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231024",
+      "name": "MaestroRouter2",
+      "category": "arbitrary-external-call"
+    },
+    {
+      "date": "20231022",
+      "name": "OpenLeverage",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231019",
+      "name": "kTAF",
+      "category": "compoundv2-inflation-attack"
+    },
+    {
+      "date": "20231018",
+      "name": "HopeLend",
+      "category": "div-precision-loss"
+    },
+    {
+      "date": "20231018",
+      "name": "MicDao",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231013",
+      "name": "BelugaDex",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231013",
+      "name": "WiseLending",
+      "category": "donate-inflation-exchangerate--rounding-error"
+    },
+    {
+      "date": "20231012",
+      "name": "Platypus",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231011",
+      "name": "BH",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20231008",
+      "name": "ZS",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20231008",
+      "name": "pSeudoEth",
+      "category": "pool-manipulation"
+    },
+    {
+      "date": "20231007",
+      "name": "StarsArena",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20231005",
+      "name": "DePayRouter",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230930",
+      "name": "FireBirdPair",
+      "category": "lack-slippage-protection"
+    },
+    {
+      "date": "20230929",
+      "name": "DEXRouter",
+      "category": "arbitrary-external-call"
+    },
+    {
+      "date": "20230926",
+      "name": "XSDWETHpool",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20230924",
+      "name": "KubSplit",
+      "category": "pool-manipulation"
+    },
+    {
+      "date": "20230921",
+      "name": "CEXISWAP",
+      "category": "incorrect-access-control"
+    },
+    {
+      "date": "20230916",
+      "name": "uniclyNFT",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20230911",
+      "name": "0x0DEX",
+      "category": "parameter-manipulation"
+    },
+    {
+      "date": "20230909",
+      "name": "BFCToken",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230908",
+      "name": "APIG",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230907",
+      "name": "HCT",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230905",
+      "name": "QuantumWN",
+      "category": "rebasing-logic-issue"
+    },
+    {
+      "date": "20230905",
+      "name": "JumpFarm",
+      "category": "rebasing-logic-issue"
+    },
+    {
+      "date": "20230905",
+      "name": "HeavensGate",
+      "category": "rebasing-logic-issue"
+    },
+    {
+      "date": "20230905",
+      "name": "FloorDAO",
+      "category": "rebasing-logic-issue"
+    },
+    {
+      "date": "20230902",
+      "name": "DAppSocial",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230829",
+      "name": "EAC",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230827",
+      "name": "Balancer",
+      "category": "rounding-error--business-logic-flaw"
+    },
+    {
+      "date": "20230826",
+      "name": "SVT",
+      "category": "flawed-price-calculation"
+    },
+    {
+      "date": "20230824",
+      "name": "GSS",
+      "category": "skim-token-balance"
+    },
+    {
+      "date": "20230821",
+      "name": "EHIVE",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230819",
+      "name": "BTC20",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230818",
+      "name": "ExactlyProtocol",
+      "category": "insufficient-validation"
+    },
+    {
+      "date": "20230814",
+      "name": "ZunamiProtocol",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230809",
+      "name": "EarningFram",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20230802",
+      "name": "CurveBurner",
+      "category": "lack-slippage-protection"
+    },
+    {
+      "date": "20230802",
+      "name": "Uwerx",
+      "category": "fault-logic"
+    },
+    {
+      "date": "20230801",
+      "name": "NeutraFinance",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230801",
+      "name": "LeetSwap",
+      "category": "access-control"
+    },
+    {
+      "date": "20230731",
+      "name": "GYMNET",
+      "category": "insufficient-validation"
+    },
+    {
+      "date": "20230730",
+      "name": "Curve",
+      "category": "vyper-compiler-bug--reentrancy"
+    },
+    {
+      "date": "20230726",
+      "name": "Carson",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230724",
+      "name": "Palmswap",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230723",
+      "name": "MintoFinance",
+      "category": "signature-replay"
+    },
+    {
+      "date": "20230722",
+      "name": "ConicFinance02",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230721",
+      "name": "ConicFinance",
+      "category": "read-only-reentrancy--misconfiguration"
+    },
+    {
+      "date": "20230721",
+      "name": "SUT",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230720",
+      "name": "Utopia",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230720",
+      "name": "FFIST",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230718",
+      "name": "APEDAO",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230718",
+      "name": "BNO",
+      "category": "invalid-emergency-withdraw-mechanism"
+    },
+    {
+      "date": "20230717",
+      "name": "NewFi",
+      "category": "lack-slippage-protection"
+    },
+    {
+      "date": "20230715",
+      "name": "USDTStakingContract28",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20230712",
+      "name": "Platypus",
+      "category": "bussiness-logic-flaw"
+    },
+    {
+      "date": "20230712",
+      "name": "WGPT",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230711",
+      "name": "RodeoFinance",
+      "category": "twap-oracle-manipulation"
+    },
+    {
+      "date": "20230711",
+      "name": "Libertify",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20230710",
+      "name": "ArcadiaFi",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20230708",
+      "name": "CIVNFT",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20230708",
+      "name": "Civfund",
+      "category": "lack-of-access-control"
+    },
+    {
+      "date": "20230707",
+      "name": "LUSD",
+      "category": "price-manipulation-attack"
+    },
+    {
+      "date": "20230704",
+      "name": "BambooIA",
+      "category": "price-manipulation-attack"
+    },
+    {
+      "date": "20230704",
+      "name": "BaoCommunity",
+      "category": "donate-inflation-exchangerate--rounding-error"
+    },
+    {
+      "date": "20230703",
+      "name": "AzukiDAO",
+      "category": "invalid-signature-verification"
+    },
+    {
+      "date": "20230630",
+      "name": "Biswap",
+      "category": "v3migrator-exploit"
+    },
+    {
+      "date": "20230630",
+      "name": "MyAi",
+      "category": "business-loigc"
+    },
+    {
+      "date": "20230628",
+      "name": "Themis",
+      "category": "manipulation-of-prices-using-flashloan"
+    },
+    {
+      "date": "20230627",
+      "name": "UnverifiedContr_9ad32",
+      "category": "business-loigc-flaw"
+    },
+    {
+      "date": "20230627",
+      "name": "STRAC",
+      "category": "business-loigc"
+    },
+    {
+      "date": "20230623",
+      "name": "SHIDO",
+      "category": "business-loigc"
+    },
+    {
+      "date": "20230621",
+      "name": "BabyDogeCoin02",
+      "category": "lack-slippage-protection"
+    },
+    {
+      "date": "20230621",
+      "name": "BUNN",
+      "category": "reflection-tokens"
+    },
+    {
+      "date": "20230620",
+      "name": "MIM",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20230619",
+      "name": "Contract_0x7657",
+      "category": "business-loigc"
+    },
+    {
+      "date": "20230618",
+      "name": "ARA",
+      "category": "incorrect-handling-of-permissions"
+    },
+    {
+      "date": "20230617",
+      "name": "MidasCapitalXYZ",
+      "category": "precision-loss"
+    },
+    {
+      "date": "20230617",
+      "name": "Pawnfi",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230615",
+      "name": "CFC",
+      "category": "uniswap-skim-token-balance-attack"
+    },
+    {
+      "date": "20230615",
+      "name": "DEPUSDT_LEVUSDC",
+      "category": "incorrect-access-control"
+    },
+    {
+      "date": "20230612",
+      "name": "Sturdy Finance",
+      "category": "read-only-reentrancy"
+    },
+    {
+      "date": "20230611",
+      "name": "SellToken04",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230607",
+      "name": "CompounderFinance",
+      "category": "manipulation-of-funds-through-fluctuations-in-the-amount-of-exchangeable-assets"
+    },
+    {
+      "date": "20230606",
+      "name": "VINU",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230606",
+      "name": "UN",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230602",
+      "name": "NST SimpleSwap",
+      "category": "unverified-contract-wrong-approval"
+    },
+    {
+      "date": "20230601",
+      "name": "DDCoin",
+      "category": "flashloan-attack-and-smart-contract-vulnerability"
+    },
+    {
+      "date": "20230601",
+      "name": "Cellframenet",
+      "category": "calculation-issues-during-liquidity-migration"
+    },
+    {
+      "date": "20230531",
+      "name": "ERC20TokenBank",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230529",
+      "name": "Jimbo",
+      "category": "protocol-specific-price-manipulation"
+    },
+    {
+      "date": "20230529",
+      "name": "BabyDogeCoin",
+      "category": "lack-slippage-protection"
+    },
+    {
+      "date": "20230529",
+      "name": "FAPEN",
+      "category": "wrong-balance-check"
+    },
+    {
+      "date": "20230529",
+      "name": "NOON_NO",
+      "category": "wrong-visibility-in-function"
+    },
+    {
+      "date": "20230525",
+      "name": "GPT",
+      "category": "fee-machenism-exploitation"
+    },
+    {
+      "date": "20230524",
+      "name": "LocalTrade",
+      "category": "improper-access-control-of-close-source-contract"
+    },
+    {
+      "date": "20230524",
+      "name": "CS",
+      "category": "outdated-global-variable"
+    },
+    {
+      "date": "20230523",
+      "name": "LFI",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230514",
+      "name": "landNFT",
+      "category": "lack-of-permission-control"
+    },
+    {
+      "date": "20230514",
+      "name": "SellToken03",
+      "category": "unchecked-user-input"
+    },
+    {
+      "date": "20230513",
+      "name": "Bitpaidio",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230513",
+      "name": "SellToken02",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230512",
+      "name": "LW",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20230511",
+      "name": "SellToken01",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230510",
+      "name": "SNK",
+      "category": "reward-calculation-error"
+    },
+    {
+      "date": "20230509",
+      "name": "MCC",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230509",
+      "name": "HODL",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230506",
+      "name": "Melo",
+      "category": "access-control"
+    },
+    {
+      "date": "20230505",
+      "name": "DEI",
+      "category": "wrong-implemention"
+    },
+    {
+      "date": "20230503",
+      "name": "NeverFall",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20230502",
+      "name": "Level",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230428",
+      "name": "0vix",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20230427",
+      "name": "SiloFinance",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230424",
+      "name": "Axioma",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230419",
+      "name": "OLIFE",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230416",
+      "name": "Swapos V2",
+      "category": "error-k-value-attack"
+    },
+    {
+      "date": "20230415",
+      "name": "HundredFinance",
+      "category": "donate-inflation-exchangerate--rounding-error"
+    },
+    {
+      "date": "20230413",
+      "name": "yearnFinance",
+      "category": "misconfiguration"
+    },
+    {
+      "date": "20230412",
+      "name": "MetaPoint",
+      "category": "unrestricted-approval"
+    },
+    {
+      "date": "20230411",
+      "name": "Paribus",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20230409",
+      "name": "SushiSwap",
+      "category": "unchecked-user-input"
+    },
+    {
+      "date": "20230405",
+      "name": "Sentiment",
+      "category": "read-only-reentrancy"
+    },
+    {
+      "date": "20230402",
+      "name": "Allbridge",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20230328",
+      "name": "THENA",
+      "category": "yield-protocol-flaw"
+    },
+    {
+      "date": "20230325",
+      "name": "DBW",
+      "category": "dbw--business-logic-flaw"
+    },
+    {
+      "date": "20230322",
+      "name": "BIGFI",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230317",
+      "name": "ParaSpace NFT",
+      "category": "flashloan--scaledbalanceof-manipulation"
+    },
+    {
+      "date": "20230315",
+      "name": "Poolz",
+      "category": "integer-overflow"
+    },
+    {
+      "date": "20230313",
+      "name": "EulerFinance",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230308",
+      "name": "DKP",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20230307",
+      "name": "Phoenix",
+      "category": "access-control--arbitrary-external-call"
+    },
+    {
+      "date": "20230227",
+      "name": "LaunchZone",
+      "category": "access-control"
+    },
+    {
+      "date": "20230227",
+      "name": "SwapX",
+      "category": "access-control"
+    },
+    {
+      "date": "20230224",
+      "name": "EFVault",
+      "category": "storage-collision"
+    },
+    {
+      "date": "20230222",
+      "name": "DYNA",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230218",
+      "name": "RevertFinance",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20230217",
+      "name": "Starlink",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230217",
+      "name": "Dexible",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20230217",
+      "name": "Platypusdefi",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230210",
+      "name": "Sheep Token",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230210",
+      "name": "dForce",
+      "category": "read-only-reentrancy"
+    },
+    {
+      "date": "20230207",
+      "name": "CowSwap",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20230206",
+      "name": "FDP Token",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230203",
+      "name": "Orion Protocol",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20230203",
+      "name": "Spherax USDs",
+      "category": "balance-recalculation-bug"
+    },
+    {
+      "date": "20230202",
+      "name": "BonqDAO",
+      "category": "price-oracle-manipulation"
+    },
+    {
+      "date": "20230130",
+      "name": "BEVO",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230126",
+      "name": "TomInu Token",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230119",
+      "name": "SHOCO Token",
+      "category": "reflection-token"
+    },
+    {
+      "date": "20230119",
+      "name": "ThoreumFinance",
+      "category": "thoreumfinance-business-logic-flaw"
+    },
+    {
+      "date": "20230118",
+      "name": "QTN Token",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230118",
+      "name": "UPS Token",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230117",
+      "name": "OmniEstate",
+      "category": "no-input-parameter-check"
+    },
+    {
+      "date": "20230116",
+      "name": "MidasCapital",
+      "category": "read-only-reentrancy"
+    },
+    {
+      "date": "20230111",
+      "name": "UFDao",
+      "category": "incorrect-parameter-setting"
+    },
+    {
+      "date": "20230111",
+      "name": "ROE",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20230110",
+      "name": "BRA",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20230103",
+      "name": "GDS",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20221230",
+      "name": "DFS",
+      "category": "insufficient-validation--flashloan"
+    },
+    {
+      "date": "20221229",
+      "name": "JAY",
+      "category": "insufficient-validation--reentrancy"
+    },
+    {
+      "date": "20221225",
+      "name": "Rubic",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20221223",
+      "name": "Defrost",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20221214",
+      "name": "Nmbplatform",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20221214",
+      "name": "FPR",
+      "category": "access-control"
+    },
+    {
+      "date": "20221213",
+      "name": "ElasticSwap",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20221212",
+      "name": "BGLD",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20221211",
+      "name": "Lodestar",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20221211",
+      "name": "MEVbot_0x28d9",
+      "category": "insufficient-validation"
+    },
+    {
+      "date": "20221210",
+      "name": "MUMUG",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20221210",
+      "name": "TIFIToken",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20221209",
+      "name": "NOVAToken",
+      "category": "malicious-unlimted-minting-rugged"
+    },
+    {
+      "date": "20221207",
+      "name": "AES",
+      "category": "business-logic-flaw--flashloan-price-manipulation"
+    },
+    {
+      "date": "20221205",
+      "name": "RFB",
+      "category": "predicting-random-numbers"
+    },
+    {
+      "date": "20221205",
+      "name": "BBOX",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20221202",
+      "name": "OverNight",
+      "category": "flashloan-attack"
+    },
+    {
+      "date": "20221201",
+      "name": "APC",
+      "category": "flashloan--price-manipulation"
+    },
+    {
+      "date": "20221129",
+      "name": "MBC & ZZSH",
+      "category": "business-logic-flaw--access-control"
+    },
+    {
+      "date": "20221129",
+      "name": "SEAMAN",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20221123",
+      "name": "NUM",
+      "category": "protocol-token-incompatible"
+    },
+    {
+      "date": "20221122",
+      "name": "AUR",
+      "category": "lack-of-permission-check"
+    },
+    {
+      "date": "20221121",
+      "name": "SDAO",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20221119",
+      "name": "AnnexFinance",
+      "category": "verify-flashloan-callback"
+    },
+    {
+      "date": "20221118",
+      "name": "Polynomial",
+      "category": "no-input-validation"
+    },
+    {
+      "date": "20221117",
+      "name": "UEarnPool",
+      "category": "flashloan-attack"
+    },
+    {
+      "date": "20221116",
+      "name": "SheepFarm",
+      "category": "no-input-validation"
+    },
+    {
+      "date": "20221110",
+      "name": "DFXFinance",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20221109",
+      "name": "brahTOPG",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20221108",
+      "name": "MEV_0ad8",
+      "category": "arbitrary-call"
+    },
+    {
+      "date": "20221108",
+      "name": "Kashi",
+      "category": "price-caching-design-defect"
+    },
+    {
+      "date": "20221107",
+      "name": "MooCAKECTX",
+      "category": "flashloan-attack"
+    },
+    {
+      "date": "20221105",
+      "name": "BDEX",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20221027",
+      "name": "VTF",
+      "category": "incorrect-reward-calculation"
+    },
+    {
+      "date": "20221027",
+      "name": "Team Finance",
+      "category": "liquidity-migration-exploit"
+    },
+    {
+      "date": "20221026",
+      "name": "N00d Token",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20221025",
+      "name": "ULME",
+      "category": "access-control"
+    },
+    {
+      "date": "20221024",
+      "name": "Market",
+      "category": "read-only-reentrancy"
+    },
+    {
+      "date": "20221024",
+      "name": "MulticallWithoutCheck",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20221021",
+      "name": "OlympusDAO",
+      "category": "no-input-validation"
+    },
+    {
+      "date": "20221020",
+      "name": "HEALTH Token",
+      "category": "transfer-logic-flaw"
+    },
+    {
+      "date": "20221019",
+      "name": "BEGO Token",
+      "category": "incorrect-signature-verification"
+    },
+    {
+      "date": "20221018",
+      "name": "HPAY",
+      "category": "access-control"
+    },
+    {
+      "date": "20221018",
+      "name": "PLTD Token",
+      "category": "transfer-logic-flaw"
+    },
+    {
+      "date": "20221017",
+      "name": "Uerii Token",
+      "category": "access-control"
+    },
+    {
+      "date": "20221014",
+      "name": "INUKO Token",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20221014",
+      "name": "EFLeverVault",
+      "category": "verify-flashloan-callback"
+    },
+    {
+      "date": "20221014",
+      "name": "MEVBOT a47b",
+      "category": "mevbot-a47b"
+    },
+    {
+      "date": "20221012",
+      "name": "ATK",
+      "category": "flashloan-manipulate-price"
+    },
+    {
+      "date": "20221011",
+      "name": "Rabby Wallet SwapRouter",
+      "category": "arbitrary-external-call-vulnerability"
+    },
+    {
+      "date": "20221011",
+      "name": "Templedao",
+      "category": "insufficient-access-control"
+    },
+    {
+      "date": "20221010",
+      "name": "Carrot",
+      "category": "public-functioncall"
+    },
+    {
+      "date": "20221009",
+      "name": "Xave Finance",
+      "category": "malicious-proposal-mint--transfer-ownership"
+    },
+    {
+      "date": "20221006",
+      "name": "RES-Token",
+      "category": "pair-manipulate"
+    },
+    {
+      "date": "20221002",
+      "name": "Transit Swap",
+      "category": "incorrect-owner-address-validation"
+    },
+    {
+      "date": "20221001",
+      "name": "BabySwap",
+      "category": "parameter-access-control"
+    },
+    {
+      "date": "20221001",
+      "name": "RL",
+      "category": "incorrect-reward-calculation"
+    },
+    {
+      "date": "20221001",
+      "name": "Thunder Brawl",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20220929",
+      "name": "BXH",
+      "category": "flashloan--price-oracle-manipulation"
+    },
+    {
+      "date": "20220928",
+      "name": "MEVBOT Badc0de",
+      "category": "badc0de"
+    },
+    {
+      "date": "20220923",
+      "name": "RADT-DAO",
+      "category": "pair-manipulate"
+    },
+    {
+      "date": "20220909",
+      "name": "DPC",
+      "category": "incorrect-reward-calculation"
+    },
+    {
+      "date": "20220908",
+      "name": "YYDS",
+      "category": "pair-manipulate"
+    },
+    {
+      "date": "20220908",
+      "name": "NewFreeDAO",
+      "category": "flashloans-attack"
+    },
+    {
+      "date": "20220908",
+      "name": "Ragnarok Online Invasion",
+      "category": "broken-access-control"
+    },
+    {
+      "date": "20220906",
+      "name": "NXUSD",
+      "category": "flashloan-price-oracle-manipulation"
+    },
+    {
+      "date": "20220905",
+      "name": "ZoomproFinance",
+      "category": "flashloans--price-manipulation"
+    },
+    {
+      "date": "20220902",
+      "name": "ShadowFi",
+      "category": "access-control"
+    },
+    {
+      "date": "20220902",
+      "name": "Bad Guys by RPF",
+      "category": "business-logic-flaw--missing-check-for-number-of-nft-to-mint"
+    },
+    {
+      "date": "20220824",
+      "name": "LuckyTiger NFT",
+      "category": "predicting-random-numbers"
+    },
+    {
+      "date": "20220816",
+      "name": "Circle_2",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20220813",
+      "name": "Circle",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20220810",
+      "name": "XSTABLE Protocol",
+      "category": "incorrect-logic-check"
+    },
+    {
+      "date": "20220809",
+      "name": "ANCH",
+      "category": "skim-token-balance"
+    },
+    {
+      "date": "20220807",
+      "name": "EGD Finance",
+      "category": "flashloans--price-manipulation"
+    },
+    {
+      "date": "20220804",
+      "name": "EtnProduct",
+      "category": "business-logic-flaw"
+    },
+    {
+      "date": "20220803",
+      "name": "Qixi",
+      "category": "underflow"
+    },
+    {
+      "date": "20220802",
+      "name": "Nomad Bridge",
+      "category": "business-logic-flaw--incorrect-acceptable-merkle-root-checks"
+    },
+    {
+      "date": "20220801",
+      "name": "Reaper Farm",
+      "category": "business-logic-flaw--lack-of-access-control-mechanism"
+    },
+    {
+      "date": "20220725",
+      "name": "LPC",
+      "category": "business-logic-flaw--incorrect-recipient-balance-check-did-not-check-senderrecipient-in-transfer"
+    },
+    {
+      "date": "20220723",
+      "name": "Audius",
+      "category": "storage-collision--malicious-proposal"
+    },
+    {
+      "date": "20220713",
+      "name": "SpaceGodzilla",
+      "category": "flashloans--price-manipulation"
+    },
+    {
+      "date": "20220710",
+      "name": "Omni NFT",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20220706",
+      "name": "FlippazOne NFT",
+      "category": "accesscontrol"
+    },
+    {
+      "date": "20220701",
+      "name": "Quixotic - Optimism NFT Marketplace",
+      "category": "optimism-nft-marketplace"
+    },
+    {
+      "date": "20220626",
+      "name": "XCarnival",
+      "category": "infinite-number-of-loans"
+    },
+    {
+      "date": "20220624",
+      "name": "Harmony's Horizon Bridge",
+      "category": "private-key-compromised"
+    },
+    {
+      "date": "20220618",
+      "name": "SNOOD",
+      "category": "miscalculation-on-_spendallowance"
+    },
+    {
+      "date": "20220616",
+      "name": "InverseFinance",
+      "category": "flashloan--price-oracle-manipulation"
+    },
+    {
+      "date": "20220608",
+      "name": "GYMNetwork",
+      "category": "accesscontrol"
+    },
+    {
+      "date": "20220608",
+      "name": "Optimism - Wintermute",
+      "category": "wintermute"
+    },
+    {
+      "date": "20220606",
+      "name": "Discover",
+      "category": "flashloan--price-oracle-manipulation"
+    },
+    {
+      "date": "20220529",
+      "name": "NOVO Protocol",
+      "category": "flashloan--price-oracle-manipulation"
+    },
+    {
+      "date": "20220524",
+      "name": "HackDao",
+      "category": "skim-token-balance"
+    },
+    {
+      "date": "20220517",
+      "name": "ApeCoin",
+      "category": "flashloan"
+    },
+    {
+      "date": "20220508",
+      "name": "Fortress Loans",
+      "category": "malicious-proposal--price-oracle-manipulation"
+    },
+    {
+      "date": "20220430",
+      "name": "Saddle Finance",
+      "category": "swap-metapool-attack"
+    },
+    {
+      "date": "20220430",
+      "name": "Rari Capital/Fei Protocol",
+      "category": "flashloan-attack--reentrancy"
+    },
+    {
+      "date": "20220428",
+      "name": "DEUS DAO",
+      "category": "flashloan--price-oracle-manipulation"
+    },
+    {
+      "date": "20220424",
+      "name": "Wiener DOGE",
+      "category": "flashloan"
+    },
+    {
+      "date": "20220423",
+      "name": "Akutar NFT",
+      "category": "denial-of-service"
+    },
+    {
+      "date": "20220416",
+      "name": "BeanstalkFarms",
+      "category": "dao--flashloan"
+    },
+    {
+      "date": "20220415",
+      "name": "Rikkei Finance",
+      "category": "access-control--price-oracle-manipulation"
+    },
+    {
+      "date": "20220412",
+      "name": "ElephantMoney",
+      "category": "flashloan--price-oracle-manipulation"
+    },
+    {
+      "date": "20220409",
+      "name": "GYMNetwork",
+      "category": "flashloan--token-migrate-flaw"
+    },
+    {
+      "date": "20220329",
+      "name": "Ronin Network",
+      "category": "bridge"
+    },
+    {
+      "date": "20220329",
+      "name": "Redacted Cartel",
+      "category": "custom-approval-logic"
+    },
+    {
+      "date": "20220327",
+      "name": "Revest Finance",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20220321",
+      "name": "OneRing Finance",
+      "category": "flashloan--price-oracle-manipulation"
+    },
+    {
+      "date": "20220320",
+      "name": "LI.FI",
+      "category": "bridges"
+    },
+    {
+      "date": "20220320",
+      "name": "Umbrella Network",
+      "category": "underflow"
+    },
+    {
+      "date": "20220315",
+      "name": "Agave Finance",
+      "category": "erc667-reentrancy"
+    },
+    {
+      "date": "20220315",
+      "name": "Hundred Finance",
+      "category": "erc667-reentrancy"
+    },
+    {
+      "date": "20220313",
+      "name": "Paraluni",
+      "category": "flashloan--reentrancy"
+    },
+    {
+      "date": "20220309",
+      "name": "Fantasm Finance",
+      "category": "business-logic-in-mint"
+    },
+    {
+      "date": "20220305",
+      "name": "Bacon Protocol",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20220303",
+      "name": "TreasureDAO",
+      "category": "zero-fee"
+    },
+    {
+      "date": "20220214",
+      "name": "BuildFinance - DAO",
+      "category": "dao"
+    },
+    {
+      "date": "20220208",
+      "name": "Sandbox LAND",
+      "category": "access-control"
+    },
+    {
+      "date": "20220205",
+      "name": "Meter",
+      "category": "bridge"
+    },
+    {
+      "date": "20220204",
+      "name": "TecraSpace",
+      "category": "any-token-is-destroyed"
+    },
+    {
+      "date": "20220128",
+      "name": "Qubit Finance",
+      "category": "bridge-address0safetransferfrom-does-not-revert"
+    },
+    {
+      "date": "20220118",
+      "name": "Multichain (Anyswap)",
+      "category": "insufficient-token-validation"
+    },
+    {
+      "date": "20211221",
+      "name": "Visor Finance",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20211218",
+      "name": "Grim Finance",
+      "category": "flashloan--reentrancy"
+    },
+    {
+      "date": "20211214",
+      "name": "Nerve Bridge",
+      "category": "swap-metapool-attack"
+    },
+    {
+      "date": "20211130",
+      "name": "MonoX Finance",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20211123",
+      "name": "Ploutoz Finance",
+      "category": "flash-loan"
+    },
+    {
+      "date": "20211027",
+      "name": "Cream Finance",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20211015",
+      "name": "Indexed Finance",
+      "category": "price-manipulation"
+    },
+    {
+      "date": "20210912",
+      "name": "ZABU Finance",
+      "category": "deflationary-token-uncompatible"
+    },
+    {
+      "date": "20210903",
+      "name": "DAO Maker",
+      "category": "bad-access-controal"
+    },
+    {
+      "date": "20210830",
+      "name": "Cream Finance",
+      "category": "flashloan-attack--reentrancy"
+    },
+    {
+      "date": "20210817",
+      "name": "XSURGE",
+      "category": "flashloan-attack--reentrancy"
+    },
+    {
+      "date": "20210811",
+      "name": "Poly Network",
+      "category": "bridge-getting-around-modifier-through-cross-chain-message"
+    },
+    {
+      "date": "20210804",
+      "name": "WaultFinance",
+      "category": "flashloan-price-manipulation"
+    },
+    {
+      "date": "20210804",
+      "name": "Popsicle",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20210728",
+      "name": "Levyathan Finance",
+      "category": "i-lost-keys-and-minting-ii-vulnerable-emergencywithdraw"
+    },
+    {
+      "date": "20210710",
+      "name": "Chainswap",
+      "category": "bridge-logic-flaw"
+    },
+    {
+      "date": "20210702",
+      "name": "Chainswap",
+      "category": "bridge-logic-flaw"
+    },
+    {
+      "date": "20210628",
+      "name": "SafeDollar",
+      "category": "deflationary-token-uncompatible"
+    },
+    {
+      "date": "20210625",
+      "name": "xWin Finance",
+      "category": "subscription-incentive-mechanism"
+    },
+    {
+      "date": "20210622",
+      "name": "Eleven Finance",
+      "category": "doesnt-burn-shares"
+    },
+    {
+      "date": "20210607",
+      "name": "88mph NFT",
+      "category": "access-control"
+    },
+    {
+      "date": "20210603",
+      "name": "PancakeHunny",
+      "category": "incorrect-calculation"
+    },
+    {
+      "date": "20210527",
+      "name": "JulSwap",
+      "category": "flash-loan"
+    },
+    {
+      "date": "20210527",
+      "name": "BurgerSwap",
+      "category": "mathematical-flaw--reentrancy"
+    },
+    {
+      "date": "20210519",
+      "name": "PancakeBunny",
+      "category": "price-oracle-manipulation"
+    },
+    {
+      "date": "20210516",
+      "name": "bEarn",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20210508",
+      "name": "Rari Capital",
+      "category": "cross-contract-reentrancy"
+    },
+    {
+      "date": "20210508",
+      "name": "Value Defi",
+      "category": "cross-contract-reentrancy"
+    },
+    {
+      "date": "20210502",
+      "name": "Spartan",
+      "category": "logic-flaw"
+    },
+    {
+      "date": "20210428",
+      "name": "Uranium",
+      "category": "miscalculation"
+    },
+    {
+      "date": "20210308",
+      "name": "DODO",
+      "category": "flashloan-attack"
+    },
+    {
+      "date": "20210305",
+      "name": "Paid Network",
+      "category": "private-key-compromised"
+    },
+    {
+      "date": "20210204",
+      "name": "Yearn YDai",
+      "category": "slippage-proection-absent"
+    },
+    {
+      "date": "20210125",
+      "name": "Sushi Badger Digg",
+      "category": "sandwich-attack"
+    },
+    {
+      "date": "20201026",
+      "name": "Harvest Finance",
+      "category": "flashloan-attack"
+    },
+    {
+      "date": "20200912",
+      "name": "bzx",
+      "category": "incorrect-transfer"
+    },
+    {
+      "date": "20200804",
+      "name": "Opyn Protocol",
+      "category": "msgvalue-in-loop"
+    },
+    {
+      "date": "20200628",
+      "name": "Balancer Protocol",
+      "category": "token-incompatible"
+    },
+    {
+      "date": "20200618",
+      "name": "Bancor Protocol",
+      "category": "access-control"
+    },
+    {
+      "date": "20200419",
+      "name": "LendfMe",
+      "category": "erc777-reentrancy"
+    },
+    {
+      "date": "20200418",
+      "name": "UniSwapV1",
+      "category": "erc777-reentrancy"
+    },
+    {
+      "date": "20181007",
+      "name": "SpankChain",
+      "category": "reentrancy"
+    },
+    {
+      "date": "20180424",
+      "name": "SmartMesh",
+      "category": "overflow"
+    },
+    {
+      "date": "20180422",
+      "name": "Beauty Chain",
+      "category": "integer-overflow"
+    },
+    {
+      "date": "20171106",
+      "name": "Parity - 'Accidentally Killed It'",
+      "category": "accidentally-killed-it"
+    },
+    {
+      "date": "20170719",
+      "name": "Parity Multisig",
+      "category": "delegatecall-to-unprotected-initwallet"
+    }
+  ]
+}

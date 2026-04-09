@@ -1,25 +1,25 @@
 # Research Positioning
 
-> 2026-04-04 멘토 이수현님과의 논의 정리
+> 2026-04-06 업데이트. 실험 결과 기반 방향 전환 반영.
 
-## 멘토 질문
+## 핵심 포지셔닝 (2026-04-06 확정)
 
-"자동 취약점 분석을 하는 건 알겠는데, 어떤 의미를 찾는 거지? 포지셔닝은? 잘 찾는 거 이런 거 말고."
+### Runtime Architecture가 Agent Orchestration의 Cost-Effectiveness를 결정한다
 
-## 핵심 포지셔닝: Deployable and Cost-Efficient Orchestration for Smart Contract Vulnerability Detection
+동일한 분석 목표(smart contract 취약점 탐지)에서도 **runtime architecture가 cost-effectiveness를 구조적으로 바꾼다**는 점을 도메인 실험으로 증명.
 
-기존 도구들의 문제:
-- 모델 5개 동시 실행 등 고비용 오케스트레이션
-- 성능(정확도)만 추구, 비용/자원 최적화는 무시
-- 개인 연구자나 소규모 팀이 사용하기 어려움
+- API 환경에서 tool-use loop의 **반복 context 전송이 prompt cache 효율을 저하**시키며, orchestrator-centric single-call 구조가 recall을 유지하면서 비용을 3-5× 절감
+- "단순히 single-agent가 낫다"는 주장이 아니라, **왜 API 환경에서 그런 현상이 발생하는지 구조적 원인(cache prefix 안정성, context 중복 비율)을 분석**
 
-우리의 차별점:
-1. **토큰 효율성 최적화** — 토큰 사용량에 한계를 두고도 검증 가능한 취약점 탐지 가능
-2. **단일 머신 실행** — 개인 컴퓨터 하나로 돌릴 수 있는 경량 오케스트레이션
-3. **비용 대비 성능 (cost-performance tradeoff)** — 같은 frontier급 설정 대비 총 실행 비용을 줄이는 방향
-4. **실배포 가능성 (deployability)** — 클러스터, 커스텀 인프라, 대규모 병렬 실행 없이도 운영 가능
+### 포지셔닝 변천
 
-## 현재 포지션의 한계
+| 시점 | 포지셔닝 | 문제점 |
+|------|---------|--------|
+| 2026-04-04 (초기) | "싼 모델을 똑똑하게" — 저가 모델 + orchestration으로 Opus 80% 달성 | 실험 결과 orchestration 비용이 폭발, cost-effective하지 않음 |
+| 2026-04-05 (실험 후) | "Orch+cache가 cost-effective" | Orch+cache는 prompt engineering + API caching이지 진정한 orchestration이 아님 |
+| **2026-04-06 (확정)** | **"Runtime architecture가 cost를 결정"** | 실험 데이터로 뒷받침 가능, 기존 연구 갭 존재 |
+
+## 기존 포지션의 한계 (참고용)
 
 - Blitz가 현재 주로 사용하는 모델은 `Claude Opus`이며, 이는 절대적으로 저렴한 모델이 아님
 - 따라서 현재 단계에서 주장할 수 있는 것은 "economical model"이 아니라 "expensive model을 더 효율적으로 사용하는 orchestration"임
@@ -37,27 +37,33 @@
 - 따라서 포지셔닝은 "budget-efficient agent"가 아니라 "deployable, budget-aware, verifiable security agent"로 가야 함
 - 특히 Opus 기반일 경우 "저비용 모델"이 아니라 "비용 효율적 시스템 설계"로 말해야 정직함
 
-## 주장 문장 초안
+## 핵심 메시지
 
-- Blitz는 smart contract 보안 에이전트를 위한 비용-성능 최적화 오케스트레이션을 제안한다.
-- Blitz는 단일 머신 환경에서 동작하며, frontier급 모델을 사용하더라도 불필요한 토큰 사용과 병렬 오버헤드를 줄이는 방향으로 설계된다.
-- Blitz는 절대적으로 저렴한 모델을 사용하는 시스템이 아니라, 고비용 모델을 더 deployable하게 운용하기 위한 경량 orchestration이다.
-- Blitz는 단순 탐지 리포트가 아니라 PoC, patch, exploit failure/pass와 같은 검증 가능한 결과를 우선 지표로 삼는다.
+> **"Don't make the LLM the agent — make the orchestrator the agent."**
 
-## 연구 질문 (RQ) 초안
+API 환경에서는 LLM에게 도구를 주고 자율 탐색시키는 것보다, Python orchestrator가 코드를 선별하고 LLM은 curated context로 한 번만 분석하는 것이 recall 동등 + 비용 3-5× 절감.
 
-- **RQ1.** 동일한 예산 제약 하에서 어떤 오케스트레이션이 가장 높은 취약점 탐지/패치 성능을 내는가?
-- **RQ2.** 단일 머신 경량 오케스트레이션이 고비용 멀티에이전트 설정 대비 얼마나 성능을 유지하는가?
-- **RQ3.** 비용 절감의 핵심 요인은 모델 크기, 컨텍스트 절약, 탐색 전략 중 무엇인가?
-- **RQ4.** 비용 최적화가 Detect뿐 아니라 Patch / Exploit / PoC-confirmed setting에서도 유지되는가?
+### 실험적 근거 (GPT-4.1 × 5 audits)
 
-## 연구 Contribution 프레이밍
+| Scaffold | Recall | Cost | 특성 |
+|----------|--------|------|------|
+| Raw (single-call) | 58% | $0.79 | baseline |
+| Orch+cache (specialist × single-call) | **67%** | $1.20 | cache hit으로 context 공유 |
+| Agentic v2 (tool-use loop) | 58-67% | $1.67-$3.66 | O(N²) token 누적, cache miss |
 
-현재는 contribution을 다음 순서로 제시하는 것이 가장 정직함:
+## 연구 질문 (RQ)
 
-- `absolute low cost`가 아니라 `relative efficiency`
-- `economical model`이 아니라 `deployable orchestration`
-- `best recall`이 아니라 `cost-performance frontier` 상의 위치
+- **RQ1.** API 기반 LLM agent orchestration에서 runtime architecture(single-call vs tool-use loop)가 cost-effectiveness에 미치는 영향은 어떠한가?
+- **RQ2.** Prompt cache 효율은 orchestration 방식에 따라 어떻게 달라지며, tool-use loop에서 cache prefix 안정성이 비용에 미치는 정량적 영향은?
+- **RQ3.** Smart contract 취약점의 어떤 특성(locality, complexity, 도메인 특수성)이 orchestration 방식별 탐지율 차이를 결정하는가?
+- **RQ4.** Orchestrator-centric single-call 구조가 recall을 유지하면서 비용을 절감하는 조건과 한계는?
+
+## 연구 Contribution
+
+1. **실증 비교**: Smart contract security 도메인에서 4가지 orchestration scaffold (raw, orch+cache, agentic, agentic v2)의 recall-cost tradeoff를 EVMBench 기반으로 비교
+2. **Architectural insight**: Communication tax의 근본 원인이 agent 설계가 아닌 **runtime architecture** (파일시스템 접근 vs token-based tool-use)임을 실험적으로 증명
+3. **실용적 가이드라인**: API 기반 모델에서는 Python orchestrator가 agent 역할을 하고 LLM은 single-call analyst로 사용하는 것이 cost-effective
+4. **Negative result**: Agentic tool-use loop은 API 환경에서 O(N²) token 누적으로 인해 cost-ineffective — agent-level 최적화로는 해결 불가능한 infrastructure-level 문제
 
 현재 구현 상태:
 

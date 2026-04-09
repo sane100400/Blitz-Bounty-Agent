@@ -1,0 +1,344 @@
+[
+  {
+    "category": "business-logic-flaw",
+    "count": 76,
+    "file": "src/test/2023-12/UnverifiedContr_0x431abb_exp.sol",
+    "name": "UnverifiedContr_0x431abb_exp"
+  },
+  {
+    "category": "price-manipulation",
+    "count": 48,
+    "file": "src/test/2023-06/VINU_exp.sol",
+    "name": "VINU_exp"
+  },
+  {
+    "category": "access-control",
+    "count": 45,
+    "file": "src/test/2023-02/LaunchZone_exp.sol",
+    "name": "LaunchZone_exp"
+  },
+  {
+    "category": "logic-flaw",
+    "count": 34,
+    "file": "src/test/2024-04/SATX_exp.sol",
+    "name": "SATX_exp"
+  },
+  {
+    "category": "reentrancy",
+    "count": 32,
+    "file": "src/test/2024-07/Minterest_exp.sol",
+    "name": "Minterest_exp"
+  },
+  {
+    "category": "lack-of-access-control",
+    "count": 17,
+    "file": "src/test/2023-07/Civfund_exp.sol",
+    "name": "Civfund_exp"
+  },
+  {
+    "category": "flashloan-price-manipulation",
+    "count": 12,
+    "file": "src/test/2022-12/Lodestar_exp.sol",
+    "name": "Lodestar_exp"
+  },
+  {
+    "category": "arbitrary-external-call-vulnerability",
+    "count": 9,
+    "file": "src/test/2023-02/Dexible_exp.sol",
+    "name": "Dexible_exp"
+  },
+  {
+    "category": "incorrect-input-validation",
+    "count": 8,
+    "file": "src/test/2024-01/OrbitChain_exp.sol",
+    "name": "OrbitChain_exp"
+  },
+  {
+    "category": "flashloan--price-oracle-manipulation",
+    "count": 7,
+    "file": "src/test/2022-04/deus_exp.sol",
+    "name": "deus_exp"
+  },
+  {
+    "category": "incorrect-access-control",
+    "count": 7,
+    "file": "src/test/2024-01/DAO_SoulMate_exp.sol",
+    "name": "DAO_SoulMate_exp"
+  },
+  {
+    "category": "precision-loss",
+    "count": 7,
+    "file": "src/test/2023-06/MidasCapitalXYZ_exp.sol",
+    "name": "MidasCapitalXYZ_exp"
+  },
+  {
+    "category": "lack-slippage-protection",
+    "count": 6,
+    "file": "src/test/2023-07/NewFi_exp.sol",
+    "name": "NewFi_exp"
+  },
+  {
+    "category": "incorrect-reward-calculation",
+    "count": 5,
+    "file": "src/test/2022-09/DPC_exp.sol",
+    "name": "DPC_exp"
+  },
+  {
+    "category": "arbitrary-call",
+    "count": 5,
+    "file": "src/test/2022-11/MEV_0ad8_exp.sol",
+    "name": "MEV_0ad8_exp"
+  },
+  {
+    "category": "reflection-token",
+    "count": 5,
+    "file": "src/test/2023-01/SHOCO_exp.sol",
+    "name": "SHOCO_exp"
+  },
+  {
+    "category": "flashloan-attack",
+    "count": 4,
+    "file": "src/test/2020-10/HarvestFinance_exp.sol",
+    "name": "HarvestFinance_exp"
+  },
+  {
+    "category": "price-oracle-manipulation",
+    "count": 4,
+    "file": "src/test/2021-05/PancakeBunny_exp.sol",
+    "name": "PancakeBunny_exp"
+  },
+  {
+    "category": "read-only-reentrancy",
+    "count": 4,
+    "file": "src/test/2023-02/dForce_exp.sol",
+    "name": "dForce_exp"
+  },
+  {
+    "category": "business-loigc",
+    "count": 4,
+    "file": "src/test/2023-06/STRAC_exp.sol",
+    "name": "STRAC_exp"
+  },
+  {
+    "category": "rebasing-logic-issue",
+    "count": 4,
+    "file": "src/test/2023-09/FloorDAO_exp.sol",
+    "name": "FloorDAO_exp"
+  },
+  {
+    "category": "rug-pull",
+    "count": 4,
+    "file": "src/test/2024-10/BUBAI_exp.sol",
+    "name": "BUBAI_exp"
+  },
+  {
+    "category": "cross-contract-reentrancy",
+    "count": 3,
+    "file": "src/test/2021-05/ValueDefi_exp.sol",
+    "name": "ValueDefi_exp"
+  },
+  {
+    "category": "skim-token-balance",
+    "count": 3,
+    "file": "src/test/2022-05/HackDao_exp.sol",
+    "name": "HackDao_exp"
+  },
+  {
+    "category": "flashloans--price-manipulation",
+    "count": 3,
+    "file": "src/test/2022-08/EGD_Finance_exp.sol",
+    "name": "EGD_Finance_exp"
+  },
+  {
+    "category": "no-input-validation",
+    "count": 3,
+    "file": "src/test/2022-11/SheepFarm_exp.sol",
+    "name": "SheepFarm_exp"
+  },
+  {
+    "category": "insufficient-validation",
+    "count": 3,
+    "file": "src/test/2023-07/GYMNET_exp.sol",
+    "name": "GYMNET_exp"
+  },
+  {
+    "category": "misconfiguration",
+    "count": 3,
+    "file": "src/test/2023-04/YearnFinance_exp.sol",
+    "name": "YearnFinance_exp"
+  },
+  {
+    "category": "precission-loss",
+    "count": 3,
+    "file": "src/test/2023-06/MIMSpell_exp.sol",
+    "name": "MIMSpell_exp"
+  },
+  {
+    "category": "arbitrary-external-call",
+    "count": 3,
+    "file": "src/test/2023-10/MaestroRouter2_exp.sol",
+    "name": "MaestroRouter2_exp"
+  },
+  {
+    "category": "compoundv2-inflation-attack",
+    "count": 3,
+    "file": "src/test/2023-12/ChannelsFinance_exp.sol",
+    "name": "ChannelsFinance_exp"
+  },
+  {
+    "category": "lack-of-validation",
+    "count": 3,
+    "file": "src/test/2024-02/Babyloogn_exp.sol",
+    "name": "Babyloogn_exp"
+  },
+  {
+    "category": "share-price-manipulation",
+    "count": 3,
+    "file": "src/test/2025-07/gmx_exp.sol",
+    "name": "gmx_exp"
+  },
+  {
+    "category": "incorrect-transfer",
+    "count": 2,
+    "file": "src/test/2023-12/bZx_exp.sol",
+    "name": "bZx_exp"
+  },
+  {
+    "category": "sandwich-attack",
+    "count": 2,
+    "file": "src/test/2021-01/Sushi_Badger_Digg_exp.sol",
+    "name": "Sushi_Badger_Digg_exp"
+  },
+  {
+    "category": "flash-loan",
+    "count": 2,
+    "file": "src/test/2021-05/JulSwap_exp.sol",
+    "name": "JulSwap_exp"
+  },
+  {
+    "category": "deflationary-token-uncompatible",
+    "count": 2,
+    "file": "src/test/2021-06/SafeDollar_exp.sol",
+    "name": "SafeDollar_exp"
+  },
+  {
+    "category": "flashloan-attack--reentrancy",
+    "count": 2,
+    "file": "src/test/2021-08/XSURGE_exp.sol",
+    "name": "XSURGE_exp"
+  },
+  {
+    "category": "flashloan--reentrancy",
+    "count": 2,
+    "file": "src/test/2022-03/Paraluni_exp.sol",
+    "name": "Paraluni_exp"
+  },
+  {
+    "category": "swap-metapool-attack",
+    "count": 2,
+    "file": "src/test/2021-12/NerveBridge_exp.sol",
+    "name": "NerveBridge_exp"
+  },
+  {
+    "category": "bridge",
+    "count": 2,
+    "file": "src/test/2022-02/Meter_exp.sol",
+    "name": "Meter_exp"
+  },
+  {
+    "category": "erc667-reentrancy",
+    "count": 2,
+    "file": "src/test/2022-03/HundredFinance_exp.sol",
+    "name": "HundredFinance_exp"
+  },
+  {
+    "category": "underflow",
+    "count": 2,
+    "file": "src/test/2022-03/Umbrella_exp.sol",
+    "name": "Umbrella_exp"
+  },
+  {
+    "category": "predicting-random-numbers",
+    "count": 2,
+    "file": "src/test/2022-12/RFB_exp.sol",
+    "name": "RFB_exp"
+  },
+  {
+    "category": "flashloan-price-oracle-manipulation",
+    "count": 2,
+    "file": "src/test/2022-09/NXUSD_exp.sol",
+    "name": "NXUSD_exp"
+  },
+  {
+    "category": "transfer-logic-flaw",
+    "count": 2,
+    "file": "src/test/2022-10/HEALTH_exp.sol",
+    "name": "HEALTH_exp"
+  },
+  {
+    "category": "storage-collision",
+    "count": 2,
+    "file": "src/test/2023-12/Telcoin_exp.sol",
+    "name": "Telcoin_exp"
+  },
+  {
+    "category": "bussiness-logic-flaw",
+    "count": 2,
+    "file": "src/test/2023-02/Platypus_exp.sol",
+    "name": "Platypus_exp"
+  },
+  {
+    "category": "invalid-signature-verification",
+    "count": 2,
+    "file": "src/test/2025-01/ODOS_exp.sol",
+    "name": "ODOS_exp"
+  },
+  {
+    "category": "pool-manipulation",
+    "count": 2,
+    "file": "src/test/2023-09/Kub_Split_exp.sol",
+    "name": "Kub_Split_exp"
+  },
+  {
+    "category": "donate-inflation-exchangerate--rounding-error",
+    "count": 2,
+    "file": "src/test/2023-11/MahaLend_exp.sol",
+    "name": "MahaLend_exp"
+  },
+  {
+    "category": "input-validation",
+    "count": 2,
+    "file": "src/test/2024-04/YIEDL_exp.sol",
+    "name": "YIEDL_exp"
+  },
+  {
+    "category": "lack-of-slippage-protection",
+    "count": 2,
+    "file": "src/test/2023-11/TheStandard_io_exp.sol",
+    "name": "TheStandard_io_exp"
+  },
+  {
+    "category": "loss-of-precision",
+    "count": 2,
+    "file": "src/test/2024-07/DeFiPlaza_exp.sol",
+    "name": "DeFiPlaza_exp"
+  },
+  {
+    "category": "unverified-external-call",
+    "count": 2,
+    "file": "src/test/2024-03/UnizenIO_exp.sol",
+    "name": "UnizenIO_exp"
+  },
+  {
+    "category": "arbitrage",
+    "count": 2,
+    "file": "src/test/2025-05/UsualMoney_exp.sol",
+    "name": "UsualMoney_exp"
+  },
+  {
+    "category": "faulty-oracle",
+    "count": 2,
+    "file": "src/test/2025-11/Moonwell_exp.sol",
+    "name": "Moonwell_exp"
+  }
+]
